@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-27 by Agent Nibi
+**Last updated:** 2026-05-27 by Agent F (Frontenac)
 
 ## Active Campaigns
 
@@ -21,7 +21,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Coordinator, Stage 2 complete | (none running) | 1,342 (Aβ42) | 62 (38 scaffolds) | 2026-05-27 |
-| Nibi | Nibi | Stage 7 TfR1 — BUNS fix applied, jobs resubmitted | 14990515–19 (running) | 991 (TfR1) | 310 (reprocessed) | 2026-05-27 |
+| Nibi | Nibi | Stage 7 TfR1 production + Stage 7.3 counter-screen pending | 14990515–19 (running) | 991 (TfR1) | 310 (reprocessed) | 2026-05-27 |
 | Narval | Narval | Stage 3 counter-screen | 61679472_[0-7] | — | — | 2026-05-27 |
 
 ### Aβ42 Campaign Metrics
@@ -45,8 +45,11 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Trajectories completed | 991 |
 | MPNN designs evaluated | 791 |
 | Accepted designs | **310** (reprocessed with BUNS filter disabled, 39.2% of MPNN) |
-| Parallel jobs | 5 (each targeting 1,000 designs) |
+| Top candidate | tfr1_l59_s917497_mpnn2 (i_pTM=0.85, dG=-47.8, SC=0.78) |
+| Parallel jobs | 5 resubmitted (14990515–19), continuing toward 1,000 |
 | Tf competition check | PASS (hotspots 45+ Å from Tf interface) |
+| BUNS fix | Option 1 applied: filter disabled, pyrosetta patch 999→0 |
+| **Next:** Stage 7.3 | Counter-screen 310 designs × 3 targets (TfR1+, TfR2−, Tf compat) — tasked, pending |
 
 ### Stage 3 Plan: Negative Counter-Screen
 
@@ -64,14 +67,15 @@ The counter-screen tests all accepted designs against 8 targets (1 positive re-c
 
 | Date | Agent | Action |
 |------|-------|--------|
-| 2026-05-27 | Nibi | BUNS fix applied (Option 1): disabled BUNS filter → 310 accepted from existing 791 MPNN (39.2%). Patched pyrosetta_utils.py (999→0). Resubmitted 5 jobs (14990515–19). |
-| 2026-05-27 | Nibi | TfR1 progress report: 991 traj, 791 MPNN, 0 accepted. Root cause: PyRosetta BUNS crashes on all TfR1 poses (sets unsat=999, filter rejects at ≤4). Report: `alzheimer/docs/tfr1_progress_report.md` |
-| 2026-05-27 | F | Integrated Nibi's TfR1 work into dashboard and status files. Updated all three status docs. |
-| 2026-05-27 | Nibi | Joined repo: pushed TfR1 campaign (29 files — scripts, settings, structures, stats). Started inbox watcher. |
-| 2026-05-27 | Narval | Submitted Stage 3 counter-screen: job 61679472 (array 0-7, 62 designs x 8 targets). ColabFold 1.6.1, JAX 0.9.1, single_sequence mode, multimer_v3. |
-| 2026-05-27 | F | Added inbox watcher script, session-end checklist, updated cluster CLAUDE.md files. |
-| 2026-05-26 | F | Confirmed Stage 2 complete: 62 designs, 38 scaffolds. Generated 62-design analysis report. |
-| 2026-05-26 | F | Set up GitHub repo and multi-cluster coordination infrastructure. |
+| 2026-05-27 | F | Tasked Nibi with Stage 7.3 counter-screen: 310 designs × 3 targets (TfR1 positive, TfR2 selectivity, Tf compatibility). |
+| 2026-05-27 | F | Approved BUNS fix Option 1. Decided TfR1 counter-screen targets: TfR2 (selectivity) + Tf competition (compatibility). 2 negatives sufficient for globular target. |
+| 2026-05-27 | Nibi | BUNS fix applied: disabled BUNS filter → 310 accepted from 791 MPNN (39.2%). Patched pyrosetta_utils.py (999→0). Resubmitted 5 jobs (14990515–19). |
+| 2026-05-27 | Nibi | TfR1 progress report: 991 traj, 791 MPNN, 0 accepted (BUNS crash root cause). Report: `alzheimer/docs/tfr1_progress_report.md` |
+| 2026-05-27 | F | Integrated Nibi's TfR1 work into dashboard and status files. |
+| 2026-05-27 | Nibi | Joined repo: pushed TfR1 campaign (29 files). Started inbox watcher. |
+| 2026-05-27 | Narval | Submitted Aβ42 Stage 3 counter-screen: job 61679472 (array 0-7, 62 designs × 8 targets). |
+| 2026-05-27 | F | Added inbox watcher script, session-end checklist. |
+| 2026-05-26 | F | Stage 2 complete: 62 designs, 38 scaffolds. Set up GitHub repo + multi-cluster coordination. |
 | 2026-05-06 | F | Submitted BindCraft main job 8375335 (A100, 14-day). |
 
 ### Scratch Touch Schedule (Alliance clusters)

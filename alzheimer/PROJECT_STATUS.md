@@ -1,7 +1,7 @@
 # Project Status Tracker
 
-Last updated: 2026-05-26T23:00
-Updated by: Claude Code — Stage 2 completion + multi-cluster setup
+Last updated: 2026-05-27T01:30
+Updated by: Agent F (Frontenac) — TfR1 BUNS fix, counter-screen tasked
 
 ## Pipeline status
 
@@ -69,16 +69,26 @@ stage_6:
 
 stage_7:
   name: "TfR1 arm design (parallel)"
-  status: in_progress  # 2026-05-11, running on Nibi (5 parallel BindCraft jobs)
+  status: in_progress  # 2026-05-11 started, BUNS fix 2026-05-27
   parallel_with: "stages 2-6"
   cluster: nibi
   target_pdb: "6WRV (chains A+B, apical domain hotspots 208/210/211/212/215)"
   binder_size: "50-70 residues"
-  trajectories_completed: 204
-  mpnn_designs_evaluated: 170
-  designs_accepted: 0
-  parallel_jobs: 5  # main + p1-p4, each targeting 1000 designs
-  notes: "Tf competition check PASS — hotspots on apical domain, 45+ Å from Tf interface"
+  trajectories_completed: 991
+  mpnn_designs_evaluated: 791
+  designs_accepted: 310  # after BUNS filter disabled (39.2% of MPNN)
+  acceptance_rate_mpnn: "39.2%"
+  top_candidate: "tfr1_l59_s917497_mpnn2 (i_pTM=0.85, dG=-47.8, SC=0.78)"
+  parallel_jobs: "5 resubmitted (14990515-19), continuing toward 1,000 target"
+  buns_fix: "Option 1 — BUNS filter disabled in tfr1_filters.json, pyrosetta patch returns 0 instead of 999"
+  substeps:
+    stage_7.0_target_prep: completed  # 2026-05-11
+    stage_7.1_configuration: completed  # 2026-05-11
+    stage_7.2_production: in_progress  # 991 traj, 310 accepted, jobs resubmitted toward 1,000
+    stage_7.3_counter_screen: pending  # tasked 2026-05-27, 310 designs x 3 targets (TfR1+, TfR2-, Tf compat)
+    stage_7.4_stability_filtering: not_started
+    stage_7.5_ranking: not_started
+  notes: "Tf competition check PASS. BUNS filter (DAlphaBall) crashes on 6WRV due to target size — disabled. All other quality filters (i_pTM, pAE, dG, clashes, packing, SC) remain active."
 
 stage_8:
   name: "Tandem fusion design"
@@ -128,3 +138,6 @@ designs_selective: 0
 | 2026-05-26 | Git-pull multi-cluster coordination | GitHub repo + cluster env files replace Globus sync messaging; Frontenac coordinates | PI + Claude Code |
 | 2026-05-27 | Stage 3 counter-screen on Narval | 62 designs x 8 targets, ColabFold single_sequence multimer_v3, job 61679472 | Narval agent |
 | 2026-05-27 | Stage 7 TfR1 campaign tracked | Nibi's existing TfR1 work (204 trajectories, 5 jobs) merged into repo | Nibi agent |
+| 2026-05-27 | TfR1 BUNS fix: Option 1 (disable filter) | BUNS/DAlphaBall crashes on 6WRV due to target size; disable filter, reprocess → 310 accepted | PI + F |
+| 2026-05-27 | TfR1 counter-screen: 2 negative targets sufficient | TfR2 (selectivity) + Tf competition (compatibility); globular target doesn't need 7-target panel like fibril | PI + F |
+| 2026-05-27 | Start TfR1 Stage 7.3 with 310 designs | Don't wait for 1,000; counter-screen in parallel with continued production | PI + F |

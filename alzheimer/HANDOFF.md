@@ -6,7 +6,7 @@
 
 ## 1. Project in one paragraph
 
-We are designing a de novo bispecific miniprotein that binds two targets: (1) the lateral N-terminal surface of receptor-bound Aβ42 filament (Conformation 1, PDB 9CO4) and (2) the TfR1 apical domain for blood-brain barrier transcytosis. The Aβ arm recapitulates Lecanemab's protofibril-selective binding by targeting the N-terminal epitope (Y10/E11/H13/H14/Q15/K16) where Q15's rotamer conformation differs between Conformation 1 and plaque-like fibrils — this is the primary selectivity handle. The design engine is BindCraft (AF2 backpropagation), with 1,000 designs counter-screened against 7 negative targets (plaque fibrils, monomers, Aβ40) to enforce conformational selectivity. The bispecific format is a tandem miniprotein fusion (Aβ-binder–linker–TfR1-binder, ~130–180 residues, E. coli expression). The project is currently at the very beginning of Stage 0: the HPC environment has been audited and documented, the development plan is written, but BindCraft is not yet installed.
+We are designing a de novo bispecific miniprotein that binds two targets: (1) the lateral N-terminal surface of receptor-bound Aβ42 filament (Conformation 1, PDB 9CO4) and (2) the TfR1 apical domain for blood-brain barrier transcytosis. The Aβ arm recapitulates Lecanemab's protofibril-selective binding by targeting the N-terminal epitope (Y10/E11/H13/H14/Q15/K16) where Q15's rotamer conformation differs between Conformation 1 and plaque-like fibrils — this is the primary selectivity handle. The design engine is BindCraft (AF2 backpropagation), with designs counter-screened against negative target panels to enforce selectivity. The bispecific format is a tandem miniprotein fusion (Aβ-binder–linker–TfR1-binder, ~130–180 residues, E. coli expression). The project runs across three HPC clusters: Frontenac (coordinator), Narval (Aβ42 counter-screen), and Nibi (TfR1 arm). Both arms are in active counter-screening (Stages 3 and 7.3).
 
 ---
 
@@ -34,12 +34,14 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 - [x] Multi-cluster coordination set up (2026-05-26) — GitHub repo, cluster env files, inbox system, DASHBOARD.md
 
 ### In progress
-- [ ] Stage 3: Negative-design counter-screen — running on Narval (job 61679472, array 0-7). 62 designs × 8 targets = 496 ColabFold runs. Gate 1: ≥20 designs must pass.
-- [ ] Stage 7: TfR1 arm design — running on Nibi (5 parallel BindCraft jobs: 13720337-13720342). 204 trajectories, 170 MPNN designs, 0 accepted so far. Target: 6WRV apical domain, hotspots 208/210/211/212/215, binder 50-70 aa. Tf competition check PASS.
+- [ ] Stage 3 (Aβ42): Negative-design counter-screen — running on Narval (job 61679472, array 0-7). 62 designs × 8 targets = 496 ColabFold runs. Gate 1: ≥20 designs must pass.
+- [ ] Stage 7.2 (TfR1): Production run continuing on Nibi — 991 trajectories, 791 MPNN, **310 accepted** (39.2%) after BUNS fix. 5 new jobs (14990515–19) running toward 1,000 target. Top: tfr1_l59_s917497_mpnn2 (i_pTM=0.85).
+- [ ] Stage 7.3 (TfR1): Counter-screen tasked to Nibi — 310 designs × 3 targets (TfR1 positive, TfR2 selectivity, Tf compatibility). Runs in parallel with production.
 
 ### Not started
-- [ ] Stage 4: Stability filtering
-- [ ] Stages 5–6, 8–10: (see DEVELOPMENT_PLAN.md)
+- [ ] Stage 4: Stability filtering (Aβ42, after Stage 3 Gate 1)
+- [ ] Stage 7.4: Stability + affinity-window filtering (TfR1, 50–200 nM sweet spot)
+- [ ] Stages 5–6, 7.5, 8–10: (see DEVELOPMENT_PLAN.md)
 
 ---
 
@@ -60,6 +62,9 @@ These are settled — do not revisit unless the PI explicitly asks.
 11. **Terminology: "receptor-bound Aβ42 filament"** not "oligomer" — per source paper's explicit argument.
 12. **Chain A ≡ Chain J:** structurally equivalent (backbone RMSD 0.001 Å, identical Q15 rotamer) — one BindCraft campaign on interior chains (C/E/G) suffices.
 13. **N-terminus MD deferred:** residues 1–8 are disordered in 9CO4; design against the crystal structure as-is. MD ensemble is a stretch goal.
+14. **TfR1 BUNS fix: disable filter (Option 1)** — PyRosetta DAlphaBall crashes on 6WRV due to target size (~680 residues). Disabled BUNS in `tfr1_filters.json`, patched pyrosetta_utils.py to return 0. All other quality filters remain active.
+15. **TfR1 counter-screen: 2 negatives sufficient** — TfR2 (selectivity) + Tf competition (compatibility). Globular target doesn't need the 7-target panel used for fibril selectivity.
+16. **Start TfR1 counter-screen with 310, don't wait for 1,000** — production jobs continue in parallel; counter-screen the existing pool now.
 
 ---
 
@@ -76,6 +81,7 @@ Things that have gone wrong before or are easy to get wrong:
 7. **ColabFold GPU fix (2026-05-06):** The `colabfold` conda env's `jax-cuda12-pjrt` Compute Canada build was missing the `jax_plugins/xla_cuda12/` registration directory. Fixed by `pip install --force-reinstall jax-cuda12-pjrt==0.6.0` inside the env. Without this, ColabFold silently falls back to CPU.
 8. **BindCraft is NOT an array job:** The dev plan (Stage 2.1) proposed a 1000-task SLURM array, but BindCraft runs a single while-loop process that generates designs until `number_of_final_designs` is reached. Use one long-running job (14-day wall time), not an array.
 9. **PDBFixer multichain bug:** when building multichain PDB inputs, build each chain separately then merge with BioPython — PDBFixer misplaces chains when run on multi-chain inputs directly. Also do not use `-pbc mol` after energy minimisation.
+10. **PyRosetta BUNS (DAlphaBall) crashes on large targets:** The `BuriedUnsatHbonds` filter with `dalphaball_sasa=1` crashes on 6WRV (TfR1, ~680 residues). The try/except patch catches the crash but sentinel value (999 or 0) must be handled by filters. This did NOT affect 9CO4 (~130 residues). If designing against other large targets, expect BUNS to fail.
 
 ---
 
@@ -89,14 +95,24 @@ Things that have gone wrong before or are easy to get wrong:
 ├── DEVELOPMENT_PLAN.md          — 11-stage development plan (authoritative)
 ├── HANDOFF.md                   — This file (start here for onboarding)
 ├── PROJECT_STATUS.md            — Machine-readable status tracker
-├── structures/                  — PDB files (to be populated)
-│   └── negative_targets/        — Counter-target PDBs (to be populated)
-├── bindcraft/                   — BindCraft campaign
-│   ├── settings/ab42_CEG.json   — target settings (hotspots, chains, lengths)
-│   ├── settings/advanced_ab42.json — advanced settings (iterations, weights, MPNN)
-│   ├── scripts/run_bindcraft.sh — production SLURM script (14-day A100)
-│   ├── input/9CO4_CEG.pdb       — target PDB (chains C/E/G)
-│   └── designs/                 — output (populated by Stage 2)
+├── structures/                  — PDB files
+│   ├── negative_targets/        — Aβ42 counter-targets (9CKI, 9CK6, 7Q4B, 7Q4M, 6SHS, 1IYT, Ab40)
+│   └── tfr1/                    — TfR1 structures (6WRV, 1SUV, extracted chains)
+├── bindcraft/                   — BindCraft campaigns
+│   ├── settings/ab42_CEG.json   — Aβ42 target settings (hotspots, chains, lengths)
+│   ├── settings/advanced_ab42.json — Aβ42 advanced settings
+│   ├── scripts/run_bindcraft.sh — Aβ42 production SLURM script (14-day A100)
+│   ├── input/9CO4_CEG.pdb       — Aβ42 target PDB (chains C/E/G)
+│   ├── designs/                 — Aβ42 output (62 accepted, Stage 2 complete)
+│   ├── filtering/               — Stage 3 counter-screen (Narval)
+│   │   ├── scripts/             — run_counterscreen.sh, prepare_inputs.py, extract_results.py
+│   │   ├── inputs/              — ColabFold input CSVs per target
+│   │   └── outputs/             — ColabFold results per target
+│   └── tfr1/                    — TfR1 arm (Stage 7, Nibi)
+│       ├── settings/            — tfr1_AB.json, advanced_tfr1.json, tfr1_filters.json (BUNS disabled)
+│       ├── scripts/             — run_tfr1.sh + p1-p4 parallel scripts
+│       ├── input/6WRV_apical.pdb — TfR1 target PDB (chains A+B)
+│       └── designs/             — TfR1 output (310 accepted from 991 traj)
 ├── nterm_md/                    — N-terminus MD work (deferred)
 │   ├── input/9CO4.pdb
 │   ├── prep/                    — Structure preparation files
@@ -107,7 +123,11 @@ Things that have gone wrong before or are easy to get wrong:
 │   ├── frontenac_gpu_audit_log.md
 │   └── gpu_check_*.out
 ├── docs/
-│   └── session_log.md           — Running log of all Claude Code sessions
+│   ├── session_log.md           — Running log of all Claude Code sessions
+│   ├── bindcraft_62design_analysis.md — Full Aβ42 Stage 2 analysis
+│   ├── STAGE7_TFR1_PLAN.md      — TfR1 arm development plan
+│   ├── tfr1_tf_competition_check.md — Tf competition structural analysis (PASS)
+│   └── tfr1_progress_report.md  — TfR1 progress: 991 traj, 310 accepted, BUNS fix
 └── README.md
 ```
 
