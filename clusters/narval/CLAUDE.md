@@ -64,5 +64,14 @@ Same as Nibi setup (see `clusters/nibi/CLAUDE.md`) but use `--cuda 12.4` for A10
 2. Read `CLAUDE.md` (root)
 3. Read this file (`clusters/narval/CLAUDE.md`)
 4. Read `coordination/DASHBOARD.md` for current status
-5. Check `coordination/manifests/` for assigned work
-6. At session end: update DASHBOARD.md with your progress, commit, push
+5. **Check your inbox:** `ls coordination/inbox/narval/` — read and act on any messages, then delete them
+6. Check `coordination/manifests/` for assigned work
+7. At session end: update DASHBOARD.md with your progress, commit, push
+
+## Inbox monitoring during active sessions
+
+Periodically pull and check for messages from the coordinator:
+```bash
+git pull --quiet origin master && ls coordination/inbox/narval/
+```
+Use `/loop` to automate this every few minutes during long-running work.

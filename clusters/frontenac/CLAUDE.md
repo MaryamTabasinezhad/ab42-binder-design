@@ -62,6 +62,15 @@ Activation: `eval "$(conda shell.bash hook)" && conda activate <env>`
 1. `git pull origin master`
 2. Read `CLAUDE.md` (root)
 3. Read this file (`clusters/frontenac/CLAUDE.md`)
-4. Read `coordination/DASHBOARD.md`
-5. Read `alzheimer/HANDOFF.md` for Abeta42 campaign context
-6. At session end: update DASHBOARD.md, commit, push
+4. **Check your inbox:** `ls coordination/inbox/frontenac/` — read and act on any messages, then delete them
+5. Read `coordination/DASHBOARD.md`
+6. Read `alzheimer/HANDOFF.md` for Abeta42 campaign context
+7. At session end: update DASHBOARD.md, commit, push
+
+## Inbox monitoring during active sessions
+
+Periodically pull and check for messages from workers:
+```bash
+git pull --quiet origin master && ls coordination/inbox/frontenac/
+```
+Use `/loop` to automate this every few minutes during long-running work.

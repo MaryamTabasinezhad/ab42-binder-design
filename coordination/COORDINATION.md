@@ -52,6 +52,17 @@ Prefix all commits with the cluster name in brackets:
 
 Each cluster modifies only its own section in `coordination/DASHBOARD.md` and its own manifest files. The coordinator modifies the overall status and makes campaign decisions.
 
+## Agent Inbox (inter-agent messaging)
+
+Each agent has an inbox at `coordination/inbox/<cluster>/`. To send a message:
+
+1. Write a `.md` file to the recipient's inbox: `coordination/inbox/<recipient>/YYYY-MM-DD_from-<sender>_<subject>.md`
+2. Commit with `[<sender>] msg: <subject>` and push
+3. Recipient picks it up on next `git pull`
+4. Recipient deletes the file after reading
+
+**During active sessions**, agents should periodically pull and check their inbox. Claude Code can use `/loop` to automate this every few minutes.
+
 ## Work Assignment
 
 Work is assigned via manifest files in `coordination/manifests/`. Each manifest is a TSV listing exactly which tasks belong to which cluster.
