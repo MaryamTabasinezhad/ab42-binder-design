@@ -39,8 +39,12 @@ stage_2:
 
 stage_3:
   name: "Negative-design counter-screen"
-  status: not_started
+  status: in_progress  # 2026-05-27, running on Narval (job 61679472, array 0-7)
   depends_on: stage_2
+  cluster: narval
+  designs_screened: 62
+  targets: 8  # 1 positive (9CO4) + 7 negative
+  total_runs: 496  # 62 x 8
   gate: "DECISION_GATE_1"
   gate_criterion: ">=20 designs pass positive + negative filters"
   gate_result: pending
@@ -92,7 +96,7 @@ stage_10:
 ```yaml
 designs_generated: 2977
 designs_passing_internal_filters: 62
-designs_passing_negative_screen: 0  # Stage 3 not started
+designs_passing_negative_screen: 0  # Stage 3 in progress (Narval job 61679472)
 designs_passing_stability: 0
 designs_selected_for_synthesis: 0
 designs_expressing_solubly: 0
@@ -114,3 +118,4 @@ designs_selective: 0
 | 2026-05-06 | Single long-running job, not SLURM array | BindCraft uses internal while loop; array approach from dev plan incompatible | Claude Code |
 | 2026-05-26 | Stage 2 complete with 62 designs | 1,342 trajectories exceeded 1,000 target; 62 accepted across 38 scaffolds | Claude Code |
 | 2026-05-26 | Git-pull multi-cluster coordination | GitHub repo + cluster env files replace Globus sync messaging; Frontenac coordinates | PI + Claude Code |
+| 2026-05-27 | Stage 3 counter-screen on Narval | 62 designs x 8 targets, ColabFold single_sequence multimer_v3, job 61679472 | Narval agent |

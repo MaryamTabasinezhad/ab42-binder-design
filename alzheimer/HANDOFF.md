@@ -30,13 +30,15 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 - [x] Stage 1: BindCraft configuration — settings validated on A100 (job 8375221), all 18 hotspots mapped correctly
 - [x] **Stage 1 COMPLETE** (2026-05-06)
 
+- [x] **Stage 2 COMPLETE** (2026-05-20) — 1,342 trajectories, 2,977 MPNN designs, 62 accepted, 38 unique scaffolds. Champion: s453481_mpnn1 (i_pTM=0.85, dG=-102.5). Full analysis: `docs/bindcraft_62design_analysis.md`
+- [x] Multi-cluster coordination set up (2026-05-26) — GitHub repo, cluster env files, inbox system, DASHBOARD.md
+
 ### In progress
-- [ ] Stage 2: BindCraft production run (1,000 designs)
+- [ ] Stage 3: Negative-design counter-screen — running on Narval (job 61679472, array 0-7). 62 designs × 8 targets = 496 ColabFold runs. Gate 1: ≥20 designs must pass.
 
 ### Not started
-- [ ] Stage 2: 1,000 BindCraft designs (ready to submit)
-- [ ] Stage 3: Negative-design counter-screen
-- [ ] Stages 4–10: (see DEVELOPMENT_PLAN.md)
+- [ ] Stage 4: Stability filtering
+- [ ] Stages 5–10: (see DEVELOPMENT_PLAN.md)
 
 ---
 
