@@ -1,0 +1,178 @@
+              :-) GROMACS - gmx grompp, 2024.6-EasyBuild_5.1.2 (-:
+
+Executable:   /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6/bin/gmx
+Data prefix:  /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6
+Working dir:  /global/project/hpcg6049/protein/alzheimer/nterm_md/prep
+Command line:
+  gmx grompp -f em_steep.mdp -c ions.gro -p topol.top -o em_steep.tpr -maxwarn 1
+
+Ignoring obsolete mdp entry 'ns_type'
+Generating 1-4 interactions: fudge = 0.5
+Number of degrees of freedom in T-Coupling group rest is 286881.00
+The integrator does not provide a ensemble temperature, there is no system ensemble temperature
+
+GROMACS reminds you: "You Could Be a Shadow" (The Breeders)
+
+              :-) GROMACS - gmx mdrun, 2024.6-EasyBuild_5.1.2 (-:
+
+Executable:   /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6/bin/gmx
+Data prefix:  /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6
+Working dir:  /global/project/hpcg6049/protein/alzheimer/nterm_md/prep
+Command line:
+  gmx mdrun -v -deffnm em_steep -ntomp 8
+
+Reading file em_steep.tpr, VERSION 2024.6-EasyBuild_5.1.2 (single precision)
+Using 1 MPI thread
+Using 8 OpenMP threads 
+
+
+Steepest Descents:
+   Tolerance (Fmax)   =  1.00000e+03
+   Number of steps    =         5000
+Step=    0, Dmax= 1.0e-02 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109
+Step=    1, Dmax= 1.0e-02 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=    2, Dmax= 5.0e-03 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=    3, Dmax= 2.5e-03 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=    4, Dmax= 1.2e-03 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=    5, Dmax= 6.2e-04 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=    6, Dmax= 3.1e-04 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=    7, Dmax= 1.6e-04 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=    8, Dmax= 7.8e-05 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=    9, Dmax= 3.9e-05 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=   10, Dmax= 2.0e-05 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=   11, Dmax= 9.8e-06 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=   12, Dmax= 4.9e-06 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=   13, Dmax= 2.4e-06 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109Step=   14, Dmax= 1.2e-06 nm, Epot=  3.51929e+17 Fmax=         inf, atom= 109
+Energy minimization has stopped because the force on at least one atom is not
+finite. This usually means atoms are overlapping. Modify the input
+coordinates to remove atom overlap or use soft-core potentials with the free
+energy code to avoid infinite forces.
+You could also be lucky that switching to double precision is sufficient to
+obtain finite forces.
+
+writing lowest energy coordinates.
+
+Steepest Descents converged to machine precision in 15 steps,
+but did not reach the requested Fmax < 1000.
+Potential Energy  =  3.5192873e+17
+Maximum force     =            inf on atom 109
+Norm of force     =            inf
+
+GROMACS reminds you: "The best way to obtain plausible negative examples is to run a docking program with a biophysics-based function." (Julie Bernauer)
+
+              :-) GROMACS - gmx grompp, 2024.6-EasyBuild_5.1.2 (-:
+
+Executable:   /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6/bin/gmx
+Data prefix:  /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6
+Working dir:  /global/project/hpcg6049/protein/alzheimer/nterm_md/prep
+Command line:
+  gmx grompp -f em_cg.mdp -c em_steep.gro -p topol.top -o em_cg.tpr -maxwarn 1
+
+Ignoring obsolete mdp entry 'ns_type'
+Generating 1-4 interactions: fudge = 0.5
+Number of degrees of freedom in T-Coupling group rest is 286881.00
+The integrator does not provide a ensemble temperature, there is no system ensemble temperature
+
+GROMACS reminds you: "We are perhaps not far removed from the time when we shall be able to submit the bulk of chemical phenomena to calculation." (Joseph Gay-Lussac, 1808)
+
+              :-) GROMACS - gmx mdrun, 2024.6-EasyBuild_5.1.2 (-:
+
+Executable:   /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6/bin/gmx
+Data prefix:  /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6
+Working dir:  /global/project/hpcg6049/protein/alzheimer/nterm_md/prep
+Command line:
+  gmx mdrun -v -deffnm em_cg -ntomp 8
+
+Reading file em_cg.tpr, VERSION 2024.6-EasyBuild_5.1.2 (single precision)
+Using 1 MPI thread
+Using 8 OpenMP threads 
+
+
+Polak-Ribiere Conjugate Gradients:
+   Tolerance (Fmax)   =  1.00000e+02
+   Number of steps    =         5000
+   F-max             =          inf on atom 109
+   F-Norm            =          inf
+
+
+Energy minimization has stopped because the force on at least one atom is not
+finite. This usually means atoms are overlapping. Modify the input
+coordinates to remove atom overlap or use soft-core potentials with the free
+energy code to avoid infinite forces.
+You could also be lucky that switching to double precision is sufficient to
+obtain finite forces.
+
+writing lowest energy coordinates.
+
+Polak-Ribiere Conjugate Gradients converged to machine precision in -1 steps,
+but did not reach the requested Fmax < 100.
+Potential Energy  =  3.5192873e+17
+Maximum force     =            inf on atom 109
+Norm of force     =            inf
+
+GROMACS reminds you: "Science is not a boy's game, it's not a girl's game. It's everyone's game. It's about where we are and where we're going." (Nichelle Nichols)
+
+             :-) GROMACS - gmx trjconv, 2024.6-EasyBuild_5.1.2 (-:
+
+Executable:   /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6/bin/gmx
+Data prefix:  /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6
+Working dir:  /global/project/hpcg6049/protein/alzheimer/nterm_md/prep
+Command line:
+  gmx trjconv -s em_cg.tpr -f em_cg.gro -o em_cg_protein.pdb -pbc mol -ur compact
+
+Will write pdb: Protein data bank file
+Reading file em_cg.tpr, VERSION 2024.6-EasyBuild_5.1.2 (single precision)
+Reading file em_cg.tpr, VERSION 2024.6-EasyBuild_5.1.2 (single precision)
+Group     0 (         System) has 142620 elements
+Group     1 (        Protein) has  1639 elements
+Group     2 (      Protein-H) has   821 elements
+Group     3 (        C-alpha) has   110 elements
+Group     4 (       Backbone) has   330 elements
+Group     5 (      MainChain) has   443 elements
+Group     6 (   MainChain+Cb) has   535 elements
+Group     7 (    MainChain+H) has   559 elements
+Group     8 (      SideChain) has  1080 elements
+Group     9 (    SideChain-H) has   378 elements
+Group    10 (    Prot-Masses) has  1639 elements
+Group    11 (    non-Protein) has 140981 elements
+Group    12 (          Water) has 140976 elements
+Group    13 (            SOL) has 140976 elements
+Group    14 (      non-Water) has  1644 elements
+Group    15 (            Ion) has     5 elements
+Group    16 ( Water_and_ions) has 140981 elements
+Select a group: Reading frames from gro file 'Protein in water', 142620 atoms.
+Reading frame       0 time    0.000   
+Precision of em_cg.gro is 0.001 (nm)
+Last frame          0 time    0.000   
+ ->  frame      0 time    0.000      
+Last written: frame      0 time    0.000
+
+
+GROMACS reminds you: "Science is not a boy's game, it's not a girl's game. It's everyone's game. It's about where we are and where we're going." (Nichelle Nichols)
+
+             :-) GROMACS - gmx trjconv, 2024.6-EasyBuild_5.1.2 (-:
+
+Executable:   /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6/bin/gmx
+Data prefix:  /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6
+Working dir:  /global/project/hpcg6049/protein/alzheimer/nterm_md/prep
+Command line:
+  gmx trjconv -s em_cg.tpr -f em_cg.gro -o /global/project/hpcg6049/protein/alzheimer/nterm_md/starting_structure/chainA_B_C_with_nterm_minimized.pdb -pbc mol -ur compact
+
+Will write pdb: Protein data bank file
+Reading file em_cg.tpr, VERSION 2024.6-EasyBuild_5.1.2 (single precision)
+Reading file em_cg.tpr, VERSION 2024.6-EasyBuild_5.1.2 (single precision)
+Group     0 (         System) has 142620 elements
+Group     1 (        Protein) has  1639 elements
+Group     2 (      Protein-H) has   821 elements
+Group     3 (        C-alpha) has   110 elements
+Group     4 (       Backbone) has   330 elements
+Group     5 (      MainChain) has   443 elements
+Group     6 (   MainChain+Cb) has   535 elements
+Group     7 (    MainChain+H) has   559 elements
+Group     8 (      SideChain) has  1080 elements
+Group     9 (    SideChain-H) has   378 elements
+Group    10 (    Prot-Masses) has  1639 elements
+Group    11 (    non-Protein) has 140981 elements
+Group    12 (          Water) has 140976 elements
+Group    13 (            SOL) has 140976 elements
+Group    14 (      non-Water) has  1644 elements
+Group    15 (            Ion) has     5 elements
+Group    16 ( Water_and_ions) has 140981 elements
+Select a group: Reading frames from gro file 'Protein in water', 142620 atoms.
+Reading frame       0 time    0.000   
+Precision of em_cg.gro is 0.001 (nm)
+Last frame          0 time    0.000   
+ ->  frame      0 time    0.000      
+Last written: frame      0 time    0.000
+
+
+GROMACS reminds you: "We're Gonna Hit You Harder" (Scoter)
+

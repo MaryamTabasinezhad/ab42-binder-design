@@ -1,0 +1,85 @@
+# === External tool clones (have their own repos) ===
+ProteinMPNN/
+proteinmpnn/
+alzheimer/bindcraft/repo/
+
+# === Large design outputs (transfer via Globus, not git) ===
+alzheimer/bindcraft/designs/Accepted/
+alzheimer/bindcraft/designs/Rejected/
+alzheimer/bindcraft/designs/MPNN/
+alzheimer/bindcraft/designs/Trajectory/
+alzheimer/bindcraft/designs_p*/
+alzheimer/bindcraft/logs/
+
+# === RFdiffusion large outputs ===
+rfdiffusion_test/output/
+rfdiffusion_test/schedules/
+
+# === Post-MPNN large data ===
+post_mpnn/cf_input/
+post_mpnn/cf_output/
+post_mpnn/parsed/
+post_mpnn/logs/
+mpnn_fastas/
+
+# === Container symlink (points to scratch .sif) ===
+container
+
+# === Sync transfer artifacts (ephemeral) ===
+alzheimer/bindcraft/sync/to_nibi/nibi_package/
+alzheimer/bindcraft/sync/from_nibi/
+
+# === MD simulation outputs ===
+*.gro
+*.xtc
+*.trr
+*.cpt
+*.tpr
+*.edr
+mdout.mdp
+*.cpt.bak
+
+# === ColabFold database cache ===
+colabfold_envdb_202108/
+uniref30_2302/
+mmseqs_dbs/
+
+# === Per-cluster local state (not tracked) ===
+clusters/*/local_state/
+
+# === GROMACS backup files ===
+*.bk1
+*.bk2
+
+# === Old logs and RFdiffusion inference outputs ===
+scripts/logs/
+scripts/outputs/
+
+# === General ===
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.swp
+*~
+\#*\#
+.DS_Store
+*.tar.gz
+*.zip
+
+# === Allow specific files inside designs/ ===
+!alzheimer/bindcraft/designs/final_design_stats.csv
+!alzheimer/bindcraft/designs/trajectory_stats.csv
+!alzheimer/bindcraft/designs/mpnn_design_stats.csv
+!alzheimer/bindcraft/designs/failure_csv.csv
+!alzheimer/bindcraft/designs/design_report.md
+
+# === Allow tracked PDBs (small reference structures) ===
+!alzheimer/structures/**/*.pdb
+!alzheimer/bindcraft/input/*.pdb
+!alzheimer/nterm_md/starting_structure/*.pdb
+!alzheimer/nterm_md/input/*.pdb
+!alzheimer/nterm_md/prep/*.pdb
+!structural_analysis_project/structures/*.pdb
+!structural_analysis_project/analysis/*.pdb
+!rfdiffusion_test/input/*.pdb

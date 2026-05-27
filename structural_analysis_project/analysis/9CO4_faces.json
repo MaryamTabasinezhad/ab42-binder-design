@@ -1,0 +1,467 @@
+{
+  "face_A_interface_based": [
+    "A",
+    "C",
+    "E",
+    "G",
+    "I"
+  ],
+  "face_B_interface_based": [
+    "B",
+    "D",
+    "F",
+    "H",
+    "J"
+  ],
+  "angular_face_A": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "F"
+  ],
+  "angular_face_B": [
+    "E",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "interface_matches_expected": true,
+  "angular_matches_expected": false,
+  "principal_axis": [
+    -0.8848668932914734,
+    0.4227930009365082,
+    0.1955931931734085
+  ],
+  "angles_deg": {
+    "A": -8.015406426020704e-07,
+    "B": 15.518086331416413,
+    "C": -1.0740268935597677,
+    "D": 15.067169691275968,
+    "E": -171.43291271837035,
+    "F": 8.124181629117126,
+    "G": -178.13370796317042,
+    "H": -162.29383482110453,
+    "I": -178.66943396524414,
+    "J": -163.05114641512006
+  },
+  "z_proj": {
+    "A": -11.96481704711914,
+    "B": 8.29761028289795,
+    "C": -11.099246978759766,
+    "D": 9.268026351928711,
+    "E": -10.1851224899292,
+    "F": 10.205825805664062,
+    "G": -9.291504859924316,
+    "H": 11.102635383605957,
+    "I": -8.301199913024902,
+    "J": 11.967757225036621
+  },
+  "patches_face_A": [
+    {
+      "chain": "A",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 145.74
+    },
+    {
+      "chain": "A",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 105.28
+    },
+    {
+      "chain": "A",
+      "resi": 13,
+      "resname": "HIS",
+      "sasa": 90.81
+    },
+    {
+      "chain": "A",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 126.73
+    },
+    {
+      "chain": "A",
+      "resi": 15,
+      "resname": "GLN",
+      "sasa": 96.25
+    },
+    {
+      "chain": "A",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 126.79
+    },
+    {
+      "chain": "A",
+      "resi": 19,
+      "resname": "PHE",
+      "sasa": 77.44
+    },
+    {
+      "chain": "A",
+      "resi": 20,
+      "resname": "PHE",
+      "sasa": 60.76
+    },
+    {
+      "chain": "A",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 115.68
+    },
+    {
+      "chain": "C",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 103.09
+    },
+    {
+      "chain": "C",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 55.19
+    },
+    {
+      "chain": "C",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 76.54
+    },
+    {
+      "chain": "C",
+      "resi": 15,
+      "resname": "GLN",
+      "sasa": 50.71
+    },
+    {
+      "chain": "C",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 59.43
+    },
+    {
+      "chain": "C",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 54.8
+    },
+    {
+      "chain": "E",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 102.69
+    },
+    {
+      "chain": "E",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 55.08
+    },
+    {
+      "chain": "E",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 76.88
+    },
+    {
+      "chain": "E",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 58.78
+    },
+    {
+      "chain": "E",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 53.9
+    },
+    {
+      "chain": "G",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 62.87
+    },
+    {
+      "chain": "G",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 56.4
+    },
+    {
+      "chain": "G",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 76.7
+    },
+    {
+      "chain": "G",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 59.4
+    },
+    {
+      "chain": "G",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 55.51
+    },
+    {
+      "chain": "I",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 124.63
+    },
+    {
+      "chain": "I",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 90.19
+    },
+    {
+      "chain": "I",
+      "resi": 13,
+      "resname": "HIS",
+      "sasa": 51.45
+    },
+    {
+      "chain": "I",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 126.36
+    },
+    {
+      "chain": "I",
+      "resi": 15,
+      "resname": "GLN",
+      "sasa": 59.4
+    },
+    {
+      "chain": "I",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 98.82
+    },
+    {
+      "chain": "I",
+      "resi": 19,
+      "resname": "PHE",
+      "sasa": 44.47
+    },
+    {
+      "chain": "I",
+      "resi": 20,
+      "resname": "PHE",
+      "sasa": 52.99
+    },
+    {
+      "chain": "I",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 82.7
+    }
+  ],
+  "patches_face_B": [
+    {
+      "chain": "B",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 146.59
+    },
+    {
+      "chain": "B",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 105.79
+    },
+    {
+      "chain": "B",
+      "resi": 13,
+      "resname": "HIS",
+      "sasa": 90.11
+    },
+    {
+      "chain": "B",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 125.4
+    },
+    {
+      "chain": "B",
+      "resi": 15,
+      "resname": "GLN",
+      "sasa": 91.01
+    },
+    {
+      "chain": "B",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 127.76
+    },
+    {
+      "chain": "B",
+      "resi": 19,
+      "resname": "PHE",
+      "sasa": 67.18
+    },
+    {
+      "chain": "B",
+      "resi": 20,
+      "resname": "PHE",
+      "sasa": 59.36
+    },
+    {
+      "chain": "B",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 114.44
+    },
+    {
+      "chain": "D",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 102.61
+    },
+    {
+      "chain": "D",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 55.58
+    },
+    {
+      "chain": "D",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 76.56
+    },
+    {
+      "chain": "D",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 58.77
+    },
+    {
+      "chain": "D",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 54.38
+    },
+    {
+      "chain": "F",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 64.26
+    },
+    {
+      "chain": "F",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 55.91
+    },
+    {
+      "chain": "F",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 75.2
+    },
+    {
+      "chain": "F",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 57.45
+    },
+    {
+      "chain": "F",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 54.46
+    },
+    {
+      "chain": "H",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 55.87
+    },
+    {
+      "chain": "H",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 55.6
+    },
+    {
+      "chain": "H",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 75.82
+    },
+    {
+      "chain": "H",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 59.24
+    },
+    {
+      "chain": "H",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 54.71
+    },
+    {
+      "chain": "J",
+      "resi": 10,
+      "resname": "TYR",
+      "sasa": 126.32
+    },
+    {
+      "chain": "J",
+      "resi": 11,
+      "resname": "GLU",
+      "sasa": 89.63
+    },
+    {
+      "chain": "J",
+      "resi": 13,
+      "resname": "HIS",
+      "sasa": 51.64
+    },
+    {
+      "chain": "J",
+      "resi": 14,
+      "resname": "HIS",
+      "sasa": 126.58
+    },
+    {
+      "chain": "J",
+      "resi": 15,
+      "resname": "GLN",
+      "sasa": 60.02
+    },
+    {
+      "chain": "J",
+      "resi": 16,
+      "resname": "LYS",
+      "sasa": 96.28
+    },
+    {
+      "chain": "J",
+      "resi": 19,
+      "resname": "PHE",
+      "sasa": 44.1
+    },
+    {
+      "chain": "J",
+      "resi": 20,
+      "resname": "PHE",
+      "sasa": 52.76
+    },
+    {
+      "chain": "J",
+      "resi": 22,
+      "resname": "GLU",
+      "sasa": 81.18
+    }
+  ]
+}

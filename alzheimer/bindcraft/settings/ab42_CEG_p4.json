@@ -1,0 +1,9 @@
+{
+    "design_path": "/global/project/hpcg6049/protein/alzheimer/bindcraft/designs_p4/",
+    "binder_name": "ab42",
+    "starting_pdb": "/global/project/hpcg6049/protein/alzheimer/bindcraft/input/9CO4_CEG.pdb",
+    "chains": "C,E,G",
+    "target_hotspot_residues": "C10,C11,C13,C14,C15,C16,E10,E11,E13,E14,E15,E16,G10,G11,G13,G14,G15,G16",
+    "lengths": [60, 90],
+    "number_of_final_designs": 250
+}

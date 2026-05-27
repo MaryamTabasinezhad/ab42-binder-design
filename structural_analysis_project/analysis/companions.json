@@ -1,0 +1,50 @@
+{
+  "9CK6": {
+    "title": "Cryo-EM structure of sarkosyl insoluble amyloid-beta 42 filaments extracted from human brain tissue",
+    "authors": [
+      "Butan, C.",
+      "Strittmatter, S."
+    ],
+    "release_date": null,
+    "deposit_date": "2024-07-08",
+    "resolution": 3.0,
+    "chains": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "R"
+    ],
+    "organism": null,
+    "pdb_id": "9CK6"
+  },
+  "9CKI": {
+    "title": "Cryo-EM structure of the poly(4-styrenesulfonic acid-co-maleic acid) [PSCMA]-extractable amyloid-beta 42 oligomer from human brain tissue (Conformation 2)",
+    "authors": [
+      "Butan, C.",
+      "Strittmatter, S."
+    ],
+    "release_date": null,
+    "deposit_date": "2024-07-09",
+    "resolution": 3.1,
+    "chains": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J"
+    ],
+    "organism": null,
+    "pdb_id": "9CKI"
+  }
+}

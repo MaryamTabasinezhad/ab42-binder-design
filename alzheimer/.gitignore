@@ -1,0 +1,36 @@
+# Large MD outputs
+*.gro
+*.xtc
+*.trr
+*.cpt
+*.tpr
+*.edr
+*.log
+*.pdb.gz
+
+# Backup files
+\#*\#
+*~
+.*.swp
+
+# ColabFold downloads
+colabfold_envdb_202108/
+uniref30_2302/
+mmseqs_dbs/
+*.tar.gz
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# GROMACS scratch
+mdout.mdp
+*.cpt.bak
+step*.pdb
+traj*.trr
+
+# Allow specific tracked structural files
+!nterm_md/starting_structure/*.pdb
+!nterm_md/input/9CO4.pdb
+!nterm_md/prep/*.pdb

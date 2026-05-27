@@ -1,0 +1,26 @@
+# Compressed structure files
+*.pdb.gz
+*.cif.gz
+
+# Large maps and density data
+*.map
+*.map.gz
+*.mrc
+*.mrc.gz
+*.ccp4
+*.mtz
+
+# Conda / Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.egg-info/
+.conda/
+.env
+
+# Editor / OS junk
+.DS_Store
+*.swp
+.vscode/
+.idea/

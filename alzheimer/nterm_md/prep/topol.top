@@ -1,0 +1,51 @@
+;
+;	File 'topol.top' was generated
+;	By user: hpc6049 (6049)
+;	On host: login2.frontenac.local
+;	At date: Wed May  6 01:08:09 2026
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	            :-) GROMACS - gmx pdb2gmx, 2024.6-EasyBuild_5.1.2 (-:
+;	
+;	Executable:   /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6/bin/gmx
+;	Data prefix:  /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/MPI/gcc12/openmpi4/gromacs/2024.6
+;	Working dir:  /global/project/hpcg6049/protein/alzheimer/nterm_md/prep
+;	Command line:
+;	  gmx pdb2gmx -f chainA_B_C_with_nterm.pdb -o system.gro -p topol.top -i posre.itp -ff amber99sb-ildn -water tip3p -ignh -ter
+;	Force field was read from the standard GROMACS share directory.
+;
+
+; Include forcefield parameters
+#include "amber99sb-ildn.ff/forcefield.itp"
+
+; Include chain topologies
+#include "topol_Protein_chain_A.itp"
+#include "topol_Protein_chain_B.itp"
+#include "topol_Protein_chain_C.itp"
+
+; Include water topology
+#include "amber99sb-ildn.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "amber99sb-ildn.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_A     1
+Protein_chain_B     1
+Protein_chain_C     1
+SOL         49577
+NA               5

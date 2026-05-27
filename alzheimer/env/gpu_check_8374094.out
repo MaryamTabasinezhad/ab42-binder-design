@@ -1,0 +1,42 @@
+=== GPU Check Job ===
+Date: Wed May  6 01:41:19 AM EDT 2026
+Hostname: frnt110.frontenac.local
+Job ID: 8374094
+Partition: gpubase_6hrs
+
+=== nvidia-smi ===
+Wed May  6 01:41:19 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-PCIE-32GB           On  |   00000000:3B:00.0 Off |                    0 |
+| N/A   19C    P0             23W /  250W |       0MiB /  32768MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+=== GPU Details ===
+GPU 0: Tesla V100-PCIE-32GB (UUID: GPU-e143da6a-ce3c-f5e4-f615-ea8c73347d49)
+
+=== GPU Specs ===
+Tesla V100-PCIE-32GB, 32768 MiB, 575.57.08, 7.0
+
+=== Environment ===
+CUDA_VISIBLE_DEVICES=0
+GPU_DEVICE_ORDINAL=0
+SLURM_GPUS=
+SLURM_JOB_GPUS=0
+SLURM_GPUS_ON_NODE=1
+
+=== Done ===

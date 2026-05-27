@@ -1,0 +1,13 @@
+Error executing job with overrides: ['inference.output_prefix=/output/motifscaffolding', 'inference.model_directory_path=/app/RFdiffusion/models', 'inference.input_pdb=/input/5TPN.pdb', 'inference.num_designs=3', 'contigmap.contigs=[10-40/A163-181/10-40]']
+Traceback (most recent call last):
+  File "/app/RFdiffusion/scripts/run_inference.py", line 54, in main
+    sampler = iu.sampler_selector(conf)
+  File "/app/RFdiffusion/rfdiffusion/inference/utils.py", line 511, in sampler_selector
+    sampler = model_runners.SelfConditioning(conf)
+  File "/app/RFdiffusion/rfdiffusion/inference/model_runners.py", line 37, in __init__
+    self.initialize(conf)
+  File "/app/RFdiffusion/rfdiffusion/inference/model_runners.py", line 129, in initialize
+    os.mkdir(schedule_directory)
+OSError: [Errno 30] Read-only file system: '/app/RFdiffusion/rfdiffusion/inference/../../schedules'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

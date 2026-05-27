@@ -1,0 +1,200 @@
+{
+  "input_pdb": "/global/project/hpcg6049/protein/alzheimer/nterm_md/starting_structure/chainA_B_C_with_nterm_minimized.pdb",
+  "nterm_sequence_observed": "DAEFRHDS",
+  "stereochemistry": {
+    "max_bond_deviation_A": {
+      "pair": "N-CA",
+      "dev": 0.06295389366149906,
+      "value": 1.520953893661499,
+      "ideal": 1.458,
+      "loc": "A:5"
+    },
+    "max_angle_deviation_deg": {
+      "triplet": "N-CA-C",
+      "dev": 15.318974025570881,
+      "value": 126.51897402557088,
+      "ideal": 111.2,
+      "loc": "A:5"
+    },
+    "bond_violations_count_gt_0p05A": 6,
+    "angle_violations_count_gt_5deg": 24,
+    "bond_violations_top10": [
+      {
+        "chain": "A",
+        "resid": 5,
+        "atoms": "N-CA",
+        "value": 1.520953893661499,
+        "ideal": 1.458,
+        "dev": 0.06295389366149906
+      },
+      {
+        "chain": "A",
+        "resid": 7,
+        "atoms": "N-CA",
+        "value": 1.5205574035644531,
+        "ideal": 1.458,
+        "dev": 0.06255740356445316
+      },
+      {
+        "chain": "A",
+        "resid": 6,
+        "atoms": "CA-C",
+        "value": 1.5862231254577637,
+        "ideal": 1.525,
+        "dev": 0.06122312545776376
+      },
+      {
+        "chain": "A",
+        "resid": 4,
+        "atoms": "CA-C",
+        "value": 1.5818337202072144,
+        "ideal": 1.525,
+        "dev": 0.056833720207214444
+      },
+      {
+        "chain": "A",
+        "resid": 8,
+        "atoms": "CA-C",
+        "value": 1.5775915384292603,
+        "ideal": 1.525,
+        "dev": 0.05259153842926034
+      },
+      {
+        "chain": "A",
+        "resid": 7,
+        "atoms": "CA-C",
+        "value": 1.5761340856552124,
+        "ideal": 1.525,
+        "dev": 0.05113408565521249
+      }
+    ],
+    "angle_violations_top10": [
+      {
+        "chain": "A",
+        "resid": 5,
+        "atoms": "N-CA-C",
+        "value": 126.51897402557088,
+        "ideal": 111.2,
+        "dev": 15.318974025570881
+      },
+      {
+        "chain": "A",
+        "resid": 7,
+        "atoms": "N-CA-C",
+        "value": 126.1216664815648,
+        "ideal": 111.2,
+        "dev": 14.921666481564799
+      },
+      {
+        "chain": "A",
+        "resid": "8-9",
+        "atoms": "C(i)-N(i+1)-CA(i+1)",
+        "value": 134.31241210567498,
+        "ideal": 121.7,
+        "dev": 12.612412105674977
+      },
+      {
+        "chain": "A",
+        "resid": "8-9",
+        "atoms": "CA(i)-C(i)-N(i+1)",
+        "value": 127.7963132608796,
+        "ideal": 116.2,
+        "dev": 11.596313260879597
+      },
+      {
+        "chain": "A",
+        "resid": 4,
+        "atoms": "N-CA-C",
+        "value": 122.4232850726311,
+        "ideal": 111.2,
+        "dev": 11.2232850726311
+      },
+      {
+        "chain": "A",
+        "resid": "4-5",
+        "atoms": "C(i)-N(i+1)-CA(i+1)",
+        "value": 132.35471420237863,
+        "ideal": 121.7,
+        "dev": 10.654714202378628
+      },
+      {
+        "chain": "A",
+        "resid": 6,
+        "atoms": "N-CA-C",
+        "value": 120.87378930330462,
+        "ideal": 111.2,
+        "dev": 9.673789303304616
+      },
+      {
+        "chain": "A",
+        "resid": 3,
+        "atoms": "N-CA-C",
+        "value": 118.98558218965056,
+        "ideal": 111.2,
+        "dev": 7.785582189650555
+      },
+      {
+        "chain": "A",
+        "resid": 9,
+        "atoms": "N-CA-C",
+        "value": 118.95157900673036,
+        "ideal": 111.2,
+        "dev": 7.751579006730353
+      },
+      {
+        "chain": "A",
+        "resid": "8-9",
+        "atoms": "O(i)-C(i)-N(i+1)",
+        "value": 115.43294099864102,
+        "ideal": 122.7,
+        "dev": 7.267059001358987
+      }
+    ]
+  },
+  "clash_check": {
+    "min_distance_A_including_peptide_bond": 1.365686297416687,
+    "min_distance_A_nonbonded_only": 2.195492744445801,
+    "mean_min_distance_A": 16.008508682250977,
+    "n_nterm_heavy_atoms": 68,
+    "n_clashes_lt_2A": 0,
+    "clashes": [],
+    "bonded_peptide_pairs_excluded": [
+      {
+        "nterm_atom": "A:8SER:C",
+        "partner": "A:9GLY:N",
+        "distance_A": 1.365686297416687
+      }
+    ]
+  },
+  "orientation": {
+    "nterm_radius_of_gyration_A": 8.31373119354248,
+    "nterm_centroid_xyz_A": [
+      42.73396682739258,
+      16.479116439819336,
+      47.8786735534668
+    ],
+    "chainA_core_centroid_xyz_A": [
+      65.08946228027344,
+      57.78952407836914,
+      55.87965774536133
+    ],
+    "vector_core_to_nterm_xyz_A": [
+      -22.35549545288086,
+      -41.31040954589844,
+      -8.000984191894531
+    ],
+    "vector_length_A": 47.64802169799805,
+    "filament_axis_unit_vec": [
+      0.8768057227134705,
+      -0.4663585424423218,
+      0.11713870614767075
+    ],
+    "angle_to_filament_axis_deg": 91.5311662657254
+  },
+  "buried_surface_area": {
+    "nterm_sasa_alone_A2": 552.479139458645,
+    "rest_sasa_alone_A2": 3115.020773899209,
+    "full_system_sasa_A2": 3595.3145839121544,
+    "buried_surface_area_A2": 72.18532944569961
+  }
+}
