@@ -50,12 +50,7 @@
       "Bash(tar *)",
       "Bash(gzip *)",
       "Bash(gunzip *)",
-      "Bash(zcat *)",
-      "Bash(pip install *)",
-      "Bash(conda install *)",
-      "Bash(mamba install *)",
-      "Bash(mamba create *)",
-      "Bash(conda create *)"
+      "Bash(zcat *)"
     ],
     "deny": [
       "Bash(rm -rf /)",
@@ -64,6 +59,11 @@
       "Bash(sudo *)",
       "Bash(apt-get *)",
       "Bash(apt *)",
+      "Bash(pip install *)",
+      "Bash(conda install *)",
+      "Bash(mamba install *)",
+      "Bash(mamba create *)",
+      "Bash(conda create *)",
       "Bash(shutdown *)",
       "Bash(reboot *)"
     ]

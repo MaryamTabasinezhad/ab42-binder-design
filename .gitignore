@@ -11,6 +11,14 @@ alzheimer/bindcraft/designs/Trajectory/
 alzheimer/bindcraft/designs_p*/
 alzheimer/bindcraft/logs/
 
+# === TfR1 large design outputs ===
+alzheimer/bindcraft/tfr1/designs/Accepted/
+alzheimer/bindcraft/tfr1/designs/Rejected/
+alzheimer/bindcraft/tfr1/designs/MPNN/
+alzheimer/bindcraft/tfr1/designs/Trajectory/
+alzheimer/bindcraft/tfr1/designs_p*/
+alzheimer/bindcraft/tfr1/logs/
+
 # === RFdiffusion large outputs ===
 rfdiffusion_test/output/
 rfdiffusion_test/schedules/
@@ -77,6 +85,12 @@ __pycache__/
 !alzheimer/bindcraft/designs/failure_csv.csv
 !alzheimer/bindcraft/designs/design_report.md
 
+# === Allow TfR1 stat CSVs ===
+!alzheimer/bindcraft/tfr1/designs/final_design_stats.csv
+!alzheimer/bindcraft/tfr1/designs/trajectory_stats.csv
+!alzheimer/bindcraft/tfr1/designs/mpnn_design_stats.csv
+!alzheimer/bindcraft/tfr1/designs/failure_csv.csv
+
 # === Allow tracked PDBs (small reference structures) ===
 !alzheimer/structures/**/*.pdb
 !alzheimer/bindcraft/input/*.pdb
@@ -85,4 +99,5 @@ __pycache__/
 !alzheimer/nterm_md/prep/*.pdb
 !structural_analysis_project/structures/*.pdb
 !structural_analysis_project/analysis/*.pdb
+!alzheimer/bindcraft/tfr1/input/*.pdb
 !rfdiffusion_test/input/*.pdb

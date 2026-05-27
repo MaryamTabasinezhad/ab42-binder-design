@@ -1,0 +1,9 @@
+{
+    "design_path": "/home/ghaedi/projects/def-ghaedi/ghaedi/protein/alzheimer/bindcraft/tfr1/designs_p4/",
+    "binder_name": "tfr1",
+    "starting_pdb": "/home/ghaedi/projects/def-ghaedi/ghaedi/protein/alzheimer/bindcraft/tfr1/input/6WRV_apical.pdb",
+    "chains": "A",
+    "target_hotspot_residues": "A208,A210,A211,A212,A215",
+    "lengths": [50, 70],
+    "number_of_final_designs": 1000
+}
