@@ -66,7 +66,17 @@ Activation: `eval "$(conda shell.bash hook)" && conda activate <env>`
 5. **Start inbox watcher:** `nohup bash coordination/scripts/inbox_watcher.sh &`
 6. Read `coordination/DASHBOARD.md`
 7. Read `alzheimer/HANDOFF.md` for Abeta42 campaign context
-8. At session end: update DASHBOARD.md, commit, push
+8. At session end: run the **session-end checklist** below, commit, push
+
+## Session-end checklist (MANDATORY)
+
+Before ending ANY session that changes project state, update ALL THREE status files:
+
+1. **`coordination/DASHBOARD.md`** — cluster table (stage, jobs, trajectories, accepted designs), combined metrics, recent actions log
+2. **`alzheimer/PROJECT_STATUS.md`** — stage statuses (not_started → in_progress → completed), key metrics, decision log
+3. **`alzheimer/HANDOFF.md`** — Section 2 status checklist (move items between completed/in-progress/not-started), add new decisions to Section 3, new warnings to Section 4, new files to Section 5
+
+These three files are the coordination backbone. If a worker commits progress (new job, results, status change), Frontenac must propagate that change to all three files in the same session. Do NOT defer updates to the next session — stale status files cause workers to make wrong decisions.
 
 ## Inbox monitoring
 
