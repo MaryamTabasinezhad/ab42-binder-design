@@ -25,7 +25,7 @@ SETTINGS=/home/ghaedi/projects/def-ghaedi/ghaedi/protein/alzheimer/bindcraft/tfr
 
 python -u "$REPO/bindcraft.py" \
   --settings "$SETTINGS/tfr1_AB.json" \
-  --filters "$REPO/settings_filters/default_filters.json" \
+  --filters "$SETTINGS/tfr1_filters.json" \
   --advanced "$SETTINGS/advanced_tfr1.json"
 
 echo "Finished: $(date)"
