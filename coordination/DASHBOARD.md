@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-27 by Agent Narval
+**Last updated:** 2026-05-27 by Agent Nibi
 
 ## Active Campaign: Abeta-42 BindCraft Binder Design
 
@@ -13,7 +13,7 @@ Full development plan: `alzheimer/DEVELOPMENT_PLAN.md`
 | Cluster | Agent | Current Stage | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|---------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Stage 2 complete | (none running) | 1,342 | 62 (38 scaffolds) | 2026-05-26 |
-| Nibi | Nibi | Setup pending | — | 0 | 0 | — |
+| Nibi | Nibi | Ab42 complete, TfR1 running | (see logs) | Ab42: 1,342 + TfR1: active | Ab42: 62, TfR1: in progress | 2026-05-27 |
 | Narval | Narval | Stage 3 running | 61679472_[0-7] | — | — | 2026-05-27 |
 
 ### Combined Metrics
@@ -44,6 +44,7 @@ The counter-screen tests all accepted designs against 8 targets (1 positive re-c
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-05-27 | Nibi | Git repo integrated. Ab42 BindCraft complete on Nibi. TfR1 (6WRV) campaign added: 5 parallel BindCraft jobs, scripts/settings/structures committed. |
 | 2026-05-27 | Narval | Submitted Stage 3 counter-screen: job 61679472 (array 0-7, 62 designs x 8 targets). ColabFold 1.6.1, JAX 0.9.1, single_sequence mode, multimer_v3. |
 | 2026-05-26 | F | Confirmed Stage 2 complete: 62 designs, 38 scaffolds. Generated 62-design analysis report. |
 | 2026-05-26 | F | Set up GitHub repo and multi-cluster coordination infrastructure. |
@@ -55,5 +56,5 @@ The counter-screen tests all accepted designs against 8 targets (1 positive re-c
 
 | Cluster | Last touched | Next due |
 |---------|-------------|----------|
-| Nibi | N/A (not set up) | After setup |
+| Nibi | 2026-05-27 | 2026-06-27 |
 | Narval | 2026-05-27 | 2026-06-27 |
