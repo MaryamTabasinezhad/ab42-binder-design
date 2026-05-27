@@ -35,10 +35,11 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 
 ### In progress
 - [ ] Stage 3: Negative-design counter-screen — running on Narval (job 61679472, array 0-7). 62 designs × 8 targets = 496 ColabFold runs. Gate 1: ≥20 designs must pass.
+- [ ] Stage 7: TfR1 arm design — running on Nibi (5 parallel BindCraft jobs: 13720337-13720342). 204 trajectories, 170 MPNN designs, 0 accepted so far. Target: 6WRV apical domain, hotspots 208/210/211/212/215, binder 50-70 aa. Tf competition check PASS.
 
 ### Not started
 - [ ] Stage 4: Stability filtering
-- [ ] Stages 5–10: (see DEVELOPMENT_PLAN.md)
+- [ ] Stages 5–6, 8–10: (see DEVELOPMENT_PLAN.md)
 
 ---
 

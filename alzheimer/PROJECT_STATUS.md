@@ -69,8 +69,16 @@ stage_6:
 
 stage_7:
   name: "TfR1 arm design (parallel)"
-  status: not_started
+  status: in_progress  # 2026-05-11, running on Nibi (5 parallel BindCraft jobs)
   parallel_with: "stages 2-6"
+  cluster: nibi
+  target_pdb: "6WRV (chains A+B, apical domain hotspots 208/210/211/212/215)"
+  binder_size: "50-70 residues"
+  trajectories_completed: 204
+  mpnn_designs_evaluated: 170
+  designs_accepted: 0
+  parallel_jobs: 5  # main + p1-p4, each targeting 1000 designs
+  notes: "Tf competition check PASS — hotspots on apical domain, 45+ Å from Tf interface"
 
 stage_8:
   name: "Tandem fusion design"
@@ -119,3 +127,4 @@ designs_selective: 0
 | 2026-05-26 | Stage 2 complete with 62 designs | 1,342 trajectories exceeded 1,000 target; 62 accepted across 38 scaffolds | Claude Code |
 | 2026-05-26 | Git-pull multi-cluster coordination | GitHub repo + cluster env files replace Globus sync messaging; Frontenac coordinates | PI + Claude Code |
 | 2026-05-27 | Stage 3 counter-screen on Narval | 62 designs x 8 targets, ColabFold single_sequence multimer_v3, job 61679472 | Narval agent |
+| 2026-05-27 | Stage 7 TfR1 campaign tracked | Nibi's existing TfR1 work (204 trajectories, 5 jobs) merged into repo | Nibi agent |
