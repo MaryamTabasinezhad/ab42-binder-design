@@ -47,6 +47,9 @@ mmseqs_dbs/
 # === Per-cluster local state (not tracked) ===
 clusters/*/local_state/
 
+# === Inbox watcher logs ===
+coordination/inbox/*/.watcher.log
+
 # === GROMACS backup files ===
 *.bk1
 *.bk2

@@ -63,11 +63,28 @@ Activation: `eval "$(conda shell.bash hook)" && conda activate <env>`
 - Nibi is institutional — direct transfers to/from all other endpoints work
 - See `coordination/globus/transfer_recipes.sh` for commands
 
+## Inbox monitoring
+
+Start the inbox watcher at the beginning of every session:
+```bash
+nohup bash coordination/scripts/inbox_watcher.sh &
+```
+This pulls git every 2 minutes and logs new messages to `coordination/inbox/nibi/.watcher.log`.
+
+Check the log for new messages:
+```bash
+tail -20 coordination/inbox/nibi/.watcher.log
+```
+
+Stop when session ends: `kill $(cat /tmp/inbox_watcher_nibi.pid)`
+
 ## Session protocol
 
 1. `git pull origin master`
 2. Read `CLAUDE.md` (root)
 3. Read this file (`clusters/nibi/CLAUDE.md`)
 4. Read `coordination/DASHBOARD.md` for current status
-5. Check `coordination/manifests/` for assigned work
-6. At session end: update DASHBOARD.md with your progress, commit, push
+5. **Check your inbox:** `ls coordination/inbox/nibi/` — read and act on any messages, then delete them
+6. **Start inbox watcher:** `nohup bash coordination/scripts/inbox_watcher.sh &`
+7. Check `coordination/manifests/` for assigned work
+8. At session end: update DASHBOARD.md with your progress, commit, push

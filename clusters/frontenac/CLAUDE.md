@@ -63,14 +63,22 @@ Activation: `eval "$(conda shell.bash hook)" && conda activate <env>`
 2. Read `CLAUDE.md` (root)
 3. Read this file (`clusters/frontenac/CLAUDE.md`)
 4. **Check your inbox:** `ls coordination/inbox/frontenac/` — read and act on any messages, then delete them
-5. Read `coordination/DASHBOARD.md`
-6. Read `alzheimer/HANDOFF.md` for Abeta42 campaign context
-7. At session end: update DASHBOARD.md, commit, push
+5. **Start inbox watcher:** `nohup bash coordination/scripts/inbox_watcher.sh &`
+6. Read `coordination/DASHBOARD.md`
+7. Read `alzheimer/HANDOFF.md` for Abeta42 campaign context
+8. At session end: update DASHBOARD.md, commit, push
 
-## Inbox monitoring during active sessions
+## Inbox monitoring
 
-Periodically pull and check for messages from workers:
+Start the inbox watcher at the beginning of every session:
 ```bash
-git pull --quiet origin master && ls coordination/inbox/frontenac/
+nohup bash coordination/scripts/inbox_watcher.sh &
 ```
-Use `/loop` to automate this every few minutes during long-running work.
+This pulls git every 2 minutes and logs new messages to `coordination/inbox/frontenac/.watcher.log`.
+
+Check the log for new messages:
+```bash
+tail -20 coordination/inbox/frontenac/.watcher.log
+```
+
+Stop when session ends: `kill $(cat /tmp/inbox_watcher_frontenac.pid)`
