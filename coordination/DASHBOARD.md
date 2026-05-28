@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-28 by Agent F — Counter-screens BYPASSED, proceeding to stability filtering
+**Last updated:** 2026-05-28 by Agent Nibi — Stage 7.4 COMPLETE (191/326 survive)
 
 ## Active Campaigns
 
@@ -12,7 +12,7 @@ Full development plan: `alzheimer/DEVELOPMENT_PLAN.md`
 
 ### 2. TfR1 Arm Design (Stage 7, parallel)
 
-**Status: Stage 7.3 BYPASSED → Stage 7.4 (stability filtering) NEXT. Production continues on Nibi.**
+**Status: Stage 7.4 COMPLETE — 191/326 survive stability filtering. Production continues on Nibi.**
 
 Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 
@@ -21,7 +21,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Coordinator. ColabFold container validated. | (none running) | 1,342 (Aβ42) | 62 (38 scaffolds) | 2026-05-28 |
-| Nibi | Nibi | TfR1 production continues. Stage 7.4 NEXT. Container setup pending. | 14990515–19 (running) | 991 (TfR1) | 310 (reprocessed) | 2026-05-28 |
+| Nibi | Nibi | **Stage 7.4 COMPLETE** — 191/326 survive. Container validated on H100. Production continues. | 14990515–19 (running) | 991+ (TfR1) | 326 accepted, 191 pass Stage 7.4 | 2026-05-28 |
 | Narval | Narval | Awaiting new assignment. Container setup pending. | (none) | — | — | 2026-05-28 |
 
 ### Aβ42 Campaign Metrics
@@ -80,6 +80,7 @@ All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-05-28 | Nibi | **Stage 7.4 COMPLETE:** 191/326 designs survive stability filtering. Top scaffold: s105102 (9 designs in top 20). Filters: i_pTM≥0.70, Binder_pLDDT≥0.85, SC≥0.55, PackStat≥0.55, RMSD≤2.5Å, dG≤-30, net charge [-6,+2], no Cys. Affinity-window ranking applied. Container validated on H100 (job 15091352, multimer prediction in 231s). |
 | 2026-05-28 | F | **PI Decision: skip counter-screen for both arms.** ColabFold single_sequence method failure. Trust BindCraft metrics, proceed to Stage 4 (Aβ42) and Stage 7.4 (TfR1). |
 | 2026-05-28 | F | **ColabFold containerized.** Apptainer image `colabfold_1.6.1-cuda12.sif` validated on Frontenac A100. Wrapper: `container/run_colabfold.sh`. Shipping to Nibi/Narval via Globus. Replaces conda-based ColabFold. |
 | 2026-05-28 | Narval | **Stage 3 COMPLETE: GATE 1 FAIL.** Job 61679472 (array 0-7) all COMPLETED. 0/62 designs pass positive control (pae_interaction 19-23 on 9CO4, threshold <10). All 62 pass negatives. ColabFold single_sequence mode produced no signal on any target. Method validity in question. |

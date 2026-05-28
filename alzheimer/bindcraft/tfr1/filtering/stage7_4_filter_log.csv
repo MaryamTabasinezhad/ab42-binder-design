@@ -1,0 +1,15 @@
+filter,input,output,removed
+i_pTM >= 0.70,326,308,18
+pLDDT >= 0.80,308,308,0
+Binder pLDDT >= 0.85,308,268,40
+No relaxed clashes,268,268,0
+SC >= 0.55,268,268,0
+PackStat >= 0.55,268,265,3
+Binder RMSD <= 2.5 Å,265,258,7
+Target RMSD <= 0.5 Å,258,258,0
+Surface hydrophobicity <= 0.35,258,258,0
+dG <= -30 kcal/mol,258,258,0
+Interface residues >= 7,258,258,0
+Interface H-bonds >= 3,258,258,0
+No unpaired cysteines,258,258,0
+Net charge -6 to +2,258,191,67
