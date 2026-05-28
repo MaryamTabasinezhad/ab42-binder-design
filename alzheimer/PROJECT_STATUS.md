@@ -1,7 +1,7 @@
 # Project Status Tracker
 
-Last updated: 2026-05-27T01:30
-Updated by: Agent F (Frontenac) — TfR1 BUNS fix, counter-screen tasked
+Last updated: 2026-05-28T00:00
+Updated by: Narval — Stage 3 counter-screen COMPLETE, Gate 1 FAIL
 
 ## Pipeline status
 
@@ -39,15 +39,18 @@ stage_2:
 
 stage_3:
   name: "Negative-design counter-screen"
-  status: in_progress  # 2026-05-27, running on Narval (job 61679472, array 0-7)
+  status: completed  # 2026-05-28, Narval job 61679472 COMPLETED
   depends_on: stage_2
   cluster: narval
   designs_screened: 62
   targets: 8  # 1 positive (9CO4) + 7 negative
   total_runs: 496  # 62 x 8
+  designs_pass_positive: 0  # pae_interaction 19-23 on 9CO4 (threshold <10)
+  designs_pass_all_negative: 62
+  designs_pass_stage3: 0
   gate: "DECISION_GATE_1"
   gate_criterion: ">=20 designs pass positive + negative filters"
-  gate_result: pending
+  gate_result: "FAIL — 0/62 pass. BUT: systematic method failure suspected — ColabFold single_sequence multimer_v3 produced no signal on ANY target (positive or negative). ipTM 0.13-0.19 across all 496 predictions. Method validity needs review before concluding designs don't bind."
 
 stage_4:
   name: "Stability filtering"
@@ -114,7 +117,7 @@ stage_10:
 ```yaml
 designs_generated: 2977
 designs_passing_internal_filters: 62
-designs_passing_negative_screen: 0  # Stage 3 in progress (Narval job 61679472)
+designs_passing_negative_screen: 0  # Stage 3 COMPLETE: 0/62 pass (method failure suspected)
 designs_passing_stability: 0
 designs_selected_for_synthesis: 0
 designs_expressing_solubly: 0
@@ -136,6 +139,7 @@ designs_selective: 0
 | 2026-05-06 | Single long-running job, not SLURM array | BindCraft uses internal while loop; array approach from dev plan incompatible | Claude Code |
 | 2026-05-26 | Stage 2 complete with 62 designs | 1,342 trajectories exceeded 1,000 target; 62 accepted across 38 scaffolds | Claude Code |
 | 2026-05-26 | Git-pull multi-cluster coordination | GitHub repo + cluster env files replace Globus sync messaging; Frontenac coordinates | PI + Claude Code |
+| 2026-05-28 | Stage 3 COMPLETE: Gate 1 FAIL (0/62) | ColabFold single_sequence produced pae_interaction 19-23 on ALL targets (positive+negative). ipTM 0.13-0.19 = no signal. Method failure suspected. | Narval |
 | 2026-05-27 | Stage 3 counter-screen on Narval | 62 designs x 8 targets, ColabFold single_sequence multimer_v3, job 61679472 | Narval agent |
 | 2026-05-27 | Stage 7 TfR1 campaign tracked | Nibi's existing TfR1 work (204 trajectories, 5 jobs) merged into repo | Nibi agent |
 | 2026-05-27 | TfR1 BUNS fix: Option 1 (disable filter) | BUNS/DAlphaBall crashes on 6WRV due to target size; disable filter, reprocess → 310 accepted | PI + F |

@@ -1,12 +1,12 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-27 by Agent Nibi (counter-screen fix + resubmit)
+**Last updated:** 2026-05-28 by Narval — Stage 3 counter-screen COMPLETE
 
 ## Active Campaigns
 
 ### 1. Abeta-42 BindCraft Binder Design
 
-**Development Plan Stage: Stage 2 COMPLETE, Stage 3 IN PROGRESS**
+**Development Plan Stage: Stage 3 COMPLETE — GATE 1 FAIL (0/62 pass positive control)**
 
 Full development plan: `alzheimer/DEVELOPMENT_PLAN.md`
 
@@ -22,7 +22,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Coordinator, Stage 2 complete | (none running) | 1,342 (Aβ42) | 62 (38 scaffolds) | 2026-05-27 |
 | Nibi | Nibi | Stage 7 TfR1 production + Stage 7.3 counter-screen resubmitted | 14990515–19 (running), 15063803_[0-2] (pending) | 991 (TfR1) | 310 (reprocessed) | 2026-05-27 |
-| Narval | Narval | Stage 3 counter-screen | 61679472_[0-7] | — | — | 2026-05-27 |
+| Narval | Narval | **Stage 3 COMPLETE** — 0/62 pass, Gate 1 FAIL | 61679472_[0-7] COMPLETED | — | 0 pass Stage 3 | 2026-05-28 |
 
 ### Aβ42 Campaign Metrics
 
@@ -51,22 +51,38 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | BUNS fix | Option 1 applied: filter disabled, pyrosetta patch 999→0 |
 | **Stage 7.3** | Counter-screen resubmitted: job 15063803 (array 0-2). Previous job 14992093 failed (missing tensorflow). Patched colabfold/batch.py. 310 designs × 3 targets |
 
-### Stage 3 Plan: Negative Counter-Screen
+### Stage 3 Results: Negative Counter-Screen
 
-**Status:** Running on Narval — job 61679472 submitted
+**Status:** COMPLETE on Narval — job 61679472 finished 2026-05-27 03:10
 
-The counter-screen tests all accepted designs against 8 targets (1 positive re-confirmation + 7 negative):
-- **Positive:** 9CO4 (pae_interaction < 10)
-- **Negative (all 7 must have pae_interaction > 15):** 9CKI, 9CK6, 7Q4B, 7Q4M, 6SHS, 1IYT, Abeta40 monomer
+**Result: GATE 1 FAIL — 0 of 62 designs pass the positive control**
 
-**Estimated compute:** 62 designs x 8 targets = 496 ColabFold runs, ~5 min each = ~41 GPU-hours
+All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results:
 
-**Work split (TBD):** Manifests will be created in `coordination/manifests/` to divide runs across clusters.
+| Filter | Criterion | Pass count |
+|--------|-----------|------------|
+| Positive (9CO4) | pae_interaction < 10 | **0/62** (min=19.34, median=21.42) |
+| Negative (all 7) | pae_interaction > 15 | 62/62 |
+| **Both** | | **0/62** |
+
+**Critical observation:** pae_interaction values are uniformly high (19-23) across ALL targets — positive and negative alike. ipTM is 0.13-0.19 for all predictions. ColabFold single_sequence multimer_v3 produced essentially random predictions for every design against every target. This is a **systematic method failure**, not a selectivity signal.
+
+**Likely causes:**
+1. Single-sequence mode has zero evolutionary signal for both the de novo binder and the short Ab42 chains
+2. ColabFold multimer_v3 forward prediction may be fundamentally unable to validate BindCraft-designed interactions against fibril targets
+3. The 34-residue Ab42 chain trimer is an unusual target geometry for AF2 multimer
+
+**Result files:** `alzheimer/bindcraft/filtering/stage3_results.csv`, `stage3_summary.csv`
+
+**Next steps (require coordinator decision):**
+- Per development plan: Gate 1 FAIL (< 5) → consider RFdiffusion fallback
+- However: the counter-screen method itself may be flawed — all predictions show no signal. Re-evaluate whether ColabFold single_sequence is appropriate for fibril-target validation before switching pipelines.
 
 ### Recent Actions
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-05-28 | Narval | **Stage 3 COMPLETE: GATE 1 FAIL.** Job 61679472 (array 0-7) all COMPLETED. 0/62 designs pass positive control (pae_interaction 19-23 on 9CO4, threshold <10). All 62 pass negatives. ColabFold single_sequence mode produced no signal on any target. Method validity in question. |
 | 2026-05-27 | Nibi | Stage 7.3 counter-screen RESUBMITTED: job 15063803 (array 0-2). Previous job 14992093 failed — ColabFold 1.6.1 crashed on `import tensorflow` (not installed). Patched batch.py to handle missing TF gracefully. |
 | 2026-05-27 | Nibi | Stage 7.3 counter-screen submitted: job 14992093 (array 0-2). 310 designs × 3 targets. ColabFold 1.6.1, JAX 0.9.1, single_sequence mode. TfR2 from AlphaFold (Q9UP52 v6, apical domain res 163-424). Tf competition via 1SUV (chains A+C+E). |
 | 2026-05-27 | F | Tasked Nibi with Stage 7.3 counter-screen: 310 designs × 3 targets (TfR1 positive, TfR2 selectivity, Tf compatibility). |

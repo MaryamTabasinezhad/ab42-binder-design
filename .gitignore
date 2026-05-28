@@ -19,6 +19,17 @@ alzheimer/bindcraft/tfr1/designs/Trajectory/
 alzheimer/bindcraft/tfr1/designs_p*/
 alzheimer/bindcraft/tfr1/logs/
 
+# === Stage 3 counter-screen large outputs (ColabFold PDBs, PNGs, JSONs) ===
+alzheimer/bindcraft/filtering/outputs/
+alzheimer/bindcraft/filtering/logs/
+# Keep result CSVs (tracked in git):
+!alzheimer/bindcraft/filtering/stage3_results.csv
+!alzheimer/bindcraft/filtering/stage3_summary.csv
+
+# === TfR1 counter-screen large outputs ===
+alzheimer/bindcraft/tfr1/filtering/outputs/
+alzheimer/bindcraft/tfr1/filtering/logs/
+
 # === RFdiffusion large outputs ===
 rfdiffusion_test/output/
 rfdiffusion_test/schedules/

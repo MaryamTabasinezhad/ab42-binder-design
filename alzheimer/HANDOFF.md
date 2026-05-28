@@ -34,7 +34,7 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 - [x] Multi-cluster coordination set up (2026-05-26) — GitHub repo, cluster env files, inbox system, DASHBOARD.md
 
 ### In progress
-- [ ] Stage 3 (Aβ42): Negative-design counter-screen — running on Narval (job 61679472, array 0-7). 62 designs × 8 targets = 496 ColabFold runs. Gate 1: ≥20 designs must pass.
+- [x] Stage 3 (Aβ42): Negative-design counter-screen — COMPLETED on Narval (job 61679472). **GATE 1 FAIL: 0/62 pass positive control.** ColabFold single_sequence multimer_v3 produced no signal (pae_interaction 19-23, ipTM 0.13-0.19) on ALL 496 predictions. Systematic method failure suspected — all targets (positive + negative) show identical random-level scores. Method validity needs review before concluding designs don't bind.
 - [ ] Stage 7.2 (TfR1): Production run continuing on Nibi — 991 trajectories, 791 MPNN, **310 accepted** (39.2%) after BUNS fix. 5 new jobs (14990515–19) running toward 1,000 target. Top: tfr1_l59_s917497_mpnn2 (i_pTM=0.85).
 - [ ] Stage 7.3 (TfR1): Counter-screen tasked to Nibi — 310 designs × 3 targets (TfR1 positive, TfR2 selectivity, Tf compatibility). Runs in parallel with production.
 
