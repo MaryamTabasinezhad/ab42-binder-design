@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-27 by Agent Nibi
+**Last updated:** 2026-05-27 by Agent Nibi (counter-screen fix + resubmit)
 
 ## Active Campaigns
 
@@ -21,7 +21,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Coordinator, Stage 2 complete | (none running) | 1,342 (Aβ42) | 62 (38 scaffolds) | 2026-05-27 |
-| Nibi | Nibi | Stage 7 TfR1 production + Stage 7.3 counter-screen submitted | 14990515–19 (running), 14992093_[0-2] (pending) | 991 (TfR1) | 310 (reprocessed) | 2026-05-27 |
+| Nibi | Nibi | Stage 7 TfR1 production + Stage 7.3 counter-screen resubmitted | 14990515–19 (running), 15063803_[0-2] (pending) | 991 (TfR1) | 310 (reprocessed) | 2026-05-27 |
 | Narval | Narval | Stage 3 counter-screen | 61679472_[0-7] | — | — | 2026-05-27 |
 
 ### Aβ42 Campaign Metrics
@@ -49,7 +49,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Parallel jobs | 5 resubmitted (14990515–19), continuing toward 1,000 |
 | Tf competition check | PASS (hotspots 45+ Å from Tf interface) |
 | BUNS fix | Option 1 applied: filter disabled, pyrosetta patch 999→0 |
-| **Stage 7.3** | Counter-screen submitted: job 14992093 (array 0-2), 310 designs × 3 targets |
+| **Stage 7.3** | Counter-screen resubmitted: job 15063803 (array 0-2). Previous job 14992093 failed (missing tensorflow). Patched colabfold/batch.py. 310 designs × 3 targets |
 
 ### Stage 3 Plan: Negative Counter-Screen
 
@@ -67,6 +67,7 @@ The counter-screen tests all accepted designs against 8 targets (1 positive re-c
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-05-27 | Nibi | Stage 7.3 counter-screen RESUBMITTED: job 15063803 (array 0-2). Previous job 14992093 failed — ColabFold 1.6.1 crashed on `import tensorflow` (not installed). Patched batch.py to handle missing TF gracefully. |
 | 2026-05-27 | Nibi | Stage 7.3 counter-screen submitted: job 14992093 (array 0-2). 310 designs × 3 targets. ColabFold 1.6.1, JAX 0.9.1, single_sequence mode. TfR2 from AlphaFold (Q9UP52 v6, apical domain res 163-424). Tf competition via 1SUV (chains A+C+E). |
 | 2026-05-27 | F | Tasked Nibi with Stage 7.3 counter-screen: 310 designs × 3 targets (TfR1 positive, TfR2 selectivity, Tf compatibility). |
 | 2026-05-27 | F | Approved BUNS fix Option 1. Decided TfR1 counter-screen targets: TfR2 (selectivity) + Tf competition (compatibility). 2 negatives sufficient for globular target. |
