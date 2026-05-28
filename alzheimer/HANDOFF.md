@@ -34,13 +34,15 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 - [x] Multi-cluster coordination set up (2026-05-26) — GitHub repo, cluster env files, inbox system, DASHBOARD.md
 
 ### In progress
-- [x] Stage 3 (Aβ42): Negative-design counter-screen — COMPLETED on Narval (job 61679472). **GATE 1 FAIL: 0/62 pass positive control.** ColabFold single_sequence multimer_v3 produced no signal (pae_interaction 19-23, ipTM 0.13-0.19) on ALL 496 predictions. Systematic method failure suspected — all targets (positive + negative) show identical random-level scores. Method validity needs review before concluding designs don't bind.
 - [ ] Stage 7.2 (TfR1): Production run continuing on Nibi — 991 trajectories, 791 MPNN, **310 accepted** (39.2%) after BUNS fix. 5 new jobs (14990515–19) running toward 1,000 target. Top: tfr1_l59_s917497_mpnn2 (i_pTM=0.85).
-- [ ] Stage 7.3 (TfR1): Counter-screen tasked to Nibi — 310 designs × 3 targets (TfR1 positive, TfR2 selectivity, Tf compatibility). Runs in parallel with production.
 
-### Not started
-- [ ] Stage 4: Stability filtering (Aβ42, after Stage 3 Gate 1)
-- [ ] Stage 7.4: Stability + affinity-window filtering (TfR1, 50–200 nM sweet spot)
+### Bypassed
+- [x] Stage 3 (Aβ42): Counter-screen BYPASSED (2026-05-28) — ColabFold single_sequence multimer_v3 produced zero discriminatory signal (0/62 pass, pae 19-23 on ALL targets including positive). Method failure, not design failure. PI decision: trust BindCraft internal metrics, skip to Stage 4.
+- [x] Stage 7.3 (TfR1): Counter-screen BYPASSED (2026-05-28) — same method failure (0/310 pass). One outlier s344619_mpnn13 (ipTM=0.76) flagged as lead. PI decision: trust BindCraft metrics, skip to Stage 7.4.
+
+### Next up
+- [ ] Stage 4: Stability filtering — 62 Aβ42 designs (SAP, buried unsat H-bonds, Cys, charge, Tm, polar CMS, monomer fold)
+- [ ] Stage 7.4: Stability + affinity-window filtering — 310 TfR1 designs (same + pae sweet-spot 8–12)
 - [ ] Stages 5–6, 7.5, 8–10: (see DEVELOPMENT_PLAN.md)
 
 ---
@@ -65,6 +67,8 @@ These are settled — do not revisit unless the PI explicitly asks.
 14. **TfR1 BUNS fix: disable filter (Option 1)** — PyRosetta DAlphaBall crashes on 6WRV due to target size (~680 residues). Disabled BUNS in `tfr1_filters.json`, patched pyrosetta_utils.py to return 0. All other quality filters remain active.
 15. **TfR1 counter-screen: 2 negatives sufficient** — TfR2 (selectivity) + Tf competition (compatibility). Globular target doesn't need the 7-target panel used for fibril selectivity.
 16. **Start TfR1 counter-screen with 310, don't wait for 1,000** — production jobs continue in parallel; counter-screen the existing pool now.
+17. **Skip computational counter-screen for both arms (2026-05-28)** — ColabFold single_sequence multimer_v3 forward prediction produces zero discriminatory signal for de novo binders (uniformly pae 19-23, ipTM 0.13-0.19 across ALL targets). 0/62 Aβ42 and 0/310 TfR1 designs passed, but this is a method failure, not a design failure. Trust BindCraft's internal AF2 backpropagation metrics (i_pTM, dG, pAE) and proceed directly to stability filtering. Selectivity will be validated experimentally via SPR against counter-target panels.
+18. **ColabFold via Apptainer container, not conda (2026-05-28)** — containerized ColabFold 1.6.1-cuda12 replaces conda envs for cross-cluster reproducibility. Container: `container/colabfold_1.6.1-cuda12.sif`. Wrapper: `container/run_colabfold.sh`. Setup: `container/setup_colabfold_container.sh`. Key flags: `--nv --no-home`, bind work to `/work`, bind cache to `/cache/colabfold`.
 
 ---
 

@@ -50,11 +50,11 @@ stage_3:
   designs_pass_stage3: 0
   gate: "DECISION_GATE_1"
   gate_criterion: ">=20 designs pass positive + negative filters"
-  gate_result: "FAIL — 0/62 pass. BUT: systematic method failure suspected — ColabFold single_sequence multimer_v3 produced no signal on ANY target (positive or negative). ipTM 0.13-0.19 across all 496 predictions. Method validity needs review before concluding designs don't bind."
+  gate_result: "BYPASSED (2026-05-28) — 0/62 pass, but method failure (ColabFold single_sequence produces zero signal for de novo binders). PI decision: trust BindCraft internal metrics, proceed to Stage 4."
 
 stage_4:
   name: "Stability filtering"
-  status: not_started
+  status: not_started  # NEXT — ready to start on 62 Aβ42 designs
   depends_on: stage_3
 
 stage_5:
@@ -88,8 +88,8 @@ stage_7:
     stage_7.0_target_prep: completed  # 2026-05-11
     stage_7.1_configuration: completed  # 2026-05-11
     stage_7.2_production: in_progress  # 991 traj, 310 accepted, jobs resubmitted toward 1,000
-    stage_7.3_counter_screen: pending  # tasked 2026-05-27, 310 designs x 3 targets (TfR1+, TfR2-, Tf compat)
-    stage_7.4_stability_filtering: not_started
+    stage_7.3_counter_screen: bypassed  # 2026-05-28, same method failure as Aβ42 (0/310 pass). One outlier s344619_mpnn13 (ipTM=0.76). PI: trust BindCraft metrics.
+    stage_7.4_stability_filtering: not_started  # NEXT — ready to start on 310 TfR1 designs
     stage_7.5_ranking: not_started
   notes: "Tf competition check PASS. BUNS filter (DAlphaBall) crashes on 6WRV due to target size — disabled. All other quality filters (i_pTM, pAE, dG, clashes, packing, SC) remain active."
 
@@ -145,3 +145,6 @@ designs_selective: 0
 | 2026-05-27 | TfR1 BUNS fix: Option 1 (disable filter) | BUNS/DAlphaBall crashes on 6WRV due to target size; disable filter, reprocess → 310 accepted | PI + F |
 | 2026-05-27 | TfR1 counter-screen: 2 negative targets sufficient | TfR2 (selectivity) + Tf competition (compatibility); globular target doesn't need 7-target panel like fibril | PI + F |
 | 2026-05-27 | Start TfR1 Stage 7.3 with 310 designs | Don't wait for 1,000; counter-screen in parallel with continued production | PI + F |
+| 2026-05-28 | TfR1 Stage 7.3 COMPLETE: 0/310 pass | Same method failure as Aβ42. One outlier s344619_mpnn13 (ipTM=0.76). | Nibi |
+| 2026-05-28 | Skip counter-screen for both arms | ColabFold single_sequence forward prediction can't validate de novo binders (method failure). Trust BindCraft internal AF2 backprop metrics. Proceed to stability filtering. Selectivity validated experimentally. | PI |
+| 2026-05-28 | ColabFold containerized via Apptainer | colabfold_1.6.1-cuda12.sif replaces conda envs. Wrapper: container/run_colabfold.sh. Validated on Frontenac A100. Shipping to Nibi/Narval via Globus. | PI + F |

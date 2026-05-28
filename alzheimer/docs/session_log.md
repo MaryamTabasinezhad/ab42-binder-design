@@ -43,3 +43,17 @@
 - Stage 1 completed: Created BindCraft config files (ab42_CEG.json, advanced_ab42.json). Validated on A100 (job 8375221) — 18 hotspots mapped correctly, 102-residue target + 75-residue binder = 177 total, well within 40GB VRAM.
 - Key insight: Dev plan proposed 1000-task SLURM array but BindCraft runs as a single while-loop process. Changed to one long-running 14-day job.
 - Production SLURM script ready: bindcraft/scripts/run_bindcraft.sh (awaiting submission).
+
+## Session 7 — 2026-05-28 (Frontenac HPC)
+**Machine:** hpc6049 (Frontenac)
+**Work done:**
+- Full project status review: read all ~35 markdown files across the repo
+- Processed all inbox messages: Narval Stage 3 COMPLETE (0/62 pass, method failure), Nibi Stage 7.3 COMPLETE (0/310 pass, same failure), Nibi counter-screen resubmission notice
+- **PI Decision: Skip computational counter-screen for both arms.** ColabFold single_sequence multimer_v3 is a method failure for de novo binders (uniformly pae 19-23, ipTM 0.13-0.19). Trust BindCraft internal AF2 backprop metrics. Selectivity validated experimentally via SPR.
+- **ColabFold containerized via Apptainer.** Built and validated `colabfold_1.6.1-cuda12.sif` on Frontenac A100 (8 iterations of debugging: bind mount issues, read-only cache, TLS cert leak from ~/.local, missing param marker files). Created wrapper `container/run_colabfold.sh` and setup script `container/setup_colabfold_container.sh`.
+- Updated all cluster .env files with container variables (COLABFOLD_SIF, COLABFOLD_CACHE, APPTAINER_MODULE)
+- Sent inbox messages to Nibi and Narval with decisions, container setup instructions, and new assignments (Narval → Stage 4 stability filtering, Nibi → continue production + Stage 7.4)
+- Updated HANDOFF.md (decisions 17-18, status sections), PROJECT_STATUS.md (bypassed stages, decision log), DASHBOARD.md (campaign status, cluster table, recent actions)
+- Initiated Globus transfer of container + AF2 param cache (~8.6 GB) to Nibi and Narval
+- Updated memory system: container reference, fast-onboarding guide, campaign status, fixed stale memories
+- Deleted 3 processed inbox messages from Frontenac
