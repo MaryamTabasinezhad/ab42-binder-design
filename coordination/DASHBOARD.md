@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-28 by Narval — Stage 3 counter-screen COMPLETE
+**Last updated:** 2026-05-28 by Agent Nibi — Stage 7.3 counter-screen COMPLETE
 
 ## Active Campaigns
 
@@ -21,7 +21,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Coordinator, Stage 2 complete | (none running) | 1,342 (Aβ42) | 62 (38 scaffolds) | 2026-05-27 |
-| Nibi | Nibi | Stage 7 TfR1 production + Stage 7.3 counter-screen resubmitted | 14990515–19 (running), 15063803_[0-2] (pending) | 991 (TfR1) | 310 (reprocessed) | 2026-05-27 |
+| Nibi | Nibi | **Stage 7.3 COMPLETE** — 0/310 pass (method failure, 1 outlier). Production continues. | 14990515–19 (running), 15068061_[0-2] COMPLETED | 991 (TfR1) | 310 (reprocessed) | 2026-05-28 |
 | Narval | Narval | **Stage 3 COMPLETE** — 0/62 pass, Gate 1 FAIL | 61679472_[0-7] COMPLETED | — | 0 pass Stage 3 | 2026-05-28 |
 
 ### Aβ42 Campaign Metrics
@@ -49,7 +49,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Parallel jobs | 5 resubmitted (14990515–19), continuing toward 1,000 |
 | Tf competition check | PASS (hotspots 45+ Å from Tf interface) |
 | BUNS fix | Option 1 applied: filter disabled, pyrosetta patch 999→0 |
-| **Stage 7.3** | Counter-screen resubmitted: job 15063803 (array 0-2). Previous job 14992093 failed (missing tensorflow). Patched colabfold/batch.py. 310 designs × 3 targets |
+| **Stage 7.3** | **COMPLETE:** 0/310 pass all 3 criteria. Same method failure as Aβ42 Stage 3. 1 outlier (s344619_mpnn13, pae=12.56, ipTM=0.76). Tf competition test not viable (complex too large). Report: `alzheimer/docs/tfr1_counterscreen_results.md` |
 
 ### Stage 3 Results: Negative Counter-Screen
 
@@ -83,6 +83,8 @@ All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results
 | Date | Agent | Action |
 |------|-------|--------|
 | 2026-05-28 | Narval | **Stage 3 COMPLETE: GATE 1 FAIL.** Job 61679472 (array 0-7) all COMPLETED. 0/62 designs pass positive control (pae_interaction 19-23 on 9CO4, threshold <10). All 62 pass negatives. ColabFold single_sequence mode produced no signal on any target. Method validity in question. |
+| 2026-05-28 | Nibi | **Stage 7.3 COMPLETE:** 0/310 pass all 3 criteria. ColabFold single_sequence method failure — same as Aβ42 Stage 3. 1 outlier with partial signal (s344619_mpnn13). Tf competition test not viable at this complex size. Report: `alzheimer/docs/tfr1_counterscreen_results.md` |
+| 2026-05-28 | Nibi | Fixed ColabFold tensorflow dependency: installed tensorflow 2.19.1 from CC wheelhouse. Resubmitted counter-screen as job 15068061 (all 3 tasks COMPLETED). |
 | 2026-05-27 | Nibi | Stage 7.3 counter-screen RESUBMITTED: job 15063803 (array 0-2). Previous job 14992093 failed — ColabFold 1.6.1 crashed on `import tensorflow` (not installed). Patched batch.py to handle missing TF gracefully. |
 | 2026-05-27 | Nibi | Stage 7.3 counter-screen submitted: job 14992093 (array 0-2). 310 designs × 3 targets. ColabFold 1.6.1, JAX 0.9.1, single_sequence mode. TfR2 from AlphaFold (Q9UP52 v6, apical domain res 163-424). Tf competition via 1SUV (chains A+C+E). |
 | 2026-05-27 | F | Tasked Nibi with Stage 7.3 counter-screen: 310 designs × 3 targets (TfR1 positive, TfR2 selectivity, Tf compatibility). |
