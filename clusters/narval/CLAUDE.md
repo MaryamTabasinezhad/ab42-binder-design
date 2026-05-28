@@ -29,13 +29,27 @@ Source `clusters/narval.env` for all paths and SLURM settings. Key facts:
 - **BindCraft repo:** `${PROJECT_ROOT}/alzheimer/bindcraft/repo/` (clone locally)
 - **AF2 params:** `${PROJECT_ROOT}/alzheimer/bindcraft/repo/params/` (download locally, 5.3GB)
 
+## ColabFold container (preferred over conda)
+
+ColabFold now runs via Apptainer container for cross-cluster reproducibility:
+- **SIF:** `/home/ghaedi/projects/def-ghaedi/ghaedi/protein/container/colabfold_1.6.1-cuda12.sif` (3.7 GB)
+- **Cache:** `/home/ghaedi/projects/def-ghaedi/ghaedi/protein/container/colabfold_cache/`
+- **Wrapper:** `container/run_colabfold.sh` (in `protein/` repo root)
+- **Setup:** `container/setup_colabfold_container.sh`
+- Verified on Narval (2026-05-28): container present, 15 .npz param files, both markers
+- Key flags: `--nv --no-home`, bind work to `/work`, bind cache to `/cache/colabfold`
+
 ## Conda environments
 
 BindCraft: `BindCraft` (install via `repo/install_bindcraft.sh --cuda 12.4`)
-ColabFold: `colabfold` (install separately if needed for Stage 3)
+ColabFold: `colabfold` (legacy — use container instead)
 ProteinMPNN: `mpnn`
 
 Activation: `eval "$(conda shell.bash hook)" && conda activate <env>`
+
+## Narval-specific gotcha
+
+**`module load scipy-stack` is required** for numpy/scipy/pandas on Narval. Base Python has no scientific packages, and `conda` is not on the default PATH. Always `module load scipy-stack` before running analysis scripts.
 
 ## BindCraft setup (first time only)
 

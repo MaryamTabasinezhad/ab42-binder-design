@@ -1,12 +1,12 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-28 by Agent Nibi — Stage 7.4 COMPLETE (191/326 survive)
+**Last updated:** 2026-05-28 by Narval — Stage 4 Phase A (26/62 pass), monomer pLDDT job 61936182 running; TfR1 Stage 7.4 done (191/326)
 
 ## Active Campaigns
 
 ### 1. Abeta-42 BindCraft Binder Design
 
-**Development Plan Stage: Stage 3 BYPASSED → Stage 4 (stability filtering) NEXT**
+**Development Plan Stage: Stage 4 IN PROGRESS — Phase A: 26/62 pass, Phase B: job 61936182 running**
 
 Full development plan: `alzheimer/DEVELOPMENT_PLAN.md`
 
@@ -22,7 +22,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Coordinator. ColabFold container validated. | (none running) | 1,342 (Aβ42) | 62 (38 scaffolds) | 2026-05-28 |
 | Nibi | Nibi | **Stage 7.4 COMPLETE** — 191/326 survive. Container validated on H100. Production continues. | 14990515–19 (running) | 991+ (TfR1) | 326 accepted, 191 pass Stage 7.4 | 2026-05-28 |
-| Narval | Narval | Awaiting new assignment. Container setup pending. | (none) | — | — | 2026-05-28 |
+| Narval | Narval | Stage 4: Phase A done (26/62), Phase B monomer pLDDT running. Container verified. | 61936182 (monomer pLDDT) | 1,342 (Aβ42) | 62 → 26 (Phase A) | 2026-05-28 |
 
 ### Aβ42 Campaign Metrics
 
@@ -80,6 +80,7 @@ All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-05-28 | Narval | **Stage 4 Phase A COMPLETE:** 26/62 Aβ42 designs pass sequence+CSV filters (Cys, charge [-5,+5], ss_pLDDT, binder_pLDDT). Net charge is sole bottleneck (mean -5.9). Phase B monomer pLDDT submitted as job 61936182 (ColabFold container, A100). Phase C (SAP, BUNS, CMS) deferred to Frontenac. |
 | 2026-05-28 | Nibi | **Stage 7.4 COMPLETE:** 191/326 designs survive stability filtering. Top scaffold: s105102 (9 designs in top 20). Filters: i_pTM≥0.70, Binder_pLDDT≥0.85, SC≥0.55, PackStat≥0.55, RMSD≤2.5Å, dG≤-30, net charge [-6,+2], no Cys. Affinity-window ranking applied. Container validated on H100 (job 15091352, multimer prediction in 231s). |
 | 2026-05-28 | F | **PI Decision: skip counter-screen for both arms.** ColabFold single_sequence method failure. Trust BindCraft metrics, proceed to Stage 4 (Aβ42) and Stage 7.4 (TfR1). |
 | 2026-05-28 | F | **ColabFold containerized.** Apptainer image `colabfold_1.6.1-cuda12.sif` validated on Frontenac A100. Wrapper: `container/run_colabfold.sh`. Shipping to Nibi/Narval via Globus. Replaces conda-based ColabFold. |
