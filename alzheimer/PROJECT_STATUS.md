@@ -1,7 +1,7 @@
 # Project Status Tracker
 
-Last updated: 2026-05-28T00:00
-Updated by: Narval — Stage 3 counter-screen COMPLETE, Gate 1 FAIL
+Last updated: 2026-05-29T00:00
+Updated by: Frontenac — Stage 4 Phase B job complete, filter recalibration in progress
 
 ## Pipeline status
 
@@ -54,8 +54,14 @@ stage_3:
 
 stage_4:
   name: "Stability filtering"
-  status: not_started  # NEXT — ready to start on 62 Aβ42 designs
+  status: in_progress  # Phase A done (26/62), Phase B job done (extracting), Phase C pending recalibration
   depends_on: stage_3
+  cluster: narval + frontenac
+  substeps:
+    phase_a_sequence_csv: completed  # 26/62 pass (Cys, charge [-5,+5], ss_pLDDT, binder_pLDDT)
+    phase_b_monomer_plddt: completed_pending_extraction  # Job 61936182 done (19 min), outputs in filtering/outputs/monomer_plddt/
+    phase_c_sap_buns_cms: not_started  # Deferred to Frontenac, awaiting filter recalibration
+  notes: "Original thresholds too strict (SAP scale mismatch, BUNS=0 unachievable, charge too narrow). Recalibration in progress."
 
 stage_5:
   name: "Ranking and selection"
@@ -89,7 +95,7 @@ stage_7:
     stage_7.1_configuration: completed  # 2026-05-11
     stage_7.2_production: in_progress  # 991 traj, 310 accepted, jobs resubmitted toward 1,000
     stage_7.3_counter_screen: bypassed  # 2026-05-28, same method failure as Aβ42 (0/310 pass). One outlier s344619_mpnn13 (ipTM=0.76). PI: trust BindCraft metrics.
-    stage_7.4_stability_filtering: not_started  # NEXT — ready to start on 310 TfR1 designs
+    stage_7.4_stability_filtering: completed  # 2026-05-28, 191/326 survive. Top scaffold: s105102.
     stage_7.5_ranking: not_started
   notes: "Tf competition check PASS. BUNS filter (DAlphaBall) crashes on 6WRV due to target size — disabled. All other quality filters (i_pTM, pAE, dG, clashes, packing, SC) remain active."
 
@@ -118,7 +124,8 @@ stage_10:
 designs_generated: 2977
 designs_passing_internal_filters: 62
 designs_passing_negative_screen: 0  # Stage 3 COMPLETE: 0/62 pass (method failure suspected)
-designs_passing_stability: 0
+designs_passing_stability_tfr1: 191  # Stage 7.4 COMPLETE
+designs_passing_stability_ab42: 0  # Stage 4 in progress
 designs_selected_for_synthesis: 0
 designs_expressing_solubly: 0
 designs_binding_protofibrils: 0

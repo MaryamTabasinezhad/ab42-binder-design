@@ -34,16 +34,22 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 - [x] Multi-cluster coordination set up (2026-05-26) — GitHub repo, cluster env files, inbox system, DASHBOARD.md
 
 ### In progress
+- [ ] Stage 4 (Aβ42): Stability filtering — Phase A done (26/62 pass sequence+CSV filters on Narval), Phase B monomer pLDDT job 61936182 COMPLETED on Narval (results pending extraction), Phase C (SAP, BUNS, CMS) deferred to Frontenac pending filter recalibration.
 - [ ] Stage 7.2 (TfR1): Production run continuing on Nibi — 991 trajectories, 791 MPNN, **310 accepted** (39.2%) after BUNS fix. 5 new jobs (14990515–19) running toward 1,000 target. Top: tfr1_l59_s917497_mpnn2 (i_pTM=0.85).
+
+### Completed (filtering)
+- [x] Stage 7.4 (TfR1): Stability filtering COMPLETE (2026-05-28) — 191/326 survive. Top scaffold: s105102 (9 designs in top 20). Filters: i_pTM≥0.70, Binder_pLDDT≥0.85, SC≥0.55, PackStat≥0.55, RMSD≤2.5Å, dG≤-30, net charge [-6,+2], no Cys. Affinity-window ranking applied.
 
 ### Bypassed
 - [x] Stage 3 (Aβ42): Counter-screen BYPASSED (2026-05-28) — ColabFold single_sequence multimer_v3 produced zero discriminatory signal (0/62 pass, pae 19-23 on ALL targets including positive). Method failure, not design failure. PI decision: trust BindCraft internal metrics, skip to Stage 4.
 - [x] Stage 7.3 (TfR1): Counter-screen BYPASSED (2026-05-28) — same method failure (0/310 pass). One outlier s344619_mpnn13 (ipTM=0.76) flagged as lead. PI decision: trust BindCraft metrics, skip to Stage 7.4.
 
 ### Next up
-- [ ] Stage 4: Stability filtering — 62 Aβ42 designs (SAP, buried unsat H-bonds, Cys, charge, Tm, polar CMS, monomer fold)
-- [ ] Stage 7.4: Stability + affinity-window filtering — 310 TfR1 designs (same + pae sweet-spot 8–12)
-- [ ] Stages 5–6, 7.5, 8–10: (see DEVELOPMENT_PLAN.md)
+- [ ] Stage 4 completion: Extract Phase B results (Narval), recalibrate Phase C filters (Frontenac), run Phase C
+- [ ] Stage 5: Multi-objective ranking and selection (top 50 Aβ42 designs)
+- [ ] Stage 7.5: TfR1 ranking (191 survivors + new designs from continued production)
+- [ ] Stage 8: Tandem fusion design (combine best arms)
+- [ ] Stages 6, 9–10: Experimental validation (see DEVELOPMENT_PLAN.md)
 
 ---
 
