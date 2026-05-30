@@ -1,12 +1,12 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-30 by Narval — Stage 4 Phase B COMPLETE: 26/26 pass monomer pLDDT >85 (mean 92.80). All 26 ready for Phase C on Frontenac.
+**Last updated:** 2026-05-29 by Frontenac — Phase C recalibrated (Option B: SAP/res<1.1, BUNS≤7, charge [-8,+5]). 23/62 pass Phase C, 12 confirmed (Phase B done), 11 extra need monomer pLDDT (job 9877164).
 
 ## Active Campaigns
 
 ### 1. Abeta-42 BindCraft Binder Design
 
-**Development Plan Stage: Stage 4 IN PROGRESS — Phase A: 26/62 pass, Phase B: 26/26 pass (monomer pLDDT >85, mean 92.80), Phase C: awaiting Frontenac (SAP, BUNS, CMS)**
+**Development Plan Stage: Stage 4 IN PROGRESS — Phase C recalibrated: 23/62 pass. 12 confirmed + 11 pending Phase B extra (job 9877164). Max 23 survivors → Stage 5.**
 
 Full development plan: `alzheimer/DEVELOPMENT_PLAN.md`
 
@@ -20,7 +20,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
-| Frontenac | F | Coordinator. Stage 4 filter recalibration in progress. ColabFold container validated. | (none running) | 1,342 (Aβ42) | 62 (38 scaffolds) | 2026-05-29 |
+| Frontenac | F | Stage 4 Phase C DONE (recalibrated). 11 extra monomer pLDDT running. | 9877164 (Phase B extra) | 1,342 (Aβ42) | 62 → 23 (Phase C) | 2026-05-29 |
 | Nibi | Nibi | **Stage 7.4 COMPLETE** — 191/326 survive. Container validated on H100. Production continues. | 14990515–19 (running) | 991+ (TfR1) | 326 accepted, 191 pass Stage 7.4 | 2026-05-28 |
 | Narval | Narval | **Stage 4 Phase B COMPLETE:** 26/26 pass monomer pLDDT. Awaiting Phase C on Frontenac. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-05-30 |
 
@@ -80,6 +80,7 @@ All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-05-29 | F | **Stage 4 Phase C recalibrated (Option B):** SAP/res<1.1, BUNS≤7, charge [-8,+5]. 23/62 pass. 12 confirmed (have Phase B pLDDT), 11 extra recovered by charge widening need monomer pLDDT — job 9877164 submitted on Frontenac A100. Script updated, results in `stage4_results_recalibrated.csv`. |
 | 2026-05-30 | Narval | **Stage 4 Phase B COMPLETE:** 26/26 pass monomer pLDDT >85 (mean 92.80, min 88.00, max 97.12). Results: `filtering/stage4/phase_b_results.csv`. Reply sent to Frontenac. All 26 designs ready for Phase C. |
 | 2026-05-29 | F | Coordinator session: confirmed Phase B job complete (Narval), sent inbox messages to Narval (extract Phase B results) and Nibi (continue production + container setup). Updated dashboard. Stage 4 filter recalibration discussion with PI in progress. |
 | 2026-05-28 | Narval | **Stage 4 Phase A COMPLETE:** 26/62 Aβ42 designs pass sequence+CSV filters (Cys, charge [-5,+5], ss_pLDDT, binder_pLDDT). Net charge is sole bottleneck (mean -5.9). Phase B monomer pLDDT submitted as job 61936182 (ColabFold container, A100). Phase C (SAP, BUNS, CMS) deferred to Frontenac. |

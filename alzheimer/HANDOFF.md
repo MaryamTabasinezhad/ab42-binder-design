@@ -34,7 +34,7 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 - [x] Multi-cluster coordination set up (2026-05-26) — GitHub repo, cluster env files, inbox system, DASHBOARD.md
 
 ### In progress
-- [ ] Stage 4 (Aβ42): Stability filtering — Phase A done (26/62 pass sequence+CSV filters on Narval), Phase B monomer pLDDT job 61936182 COMPLETED on Narval (results pending extraction), Phase C (SAP, BUNS, CMS) deferred to Frontenac pending filter recalibration.
+- [ ] Stage 4 (Aβ42): Stability filtering — Phase A: 26/62 (Narval), Phase B: 26/26 pass monomer pLDDT (Narval), Phase C: recalibrated + applied (23/62 pass). 12 fully confirmed; 11 extra designs (recovered by charge widening) need monomer pLDDT — job 9877164 running on Frontenac A100.
 - [ ] Stage 7.2 (TfR1): Production run continuing on Nibi — 991 trajectories, 791 MPNN, **310 accepted** (39.2%) after BUNS fix. 5 new jobs (14990515–19) running toward 1,000 target. Top: tfr1_l59_s917497_mpnn2 (i_pTM=0.85).
 
 ### Completed (filtering)
@@ -45,7 +45,7 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 - [x] Stage 7.3 (TfR1): Counter-screen BYPASSED (2026-05-28) — same method failure (0/310 pass). One outlier s344619_mpnn13 (ipTM=0.76) flagged as lead. PI decision: trust BindCraft metrics, skip to Stage 7.4.
 
 ### Next up
-- [ ] Stage 4 completion: Extract Phase B results (Narval), recalibrate Phase C filters (Frontenac), run Phase C
+- [ ] Stage 4 completion: Job 9877164 (11 extra monomer pLDDT) → extract → merge with 12 confirmed → final Stage 4 survivors
 - [ ] Stage 5: Multi-objective ranking and selection (top 50 Aβ42 designs)
 - [ ] Stage 7.5: TfR1 ranking (191 survivors + new designs from continued production)
 - [ ] Stage 8: Tandem fusion design (combine best arms)
@@ -75,6 +75,7 @@ These are settled — do not revisit unless the PI explicitly asks.
 16. **Start TfR1 counter-screen with 310, don't wait for 1,000** — production jobs continue in parallel; counter-screen the existing pool now.
 17. **Skip computational counter-screen for both arms (2026-05-28)** — ColabFold single_sequence multimer_v3 forward prediction produces zero discriminatory signal for de novo binders (uniformly pae 19-23, ipTM 0.13-0.19 across ALL targets). 0/62 Aβ42 and 0/310 TfR1 designs passed, but this is a method failure, not a design failure. Trust BindCraft's internal AF2 backpropagation metrics (i_pTM, dG, pAE) and proceed directly to stability filtering. Selectivity will be validated experimentally via SPR against counter-target panels.
 18. **ColabFold via Apptainer container, not conda (2026-05-28)** — containerized ColabFold 1.6.1-cuda12 replaces conda envs for cross-cluster reproducibility. Container: `container/colabfold_1.6.1-cuda12.sif`. Wrapper: `container/run_colabfold.sh`. Setup: `container/setup_colabfold_container.sh`. Key flags: `--nv --no-home`, bind work to `/work`, bind cache to `/cache/colabfold`.
+19. **Stage 4 filter recalibration (2026-05-29)** — Original dev plan thresholds (SAP<0.10, BUNS=0, charge [-2,+4]) yielded 0/62 survivors. Recalibrated to Option B: SAP per-residue < 1.1 (total SAP / binder length, fixes PyRosetta SapScoreMetric normalization mismatch), BUNS ≤ 7 (zero is unrealistic for 60-90 aa miniproteins; Rocklin et al. 2017 tolerates several), charge [-8, +5] (BindCraft designs skew Glu-rich for solubility; median charge -5.9). SAP and BUNS scores feed into Stage 5 ranking as continuous metrics. Unchanged filters: Cys=0, Tm proxy E/res<-2.0, Polar CMS>40%. Result: 23/62 pass Phase C; 12 confirmed with Phase B; 11 additional need monomer pLDDT (job 9877164).
 
 ---
 

@@ -59,9 +59,11 @@ stage_4:
   cluster: narval + frontenac
   substeps:
     phase_a_sequence_csv: completed  # 26/62 pass (Cys, charge [-5,+5], ss_pLDDT, binder_pLDDT)
-    phase_b_monomer_plddt: completed_pending_extraction  # Job 61936182 done (19 min), outputs in filtering/outputs/monomer_plddt/
-    phase_c_sap_buns_cms: not_started  # Deferred to Frontenac, awaiting filter recalibration
-  notes: "Original thresholds too strict (SAP scale mismatch, BUNS=0 unachievable, charge too narrow). Recalibration in progress."
+    phase_b_monomer_plddt: completed  # 26/26 pass (mean 92.80, min 88.0). Job 61936182.
+    phase_b_extra: in_progress  # 11 designs recovered by charge widening [-8,+5]. Job 9877164 on Frontenac A100.
+    phase_c_sap_buns_cms: completed  # Recalibrated: SAP/res<1.1, BUNS≤7, charge [-8,+5]. 23/62 pass.
+  recalibration: "Option B applied (2026-05-29): SAP per-residue<1.1, BUNS≤7, charge [-8,+5]. 12 fully confirmed, 11 pending Phase B extra."
+  notes: "Combined Phase A+B+C: 12 confirmed + up to 11 pending = max 23 survivors."
 
 stage_5:
   name: "Ranking and selection"
@@ -154,4 +156,5 @@ designs_selective: 0
 | 2026-05-27 | Start TfR1 Stage 7.3 with 310 designs | Don't wait for 1,000; counter-screen in parallel with continued production | PI + F |
 | 2026-05-28 | TfR1 Stage 7.3 COMPLETE: 0/310 pass | Same method failure as Aβ42. One outlier s344619_mpnn13 (ipTM=0.76). | Nibi |
 | 2026-05-28 | Skip counter-screen for both arms | ColabFold single_sequence forward prediction can't validate de novo binders (method failure). Trust BindCraft internal AF2 backprop metrics. Proceed to stability filtering. Selectivity validated experimentally. | PI |
+| 2026-05-29 | Stage 4 filter recalibration: Option B | SAP/res<1.1 (fixes PyRosetta normalization), BUNS≤7 (zero unrealistic), charge [-8,+5] (BindCraft Glu-rich skew). 23/62 pass Phase C. | PI |
 | 2026-05-28 | ColabFold containerized via Apptainer | colabfold_1.6.1-cuda12.sif replaces conda envs. Wrapper: container/run_colabfold.sh. Validated on Frontenac A100. Shipping to Nibi/Narval via Globus. | PI + F |
