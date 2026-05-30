@@ -17,7 +17,7 @@ from pathlib import Path
 
 import numpy as np
 
-DESIGNS_CSV = Path("/home/ghaedi/projects/def-ghaedi/ghaedi/protein/alzheimer/bindcraft/tfr1/designs/final_design_stats.csv")
+DESIGNS_CSV = Path("/home/ghaedi/projects/def-ghaedi/ghaedi/protein/alzheimer/bindcraft/tfr1/designs_all_merged.csv")
 OUTPUT_DIR = Path("/home/ghaedi/projects/def-ghaedi/ghaedi/protein/alzheimer/bindcraft/tfr1/filtering")
 
 # Amino acid charges at pH 7.4

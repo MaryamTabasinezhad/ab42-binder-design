@@ -35,10 +35,10 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 
 ### In progress
 - [ ] Stage 4 (Aβ42): Stability filtering — Phase A done (26/62 pass sequence+CSV filters on Narval), Phase B monomer pLDDT job 61936182 COMPLETED on Narval (results pending extraction), Phase C (SAP, BUNS, CMS) deferred to Frontenac pending filter recalibration.
-- [ ] Stage 7.2 (TfR1): Production run continuing on Nibi — 991 trajectories, 791 MPNN, **310 accepted** (39.2%) after BUNS fix. 5 new jobs (14990515–19) running toward 1,000 target. Top: tfr1_l59_s917497_mpnn2 (i_pTM=0.85).
+- [ ] Stage 7.2 (TfR1): Production run continuing on Nibi — **2,051 trajectories, 380 accepted** (all partitions merged). 5 jobs (14990515–19) still running (~4d remaining). Well past 1,000-trajectory target.
 
 ### Completed (filtering)
-- [x] Stage 7.4 (TfR1): Stability filtering COMPLETE (2026-05-28) — 191/326 survive. Top scaffold: s105102 (9 designs in top 20). Filters: i_pTM≥0.70, Binder_pLDDT≥0.85, SC≥0.55, PackStat≥0.55, RMSD≤2.5Å, dG≤-30, net charge [-6,+2], no Cys. Affinity-window ranking applied.
+- [x] Stage 7.4 (TfR1): Stability filtering RE-RUN on full pool (2026-05-29) — **224/380 survive**. Top scaffold: s105102 (10 designs in top 20). Top candidate: tfr1_l51_s105102_mpnn12 (composite=0.926). Filters: i_pTM≥0.70, Binder_pLDDT≥0.85, SC≥0.55, PackStat≥0.55, RMSD≤2.5Å, dG≤-30, net charge [-6,+2], no Cys. Affinity-window ranking applied.
 
 ### Bypassed
 - [x] Stage 3 (Aβ42): Counter-screen BYPASSED (2026-05-28) — ColabFold single_sequence multimer_v3 produced zero discriminatory signal (0/62 pass, pae 19-23 on ALL targets including positive). Method failure, not design failure. PI decision: trust BindCraft internal metrics, skip to Stage 4.
