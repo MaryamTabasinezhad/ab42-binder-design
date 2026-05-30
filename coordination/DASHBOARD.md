@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-29 by Frontenac — Phase C recalibrated (Option B: SAP/res<1.1, BUNS≤7, charge [-8,+5]). 23/62 pass Phase C, 12 confirmed (Phase B done), 11 extra need monomer pLDDT (job 9877164).
+**Last updated:** 2026-05-29 by Frontenac — Phase C recalibrated (Option B). 23/62 pass Phase C, 12 confirmed, 11 extra pending (job 9877164). TfR1: 2,051 traj, 224/380 survive Stage 7.4.
 
 ## Active Campaigns
 
@@ -12,7 +12,7 @@ Full development plan: `alzheimer/DEVELOPMENT_PLAN.md`
 
 ### 2. TfR1 Arm Design (Stage 7, parallel)
 
-**Status: Stage 7.4 COMPLETE — 191/326 survive stability filtering. Production continues on Nibi.**
+**Status: Stage 7.4 RE-RUN on full pool — 224/380 survive stability filtering. Production continues on Nibi (2,051 trajectories, 5 jobs running).**
 
 Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 
@@ -21,7 +21,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Stage 4 Phase C DONE (recalibrated). 11 extra monomer pLDDT running. | 9877164 (Phase B extra) | 1,342 (Aβ42) | 62 → 23 (Phase C) | 2026-05-29 |
-| Nibi | Nibi | **Stage 7.4 COMPLETE** — 191/326 survive. Container validated on H100. Production continues. | 14990515–19 (running) | 991+ (TfR1) | 326 accepted, 191 pass Stage 7.4 | 2026-05-28 |
+| Nibi | Nibi | **Stage 7.4 RE-RUN** — 224/380 survive (full pool). Container validated. Production continues. | 14990515–19 (running, ~4d left) | 2,051 (TfR1) | 380 accepted, 224 pass Stage 7.4 | 2026-05-29 |
 | Narval | Narval | **Stage 4 Phase B COMPLETE:** 26/26 pass monomer pLDDT. Awaiting Phase C on Frontenac. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-05-30 |
 
 ### Aβ42 Campaign Metrics
@@ -42,11 +42,11 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 |--------|-------|
 | Target | 6WRV apical domain (chains A+B), hotspots 208/210/211/212/215 |
 | Binder size | 50–70 residues |
-| Trajectories completed | 991 |
-| MPNN designs evaluated | 791 |
-| Accepted designs | **310** (reprocessed with BUNS filter disabled, 39.2% of MPNN) |
-| Top candidate | tfr1_l59_s917497_mpnn2 (i_pTM=0.85, dG=-47.8, SC=0.78) |
-| Parallel jobs | 5 resubmitted (14990515–19), continuing toward 1,000 |
+| Trajectories completed | 2,051 |
+| Accepted designs | **380** (all partitions merged, deduplicated) |
+| Stage 7.4 survivors | **224/380** (59% pass rate) |
+| Top candidate (post-7.4) | tfr1_l51_s105102_mpnn12 (i_pTM=0.81, dG=-38.9, SC=0.77, composite=0.926) |
+| Parallel jobs | 14990515–19 still running (~4d walltime remaining) |
 | Tf competition check | PASS (hotspots 45+ Å from Tf interface) |
 | BUNS fix | Option 1 applied: filter disabled, pyrosetta patch 999→0 |
 | **Stage 7.3** | **COMPLETE:** 0/310 pass all 3 criteria. Same method failure as Aβ42 Stage 3. 1 outlier (s344619_mpnn13, pae=12.56, ipTM=0.76). Tf competition test not viable (complex too large). Report: `alzheimer/docs/tfr1_counterscreen_results.md` |
@@ -82,6 +82,7 @@ All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results
 |------|-------|--------|
 | 2026-05-29 | F | **Stage 4 Phase C recalibrated (Option B):** SAP/res<1.1, BUNS≤7, charge [-8,+5]. 23/62 pass. 12 confirmed (have Phase B pLDDT), 11 extra recovered by charge widening need monomer pLDDT — job 9877164 submitted on Frontenac A100. Script updated, results in `stage4_results_recalibrated.csv`. |
 | 2026-05-30 | Narval | **Stage 4 Phase B COMPLETE:** 26/26 pass monomer pLDDT >85 (mean 92.80, min 88.00, max 97.12). Results: `filtering/stage4/phase_b_results.csv`. Reply sent to Frontenac. All 26 designs ready for Phase C. |
+| 2026-05-29 | Nibi | **Stage 7.4 RE-RUN on full pool:** Production grew to 2,051 trajectories, 380 accepted designs (merged all 5 partitions). Re-ran Stage 7.4 stability filter: 224/380 survive (up from 191/326). Top scaffold s105102 still dominates (10 of top 20). ColabFold container validated (already done last session). Jobs 14990515–19 running with ~4d remaining. |
 | 2026-05-29 | F | Coordinator session: confirmed Phase B job complete (Narval), sent inbox messages to Narval (extract Phase B results) and Nibi (continue production + container setup). Updated dashboard. Stage 4 filter recalibration discussion with PI in progress. |
 | 2026-05-28 | Narval | **Stage 4 Phase A COMPLETE:** 26/62 Aβ42 designs pass sequence+CSV filters (Cys, charge [-5,+5], ss_pLDDT, binder_pLDDT). Net charge is sole bottleneck (mean -5.9). Phase B monomer pLDDT submitted as job 61936182 (ColabFold container, A100). Phase C (SAP, BUNS, CMS) deferred to Frontenac. |
 | 2026-05-28 | Nibi | **Stage 7.4 COMPLETE:** 191/326 designs survive stability filtering. Top scaffold: s105102 (9 designs in top 20). Filters: i_pTM≥0.70, Binder_pLDDT≥0.85, SC≥0.55, PackStat≥0.55, RMSD≤2.5Å, dG≤-30, net charge [-6,+2], no Cys. Affinity-window ranking applied. Container validated on H100 (job 15091352, multimer prediction in 231s). |
