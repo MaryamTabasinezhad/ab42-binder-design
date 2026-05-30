@@ -22,7 +22,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Stage 4 Phase C DONE (recalibrated). 11 extra monomer pLDDT running. | 9877164 (Phase B extra) | 1,342 (Aβ42) | 62 → 23 (Phase C) | 2026-05-29 |
 | Nibi | Nibi | **Stage 7.4 RE-RUN** — 224/380 survive (full pool). Container validated. Production continues. | 14990515–19 (running, ~4d left) | 2,051 (TfR1) | 380 accepted, 224 pass Stage 7.4 | 2026-05-29 |
-| Narval | Narval | **Stage 4 Phase B COMPLETE:** 26/26 pass monomer pLDDT. Awaiting Phase C on Frontenac. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-05-30 |
+| Narval | Narval | **Standby.** Phase B done (26/26). Awaiting next assignment from Frontenac (Stage 5 ranking or Stage 8 fusion). | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-05-30 |
 
 ### Aβ42 Campaign Metrics
 
