@@ -35,10 +35,11 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 
 ### In progress
 - [ ] Stage 4 (Aβ42): Stability filtering — Phase A: 26/62 (Narval), Phase B: 26/26 pass monomer pLDDT (Narval), Phase C: recalibrated + applied (23/62 pass). 12 fully confirmed; 11 extra designs (recovered by charge widening) need monomer pLDDT — job 9877164 running on Frontenac A100.
-- [ ] Stage 7.2 (TfR1): Production run continuing on Nibi — **2,051 trajectories, 380 accepted** (all partitions merged). 5 jobs (14990515–19) still running (~4d remaining). Well past 1,000-trajectory target.
+- [ ] Stage 7.2 (TfR1): Production winding down — **2,051 trajectories, 380 accepted**. Jobs 14990515–19 finishing (~4d remaining). No resubmission per coordinator.
 
-### Completed (filtering)
-- [x] Stage 7.4 (TfR1): Stability filtering RE-RUN on full pool (2026-05-29) — **224/380 survive**. Top scaffold: s105102 (10 designs in top 20). Top candidate: tfr1_l51_s105102_mpnn12 (composite=0.926). Filters: i_pTM≥0.70, Binder_pLDDT≥0.85, SC≥0.55, PackStat≥0.55, RMSD≤2.5Å, dG≤-30, net charge [-6,+2], no Cys. Affinity-window ranking applied.
+### Completed (filtering + ranking)
+- [x] Stage 7.5 (TfR1): Ranking COMPLETE (2026-05-29) — **Top 50 selected** from 224 Stage 7.4 survivors. 27 scaffolds represented (max 5/scaffold). Top: tfr1_l60_s766452_mpnn12 (score=0.678). Results: `alzheimer/bindcraft/tfr1/filtering/stage7_5_ranked.csv`.
+- [x] Stage 7.4 (TfR1): Stability filtering RE-RUN on full pool (2026-05-29) — **224/380 survive**. Top scaffold: s105102 (10 designs in top 20). Filters: i_pTM≥0.70, Binder_pLDDT≥0.85, SC≥0.55, PackStat≥0.55, RMSD≤2.5Å, dG≤-30, net charge [-6,+2], no Cys. Affinity-window ranking applied.
 
 ### Bypassed
 - [x] Stage 3 (Aβ42): Counter-screen BYPASSED (2026-05-28) — ColabFold single_sequence multimer_v3 produced zero discriminatory signal (0/62 pass, pae 19-23 on ALL targets including positive). Method failure, not design failure. PI decision: trust BindCraft internal metrics, skip to Stage 4.
@@ -47,7 +48,7 @@ We are designing a de novo bispecific miniprotein that binds two targets: (1) th
 ### Next up
 - [ ] Stage 4 completion: Job 9877164 (11 extra monomer pLDDT) → extract → merge with 12 confirmed → final Stage 4 survivors
 - [ ] Stage 5: Multi-objective ranking and selection (top 50 Aβ42 designs)
-- [ ] Stage 7.5: TfR1 ranking (191 survivors + new designs from continued production)
+- [ ] Stage 7.5 re-rank: If final production batch adds >5 new Stage 7.4 survivors, re-rank and update top 50
 - [ ] Stage 8: Tandem fusion design (combine best arms)
 - [ ] Stages 6, 9–10: Experimental validation (see DEVELOPMENT_PLAN.md)
 

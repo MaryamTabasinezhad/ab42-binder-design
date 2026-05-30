@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-29 by Frontenac — Phase C recalibrated (Option B). 23/62 pass Phase C, 12 confirmed, 11 extra pending (job 9877164). TfR1: 2,051 traj, 224/380 survive Stage 7.4.
+**Last updated:** 2026-05-29 by Nibi — Stage 7.5 COMPLETE: top 50 TfR1 designs ranked across 27 scaffolds (max 5/scaffold). Production winding down (no resubmission). Ready for Stage 8 fusion.
 
 ## Active Campaigns
 
@@ -12,7 +12,7 @@ Full development plan: `alzheimer/DEVELOPMENT_PLAN.md`
 
 ### 2. TfR1 Arm Design (Stage 7, parallel)
 
-**Status: Stage 7.4 RE-RUN on full pool — 224/380 survive stability filtering. Production continues on Nibi (2,051 trajectories, 5 jobs running).**
+**Status: Stage 7.5 COMPLETE — Top 50 ranked from 224 survivors across 27 scaffolds. Production winding down. Ready for Stage 8.**
 
 Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 
@@ -21,7 +21,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | Stage 4 Phase C DONE (recalibrated). 11 extra monomer pLDDT running. | 9877164 (Phase B extra) | 1,342 (Aβ42) | 62 → 23 (Phase C) | 2026-05-29 |
-| Nibi | Nibi | **Stage 7.4 RE-RUN** — 224/380 survive (full pool). Container validated. Production continues. | 14990515–19 (running, ~4d left) | 2,051 (TfR1) | 380 accepted, 224 pass Stage 7.4 | 2026-05-29 |
+| Nibi | Nibi | **Stage 7.5 COMPLETE** — Top 50 ranked (27 scaffolds). No resubmission. Jobs 14990515–19 finishing. | 14990515–19 (running, ~4d left) | 2,051 (TfR1) | 380 → 224 → top 50 | 2026-05-29 |
 | Narval | Narval | **Standby.** Phase B done (26/26). Awaiting next assignment from Frontenac (Stage 5 ranking or Stage 8 fusion). | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-05-30 |
 
 ### Aβ42 Campaign Metrics
@@ -45,8 +45,9 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 | Trajectories completed | 2,051 |
 | Accepted designs | **380** (all partitions merged, deduplicated) |
 | Stage 7.4 survivors | **224/380** (59% pass rate) |
-| Top candidate (post-7.4) | tfr1_l51_s105102_mpnn12 (i_pTM=0.81, dG=-38.9, SC=0.77, composite=0.926) |
-| Parallel jobs | 14990515–19 still running (~4d walltime remaining) |
+| **Stage 7.5 fusion panel** | **Top 50** from 224, max 5/scaffold, 27 scaffolds represented |
+| Top candidate (post-7.5) | tfr1_l60_s766452_mpnn12 (i_pTM=0.85, dG=-58.8, SC=0.69, score=0.678) |
+| Parallel jobs | 14990515–19 finishing (~4d left), no resubmission |
 | Tf competition check | PASS (hotspots 45+ Å from Tf interface) |
 | BUNS fix | Option 1 applied: filter disabled, pyrosetta patch 999→0 |
 | **Stage 7.3** | **COMPLETE:** 0/310 pass all 3 criteria. Same method failure as Aβ42 Stage 3. 1 outlier (s344619_mpnn13, pae=12.56, ipTM=0.76). Tf competition test not viable (complex too large). Report: `alzheimer/docs/tfr1_counterscreen_results.md` |
@@ -80,6 +81,7 @@ All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-05-29 | Nibi | **Stage 7.5 COMPLETE:** Ranked 224 TfR1 survivors → selected top 50 for fusion panel. 27 scaffolds represented (max 5/scaffold cap applied — 7 designs skipped). Weights: i_pTM 0.25, dG 0.20, Binder_pLDDT 0.15, SC 0.15, diversity bonus 0.15, PackStat 0.10. Top: s766452_mpnn12 (i_pTM=0.85, dG=-58.8). No new production jobs — will re-rank if final batch adds >5 survivors. Results: `stage7_5_ranked.csv`. |
 | 2026-05-29 | F | **Stage 4 Phase C recalibrated (Option B):** SAP/res<1.1, BUNS≤7, charge [-8,+5]. 23/62 pass. 12 confirmed (have Phase B pLDDT), 11 extra recovered by charge widening need monomer pLDDT — job 9877164 submitted on Frontenac A100. Script updated, results in `stage4_results_recalibrated.csv`. |
 | 2026-05-30 | Narval | **Stage 4 Phase B COMPLETE:** 26/26 pass monomer pLDDT >85 (mean 92.80, min 88.00, max 97.12). Results: `filtering/stage4/phase_b_results.csv`. Reply sent to Frontenac. All 26 designs ready for Phase C. |
 | 2026-05-29 | Nibi | **Stage 7.4 RE-RUN on full pool:** Production grew to 2,051 trajectories, 380 accepted designs (merged all 5 partitions). Re-ran Stage 7.4 stability filter: 224/380 survive (up from 191/326). Top scaffold s105102 still dominates (10 of top 20). ColabFold container validated (already done last session). Jobs 14990515–19 running with ~4d remaining. |
