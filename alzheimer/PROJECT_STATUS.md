@@ -54,16 +54,16 @@ stage_3:
 
 stage_4:
   name: "Stability filtering"
-  status: in_progress  # Phase A done (26/62), Phase B job done (extracting), Phase C pending recalibration
+  status: completed  # 2026-05-29
   depends_on: stage_3
   cluster: narval + frontenac
+  designs_passing: 23  # out of 62
   substeps:
     phase_a_sequence_csv: completed  # 26/62 pass (Cys, charge [-5,+5], ss_pLDDT, binder_pLDDT)
-    phase_b_monomer_plddt: completed  # 26/26 pass (mean 92.80, min 88.0). Job 61936182.
-    phase_b_extra: in_progress  # 11 designs recovered by charge widening [-8,+5]. Job 9877164 on Frontenac A100.
-    phase_c_sap_buns_cms: completed  # Recalibrated: SAP/res<1.1, BUNS≤7, charge [-8,+5]. 23/62 pass.
-  recalibration: "Option B applied (2026-05-29): SAP per-residue<1.1, BUNS≤7, charge [-8,+5]. 12 fully confirmed, 11 pending Phase B extra."
-  notes: "Combined Phase A+B+C: 12 confirmed + up to 11 pending = max 23 survivors."
+    phase_b_monomer_plddt: completed  # 37/37 pass (26 Narval job 61936182 + 11 Frontenac job 9877164)
+    phase_c_sap_buns_cms: completed  # Recalibrated Option B: SAP/res<1.1, BUNS≤7, charge [-8,+5]. 23/62 pass.
+  recalibration: "Option B applied (2026-05-29): SAP per-residue<1.1, BUNS≤7, charge [-8,+5]."
+  notes: "23/62 survive all filters. Results: filtering/stage4/stage4_final_survivors.csv"
 
 stage_5:
   name: "Ranking and selection"
@@ -127,7 +127,7 @@ designs_generated: 2977
 designs_passing_internal_filters: 62
 designs_passing_negative_screen: 0  # Stage 3 COMPLETE: 0/62 pass (method failure suspected)
 designs_passing_stability_tfr1: 191  # Stage 7.4 COMPLETE
-designs_passing_stability_ab42: 0  # Stage 4 in progress
+designs_passing_stability_ab42: 23  # Stage 4 COMPLETE
 designs_selected_for_synthesis: 0
 designs_expressing_solubly: 0
 designs_binding_protofibrils: 0
