@@ -1,12 +1,12 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-29 by Frontenac — **Stage 4 COMPLETE: 23/62 Aβ42 survive all filters.** Stage 7.5 TfR1 ranking done (top 50). Both arms ready for Stage 5/8.
+**Last updated:** 2026-05-29 by Frontenac — **Stages 4+5 COMPLETE.** 23 Aβ42 designs ranked (18 scaffolds). TfR1 top 50 ranked (Stage 7.5). Both arms ready for Stage 8 fusion.
 
 ## Active Campaigns
 
 ### 1. Abeta-42 BindCraft Binder Design
 
-**Development Plan Stage: Stage 4 COMPLETE — 23/62 survive all filters. Ready for Stage 5 ranking.**
+**Development Plan Stage: Stage 5 COMPLETE — 23 designs ranked across 18 scaffolds. Top: s967366_mpnn11 (score=0.793). Ready for Stage 8 fusion.**
 
 Full development plan: `alzheimer/DEVELOPMENT_PLAN.md`
 
@@ -20,7 +20,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
-| Frontenac | F | **Stage 4 COMPLETE.** 23/62 survive. Ready for Stage 5 ranking. | (none running) | 1,342 (Aβ42) | 62 → 23 (Stage 4) | 2026-05-29 |
+| Frontenac | F | **Stages 4+5 COMPLETE.** 23 ranked, ready for Stage 8 fusion. | (none running) | 1,342 (Aβ42) | 62 → 23 ranked | 2026-05-29 |
 | Nibi | Nibi | **Stage 7.5 COMPLETE** — Top 50 ranked (27 scaffolds). No resubmission. Jobs 14990515–19 finishing. | 14990515–19 (running, ~4d left) | 2,051 (TfR1) | 380 → 224 → top 50 | 2026-05-29 |
 | Narval | Narval | **Standby.** Phase B done (26/26). Awaiting next assignment from Frontenac (Stage 5 ranking or Stage 8 fusion). | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-05-30 |
 

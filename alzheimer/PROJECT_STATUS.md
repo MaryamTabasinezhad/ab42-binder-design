@@ -67,8 +67,12 @@ stage_4:
 
 stage_5:
   name: "Ranking and selection"
-  status: not_started
+  status: completed  # 2026-05-29
   depends_on: stage_4
+  designs_ranked: 23
+  unique_scaffolds: 18
+  top_design: "ab42_l82_s967366_mpnn11 (composite=0.793, i_pTM=0.79, dG=-71.8)"
+  notes: "All 23 advance (pool < 50 target). Ranked by composite score. Results: filtering/stage5/stage5_ranked.csv"
 
 stage_6:
   name: "Experimental validation (Aβ arm)"
