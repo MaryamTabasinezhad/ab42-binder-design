@@ -146,13 +146,21 @@
 | Stability & dynamics | GROMACS + OpenMM | multi-GPU |
 
 - **NVIDIA-native:** CUDA · JAX (XLA on GPU) · PyTorch · Apptainer GPU containers
-- **Scale today:** **1,900+ A100 GPU-hours on the coordinator cluster alone** (Frontenac: 1,891 hr / 921 jobs, verified via `sacct`), plus the TfR1 and Aβ42 worker campaigns on Nibi & Narval — **3 Compute Canada clusters** total
+- **Scale today:** **~3,240 GPU-hours already consumed across 3 Compute Canada clusters** (1,098 GPU jobs), on **NVIDIA A100 and H100** — all verified via `sacct`:
+
+  | Cluster | GPU-hours | Jobs | GPU |
+  |---|---|---|---|
+  | Frontenac | 1,891 | 921 | A100 |
+  | Nibi | 1,103 | 30 | H100 |
+  | Narval | 244 | 147 | A100 |
+  | **Total** | **~3,238** | **1,098** | A100 + H100 |
+
 - **Bottleneck = GPU.** More compute directly converts to more validated drug candidates.
 
 **SAY**
-- "There is no non-GPU version of this company. Every box in this table is an NVIDIA GPU workload. We've already burned nearly 1,900 A100-hours on one cluster — and that's before the lecanemab program scaled up."
+- "There is no non-GPU version of this company. Every box in this table is an NVIDIA GPU workload — we've already consumed over 3,200 A100/H100-hours across three clusters, and that's before the lecanemab program scales up. Inception credits go straight into more validated candidates."
 
-`[TODO]` Add Nibi + Narval `sacct` totals for a full 3-cluster figure (Frontenac verified: 1,891 hr / 921 GPU jobs as of 2026-06-09). Largest single job: BindCraft Aβ42 production (8375335, 265 GPU-hr).
+**Footnote (keep in notes, not on slide):** Figures verified via `sacct -X` on each cluster, 2026-06-09. Nibi's H100 total includes failed/OOM runs (real burned allocation) — framed as "GPU-hours consumed." Largest single job: BindCraft Aβ42 production (Frontenac 8375335, 265 GPU-hr).
 
 ---
 
@@ -262,7 +270,7 @@
 
 - [ ] One-line bios + headshots: Maria Tabasi, Hamid Ghaedi
 - [ ] Incorporation date + funding status for the form
-- [x] Frontenac GPU-hours: 1,891 hr / 921 jobs (verified 2026-06-09) — [ ] still need Nibi + Narval totals
+- [x] GPU-hours verified, all 3 clusters (2026-06-09): ~3,238 hr / 1,098 jobs — Frontenac 1,891 (A100), Nibi 1,103 (H100), Narval 244 (A100)
 - [ ] Cite market & ARIA/BBB figures (Slides 2 & 9)
 - [ ] Structure renders (PyMOL/ChimeraX), pipeline funnel diagram, bispecific & BBB cartoons
 - [ ] Advisory board names, if any are ready
