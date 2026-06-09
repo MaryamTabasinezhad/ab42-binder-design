@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-05-29 by Frontenac — **Stages 4+5 COMPLETE.** 23 Aβ42 designs ranked (18 scaffolds). TfR1 top 50 ranked (Stage 7.5). Both arms ready for Stage 8 fusion.
+**Last updated:** 2026-06-09 by Frontenac — **Stage 8 LAUNCHED.** Split A submitted on Frontenac (job 11950572, 125 fusions). Split B assigned to Narval via inbox.
 
 ## Active Campaigns
 
@@ -20,9 +20,9 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
-| Frontenac | F | **Stages 4+5 COMPLETE.** 23 ranked, ready for Stage 8 fusion. | (none running) | 1,342 (Aβ42) | 62 → 23 ranked | 2026-05-29 |
-| Nibi | Nibi | **Stage 7.5 COMPLETE** — Top 50 ranked (27 scaffolds). No resubmission. Jobs 14990515–19 finishing. | 14990515–19 (running, ~4d left) | 2,051 (TfR1) | 380 → 224 → top 50 | 2026-05-29 |
-| Narval | Narval | **Standby.** Phase B done (26/26). Awaiting next assignment from Frontenac (Stage 5 ranking or Stage 8 fusion). | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-05-30 |
+| Frontenac | F | **Stage 8 RUNNING.** Split A submitted (job 11950572, 125 fusions, A100, 4h). | 11950572 (pending/running) | 1,342 (Aβ42) | 62 → 23 ranked | 2026-06-09 |
+| Nibi | Nibi | **Stage 7.5 COMPLETE** — Top 50 ranked (27 scaffolds). Jobs 14990515–19 likely finished. | (check status) | 2,051 (TfR1) | 380 → 224 → top 50 | 2026-05-29 |
+| Narval | Narval | **Stage 8 assigned.** Split B (125 fusions) inbox message sent. Awaiting submission. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-06-09 |
 
 ### Aβ42 Campaign Metrics
 
@@ -81,6 +81,7 @@ All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-06-09 | F | **Stage 8 LAUNCHED:** Split A submitted on Frontenac as job 11950572 (125 fusions, A100, 4h walltime, single_sequence, 1 model, 3 recycles). Split B (125 fusions) assigned to Narval via inbox. |
 | 2026-05-29 | Nibi | **Stage 7.5 COMPLETE:** Ranked 224 TfR1 survivors → selected top 50 for fusion panel. 27 scaffolds represented (max 5/scaffold cap applied — 7 designs skipped). Weights: i_pTM 0.25, dG 0.20, Binder_pLDDT 0.15, SC 0.15, diversity bonus 0.15, PackStat 0.10. Top: s766452_mpnn12 (i_pTM=0.85, dG=-58.8). No new production jobs — will re-rank if final batch adds >5 survivors. Results: `stage7_5_ranked.csv`. |
 | 2026-05-29 | F | **Stage 4 Phase C recalibrated (Option B):** SAP/res<1.1, BUNS≤7, charge [-8,+5]. 23/62 pass. 12 confirmed (have Phase B pLDDT), 11 extra recovered by charge widening need monomer pLDDT — job 9877164 submitted on Frontenac A100. Script updated, results in `stage4_results_recalibrated.csv`. |
 | 2026-05-30 | Narval | **Stage 4 Phase B COMPLETE:** 26/26 pass monomer pLDDT >85 (mean 92.80, min 88.00, max 97.12). Results: `filtering/stage4/phase_b_results.csv`. Reply sent to Frontenac. All 26 designs ready for Phase C. |
