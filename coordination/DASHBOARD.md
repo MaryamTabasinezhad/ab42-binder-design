@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-06-09 by Frontenac — **Stage 8 LAUNCHED.** Split A submitted on Frontenac (job 11950572, 125 fusions). Split B assigned to Narval via inbox.
+**Last updated:** 2026-06-09 by Narval — **Stage 8 RUNNING on both clusters.** Split A on Frontenac (job 11950572), Split B on Narval (job 62652492).
 
 ## Active Campaigns
 
@@ -22,7 +22,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | **Stage 8 RUNNING.** Split A submitted (job 11950572, 125 fusions, A100, 4h). | 11950572 (pending/running) | 1,342 (Aβ42) | 62 → 23 ranked | 2026-06-09 |
 | Nibi | Nibi | **Stage 7.5 COMPLETE** — Top 50 ranked (27 scaffolds). Jobs 14990515–19 likely finished. | (check status) | 2,051 (TfR1) | 380 → 224 → top 50 | 2026-05-29 |
-| Narval | Narval | **Stage 8 assigned.** Split B (125 fusions) inbox message sent. Awaiting submission. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-06-09 |
+| Narval | Narval | **Stage 8 RUNNING.** Split B submitted (job 62652492, 125 fusions, A100, 4h). | 62652492 (pending) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-06-09 |
 
 ### Aβ42 Campaign Metrics
 
