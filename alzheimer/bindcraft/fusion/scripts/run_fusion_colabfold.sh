@@ -17,6 +17,21 @@ nvidia-smi -L | head -1
 
 REPO=/global/project/hpcg6049/protein
 
+# Source the cluster env explicitly and export the container vars, rather than
+# relying on the wrapper's hostname auto-detect — that failed on Narval compute
+# nodes (job 62652492/62692747). Override with CLUSTER=<name> sbatch ... if needed.
+if [ -z "${CLUSTER}" ]; then
+    case "$(hostname -f)" in
+        *frontenac*|frnt*) CLUSTER=frontenac ;;
+        *nibi*)            CLUSTER=nibi ;;
+        *narval*)          CLUSTER=narval ;;
+        *) echo "ERROR: cannot detect cluster from $(hostname -f); resubmit with CLUSTER=<name> sbatch ..." >&2; exit 1 ;;
+    esac
+fi
+source "${REPO}/clusters/${CLUSTER}.env"
+export COLABFOLD_SIF COLABFOLD_CACHE APPTAINER_MODULE
+echo "Cluster=${CLUSTER}  SIF=${COLABFOLD_SIF}"
+
 # Default to split A; pass SPLIT=B for Narval's half
 SPLIT=${SPLIT:-A}
 INPUT=${REPO}/alzheimer/bindcraft/fusion/inputs/fusion_input_${SPLIT}.csv
@@ -26,7 +41,9 @@ mkdir -p "${OUTDIR}"
 
 echo "Running split ${SPLIT}: $(wc -l < "${INPUT}") sequences (including header)"
 
-${REPO}/container/run_colabfold.sh \
+# Invoke via `bash` so a missing +x bit on the wrapper doesn't fail the job
+# (this also bit Narval's first attempt, job 62652492).
+bash "${REPO}/container/run_colabfold.sh" \
     "${INPUT}" \
     "${OUTDIR}" \
     --num-models 1 \

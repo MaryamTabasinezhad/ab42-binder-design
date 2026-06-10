@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-06-10 by Narval — **Stage 8 Split B COMPLETE.** 125/125 predictions done (job 62692772, 34 min). Split A on Frontenac (job 11950572). Ready for analysis.
+**Last updated:** 2026-06-10 by Frontenac — **Stage 8 BOTH SPLITS COMPLETE (250/250).** Split A analyzed (125/125). pTM filter flagged as wrong for tandem-fusion architecture — arms fold well (median pLDDT ~88), domains independent (PAE ~22); re-ranking on per-arm pLDDT + inter-domain PAE. Narval to analyze Split B + push CSV for merge.
 
 ## Active Campaigns
 
@@ -20,7 +20,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 
 | Cluster | Agent | Current Work | SLURM Jobs | Trajectories | Accepted Designs | Last Update |
 |---------|-------|--------------|------------|--------------|------------------|-------------|
-| Frontenac | F | **Stage 8 RUNNING.** Split A submitted (job 11950572, 125 fusions, A100, 4h). | 11950572 (pending/running) | 1,342 (Aβ42) | 62 → 23 ranked | 2026-06-09 |
+| Frontenac | F | **Stage 8 Split A COMPLETE + analyzed** (125/125, job 11950572, 35 min). Merging/re-ranking pending Narval CSV. | (none running) | 1,342 (Aβ42) | 62 → 23 ranked | 2026-06-10 |
 | Nibi | Nibi | **Stage 7.5 COMPLETE** — Top 50 ranked (27 scaffolds). Jobs 14990515–19 likely finished. | (check status) | 2,051 (TfR1) | 380 → 224 → top 50 | 2026-05-29 |
 | Narval | Narval | **Stage 8 Split B COMPLETE.** 125/125 predictions (job 62692772, 34 min). Awaiting analysis. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-06-10 |
 
@@ -81,6 +81,8 @@ All 496 ColabFold runs (62 designs × 8 targets) completed successfully. Results
 
 | Date | Agent | Action |
 |------|-------|--------|
+| 2026-06-10 | F | **Stage 8 Split A analyzed (125/125).** Arms fold well (arm1/arm2 pLDDT median ~88; 109/112 of 125 pass >80), domains independent (inter-PAE median 22, 122/125 pass >15). **pTM>0.6 gate flagged as wrong for tandem fusions** (only 3/125 pass; pTM penalizes the independent-domain design). Re-ranking on per-arm pLDDT + inter-domain PAE. Sent Narval analysis instructions; patched `run_fusion_colabfold.sh` (explicit env source + `bash` wrapper invocation) to fix the two issues Narval's first attempts hit. |
+| 2026-06-10 | Narval | **Stage 8 Split B COMPLETE:** 125/125 predictions (job 62692772, 34 min on A100). First two attempts failed (wrapper +x, env auto-detect); fixed via direct env exports. Outputs on Narval scratch. |
 | 2026-06-09 | F | **Stage 8 LAUNCHED:** Split A submitted on Frontenac as job 11950572 (125 fusions, A100, 4h walltime, single_sequence, 1 model, 3 recycles). Split B (125 fusions) assigned to Narval via inbox. |
 | 2026-05-29 | Nibi | **Stage 7.5 COMPLETE:** Ranked 224 TfR1 survivors → selected top 50 for fusion panel. 27 scaffolds represented (max 5/scaffold cap applied — 7 designs skipped). Weights: i_pTM 0.25, dG 0.20, Binder_pLDDT 0.15, SC 0.15, diversity bonus 0.15, PackStat 0.10. Top: s766452_mpnn12 (i_pTM=0.85, dG=-58.8). No new production jobs — will re-rank if final batch adds >5 survivors. Results: `stage7_5_ranked.csv`. |
 | 2026-05-29 | F | **Stage 4 Phase C recalibrated (Option B):** SAP/res<1.1, BUNS≤7, charge [-8,+5]. 23/62 pass. 12 confirmed (have Phase B pLDDT), 11 extra recovered by charge widening need monomer pLDDT — job 9877164 submitted on Frontenac A100. Script updated, results in `stage4_results_recalibrated.csv`. |
