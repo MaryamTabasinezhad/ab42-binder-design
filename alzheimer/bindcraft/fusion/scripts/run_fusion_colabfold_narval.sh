@@ -20,6 +20,10 @@ PROTEIN=/home/ghaedi/projects/def-ghaedi/ghaedi/protein
 INPUT=${REPO}/alzheimer/bindcraft/fusion/inputs/fusion_input_B.csv
 OUTDIR=${REPO}/alzheimer/bindcraft/fusion/outputs/split_B
 
+export COLABFOLD_SIF=${PROTEIN}/container/colabfold_1.6.1-cuda12.sif
+export COLABFOLD_CACHE=${PROTEIN}/container/colabfold_cache
+export APPTAINER_MODULE=apptainer
+
 mkdir -p "${OUTDIR}"
 
 echo "Running split B: $(wc -l < "${INPUT}") sequences (including header)"
