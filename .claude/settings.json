@@ -68,7 +68,7 @@
       "Bash(reboot *)"
     ]
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-8",
   "effortLevel": "high",
   "verbose": true,
   "showTurnDuration": true

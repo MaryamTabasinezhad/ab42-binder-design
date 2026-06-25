@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-06-25 by Narval — **Stage 8 Split B ANALYZED + pushed** (commit 3645585). 79/125 pass per-arm pLDDT≥80 + inter-domain PAE≥15. CSV `stage8_results_splitB.csv` on master. Both splits now analyzed → Frontenac to `--merge-csvs` pool + re-rank all 250. Top Split B candidate: fusion_s843399m18_s255454m5_v2 (arm1=93.14, arm2=90.75, iPAE=24.52).
+**Last updated:** 2026-06-25 by Frontenac — **STAGE 8 COMPLETE.** Merged all 250 fusions (`--merge-csvs`), re-ranked on per-arm pLDDT + inter-domain PAE. **183/250 pass hard gates; 20-member synthesis panel selected** (≤2/arm-pair, 13 distinct pairs). Results: `alzheimer/bindcraft/fusion/stage8_results_merged.csv`. Top: `fusion_s843399m18_s255454m5_v2` (arm1=93.14, arm2=90.75, iPAE=24.52, GS4). Fixed a merge bug (stale `panel_selected` flags inherited from split CSVs → was flagging 40). Next: Narval to Globus the 20 panel PDBs.
 
 ## Active Campaigns
 

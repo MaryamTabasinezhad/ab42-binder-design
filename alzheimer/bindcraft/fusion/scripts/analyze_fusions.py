@@ -155,8 +155,11 @@ def apply_gates(result, args):
     result['pass_all'] = all([
         result['pass_arm1_plddt'], result['pass_arm2_plddt'], result['pass_inter_pae'],
     ])
-    result.setdefault('rank', '')
-    result.setdefault('panel_selected', False)
+    # Always reset rank/panel_selected — in merge mode these are inherited as
+    # stale strings from the per-split input CSVs; rank_select_write is the sole
+    # authority and re-derives them across the pooled set.
+    result['rank'] = ''
+    result['panel_selected'] = False
     return result
 
 

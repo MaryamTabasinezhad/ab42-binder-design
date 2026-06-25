@@ -1,0 +1,5 @@
+2026-06-09 09:07:35.780338: W external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1092] Compiling 1579 configs for 57 fusions on a single thread.
+2026-06-09 09:14:04.665448: W external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1092] Compiling 1470 configs for 52 fusions on a single thread.
+2026-06-09 09:21:45.092656: W external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1092] Compiling 1470 configs for 52 fusions on a single thread.
+2026-06-09 09:29:11.069913: W external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1092] Compiling 1465 configs for 52 fusions on a single thread.
+2026-06-09 09:35:39.802947: W external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1092] Compiling 1670 configs for 59 fusions on a single thread.
