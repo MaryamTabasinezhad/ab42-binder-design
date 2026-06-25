@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-06-10 by Frontenac — **Stage 8 BOTH SPLITS COMPLETE (250/250).** Split A analyzed (125/125). pTM filter flagged as wrong for tandem-fusion architecture — arms fold well (median pLDDT ~88), domains independent (PAE ~22); re-ranking on per-arm pLDDT + inter-domain PAE. Narval to analyze Split B + push CSV for merge.
+**Last updated:** 2026-06-25 by Narval — **Stage 8 Split B ANALYZED + pushed** (commit 3645585). 79/125 pass per-arm pLDDT≥80 + inter-domain PAE≥15. CSV `stage8_results_splitB.csv` on master. Both splits now analyzed → Frontenac to `--merge-csvs` pool + re-rank all 250. Top Split B candidate: fusion_s843399m18_s255454m5_v2 (arm1=93.14, arm2=90.75, iPAE=24.52).
 
 ## Active Campaigns
 
@@ -22,7 +22,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | **Stage 8 Split A COMPLETE + analyzed** (125/125, job 11950572, 35 min). Merging/re-ranking pending Narval CSV. | (none running) | 1,342 (Aβ42) | 62 → 23 ranked | 2026-06-10 |
 | Nibi | Nibi | **Stage 7.5 COMPLETE** — Top 50 ranked (27 scaffolds). Jobs 14990515–19 likely finished. | (check status) | 2,051 (TfR1) | 380 → 224 → top 50 | 2026-05-29 |
-| Narval | Narval | **Stage 8 Split B COMPLETE.** 125/125 predictions (job 62692772, 34 min). Awaiting analysis. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-06-10 |
+| Narval | Narval | **Stage 8 Split B ANALYZED + pushed** (commit 3645585). 79/125 pass gates. CSV on master — Frontenac to merge+rank. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-06-25 |
 
 ### Aβ42 Campaign Metrics
 
