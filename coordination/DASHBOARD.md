@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-06-25 by Frontenac — **STAGE 8 COMPLETE.** Merged all 250 fusions (`--merge-csvs`), re-ranked on per-arm pLDDT + inter-domain PAE. **183/250 pass hard gates; 20-member synthesis panel selected** (≤2/arm-pair, 13 distinct pairs). Results: `alzheimer/bindcraft/fusion/stage8_results_merged.csv`. Top: `fusion_s843399m18_s255454m5_v2` (arm1=93.14, arm2=90.75, iPAE=24.52, GS4). Fixed a merge bug (stale `panel_selected` flags inherited from split CSVs → was flagging 40). Next: Narval to Globus the 20 panel PDBs.
+**Last updated:** 2026-06-25 by Frontenac — **STAGE 9 SEQUENCE TRACK COMPLETE.** 20 order-ready His6-SUMO / pET-28a(+) constructs: DNAChisel codon-optimized for E. coli (GC 46.7–51.3%), validated 20/20 (CDS→protein exact, NdeI+XhoI unique/terminal). 0 severe developability flags. Deliverable: `alzheimer/bindcraft/fusion/stage9/synthesis_panel.csv`; report `alzheimer/docs/STAGE9_SYNTHESIS_PREP.md`. **PENDING: 9.1 structural QC** needs 8 Narval Split-B PDBs (Globus, requested via inbox). Stage 8 prior: 250 fusions merged, 183/250 pass gates, 20-design panel.
 
 ## Active Campaigns
 
