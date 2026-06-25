@@ -1,6 +1,6 @@
 # Campaign Dashboard
 
-**Last updated:** 2026-06-25 by Frontenac — **STAGE 9 SEQUENCE TRACK COMPLETE.** 20 order-ready His6-SUMO / pET-28a(+) constructs: DNAChisel codon-optimized for E. coli (GC 46.7–51.3%), validated 20/20 (CDS→protein exact, NdeI+XhoI unique/terminal). 0 severe developability flags. Deliverable: `alzheimer/bindcraft/fusion/stage9/synthesis_panel.csv`; report `alzheimer/docs/STAGE9_SYNTHESIS_PREP.md`. **PENDING: 9.1 structural QC** needs 8 Narval Split-B PDBs (Globus, requested via inbox). Stage 8 prior: 250 fusions merged, 183/250 pass gates, 20-design panel.
+**Last updated:** 2026-06-25 by Narval — **STAGE 9 SEQUENCE TRACK COMPLETE.** 20 order-ready His6-SUMO / pET-28a(+) constructs: DNAChisel codon-optimized for E. coli (GC 46.7–51.3%), validated 20/20 (CDS→protein exact, NdeI+XhoI unique/terminal). 0 severe developability flags. Deliverable: `alzheimer/bindcraft/fusion/stage9/synthesis_panel.csv`; report `alzheimer/docs/STAGE9_SYNTHESIS_PREP.md`. **9.1 structural QC: PDBs DELIVERED** — Narval Globus'd the 6 Split-B panel structures (task 12bf6418, SUCCEEDED, 6 files) to `sync/from_narval/panel_pdbs/`. All 20 panel structures now on Frontenac → clear to run 9.1 (per-domain RMSD, inter-domain packing, back-face SAP). Stage 8 prior: 250 fusions merged, 183/250 pass gates, 20-design panel.
 
 ## Active Campaigns
 
@@ -22,7 +22,7 @@ Full plan: `alzheimer/docs/STAGE7_TFR1_PLAN.md`
 |---------|-------|--------------|------------|--------------|------------------|-------------|
 | Frontenac | F | **Stage 8 Split A COMPLETE + analyzed** (125/125, job 11950572, 35 min). Merging/re-ranking pending Narval CSV. | (none running) | 1,342 (Aβ42) | 62 → 23 ranked | 2026-06-10 |
 | Nibi | Nibi | **Stage 7.5 COMPLETE** — Top 50 ranked (27 scaffolds). Jobs 14990515–19 likely finished. | (check status) | 2,051 (TfR1) | 380 → 224 → top 50 | 2026-05-29 |
-| Narval | Narval | **Stage 8 Split B ANALYZED + pushed** (commit 3645585). 79/125 pass gates. CSV on master — Frontenac to merge+rank. | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-06-25 |
+| Narval | Narval | **Stage 9 panel PDBs DELIVERED** via Globus (task 12bf6418, 6 Split-B structures → Frontenac). Stage 8 Split B analyzed earlier (commit 3645585, 79/125 pass). | (none running) | 1,342 (Aβ42) | 62 → 26 (Phase A+B) | 2026-06-25 |
 
 ### Aβ42 Campaign Metrics
 
