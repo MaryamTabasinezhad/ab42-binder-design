@@ -112,3 +112,4 @@ __pycache__/
 !structural_analysis_project/analysis/*.pdb
 !alzheimer/bindcraft/tfr1/input/*.pdb
 !rfdiffusion_test/input/*.pdb
+alzheimer/bindcraft/fusion/stage9/.venv-dnachisel/
