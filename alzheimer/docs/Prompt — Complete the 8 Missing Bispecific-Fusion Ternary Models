@@ -1,0 +1,71 @@
+ # Prompt — Complete the 8 Missing Bispecific-Fusion Ternary Models
+
+Hand this to Claude Code (or an operator) on Frontenac to generate the 8 remaining ternary models
+(fusion bound to Aβ42 + TfR1) end-to-end.
+
+---
+
+## TASK
+Complete the 8 missing bispecific-fusion ternary models (fusion bound to Aβ42 + TfR1).
+
+## CONTEXT
+- Repo: `MaryamTabasinezhad/ab42-binder-design`. Work under `alzheimer/bindcraft/fusion/`.
+- We have a 20-design fusion panel (Aβ42-arm + linker + TfR1-arm bispecifics). 12 ternary models are
+  already built (`alzheimer/ternary_fusions/`). 8 remain because they lack a GPU-predicted input.
+- HPC: Frontenac (CAC, Queen's). User `hpc6049`, account `def-hpcg6049_gpu`, NVIDIA A100.
+  SLURM rules: always `--account=def-hpcg6049_gpu --gres=gpu:a100:1`, **NEVER** `--partition`,
+  use `eval "$(conda shell.bash hook)" && conda activate colabfold`, absolute paths only.
+
+## THE 8 MISSING FUSIONS
+```
+s843399m18_s255454m5_v2, s843399m18_s422992m5_v10, s843399m18_s422992m5_v4,
+s843399m18_s938332m1_v10, s480128m17_s938332m1_v10, s480128m17_s255454m5_v4,
+s311742m16_s422992m5_v4, s311742m16_s938332m1_v4
+```
+Why missing: 6 have no committed fusion structure (split B); 2 (s311742) lack the Aβ-arm docked complex.
+
+## STEP 1 — INPUTS (already prepared)
+For each of the 8, an input FASTA exists = `fusion_sequence : Aβ42(9-42) : Aβ42(9-42) : Aβ42(9-42)`,
+i.e. the fusion plus 3 copies of the 34-mer target chain `GYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA`.
+These are the `ternary_missing/inputs/*_plus_Abeta.fasta` files. If regenerating, pull the fusion
+sequences from `stage9/synthesis_panel.csv` (construct/fusion protein column) and append the target.
+
+## STEP 2 — PREDICT (ColabFold, one A100 array job)
+Run `colabfold_batch` on each input as an AlphaFold2-multimer complex, matching the original fusion run:
+```
+--num-models 1 --num-recycle 3 --msa-mode single_sequence --model-type alphafold2_multimer_v3
+```
+This yields, per fusion, the **fusion docked onto Aβ42** (scaffold + Aβ pose in one prediction).
+Use the provided `run_missing_colabfold.sh` (8-task SLURM array). Outputs → `outputs/<id>_plus_Abeta/*rank_001*.pdb`.
+
+## STEP 3 — ASSEMBLE TERNARY (per fusion)
+For each predicted complex:
+- **a)** It already contains chain-labeled fusion + Aβ42 target (rigorous, co-folded). Keep those as chains **F** and **A**.
+- **b)** Add TfR1 **schematically**: load the TfR1 apical target (`alzheimer/bindcraft/tfr1/input/6WRV_apical.pdb`),
+  orient its design hotspots (A208, A210, A211, A212, A215) toward the fusion's TfR1-arm surface,
+  place at contact distance, clash-check (min interdomain distance > 3 Å). Label it chain **T**.
+- **c)** Write an annotated PDB: HEADER/TITLE, COMPND naming F=fusion (drug), A=Amyloid-beta42 (9CO4 target),
+  T=TfR1 apical (6WRV, schematic); SEQRES for all three chains; REMARK stating the Aβ side is rigorous
+  (co-folded) and the TfR1 side is schematic, and that in vivo the two binding events are sequential.
+- **d)** Render a per-chain-colored PNG (F = blue, A = orange, T = green): cartoon + light VDW surface, on dark bg.
+
+## OUTPUT
+- 8 files `ternary_<id>.pdb` + `ternary_<id>.png` in `alzheimer/ternary_fusions/` (joining the existing 12 → all 20).
+- Update `alzheimer/ternary_fusions/README.md` coverage to 20/20.
+- Commit + push.
+
+## IMPORTANT / HONESTY
+- Aβ42 side = **rigorous** (co-folded); TfR1 side = **schematic** (illustrative, not a computed dock).
+- "Bound to both at once" is illustrative — in vivo binding is **sequential** (TfR1 at the BBB, then Aβ in brain).
+- `alphafold2_multimer_v3` **approximates**, not necessarily reproduces, the BindCraft-designed dock; note this.
+
+---
+
+### Ready-to-run package (already on disk)
+`~/Documents/Bindlix/final_fusions_July4/t/to_run_on_hpc/`
+- `inputs/*_plus_Abeta.fasta` — the 8 ColabFold complex inputs
+- `run_missing_colabfold.sh` — 8-task SLURM array (A100, single-seq MSA, 1 model, 3 recycles)
+- `README.md` — run + rebuild instructions
+
+Copy that folder to Frontenac (e.g. `/global/project/hpcg6049/protein/alzheimer/bindcraft/fusion/ternary_missing/`)
+and `sbatch run_missing_colabfold.sh`. When outputs return, rebuild the ternaries locally to complete all 20.
