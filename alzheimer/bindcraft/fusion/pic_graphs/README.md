@@ -45,6 +45,31 @@ The dashed line at 15 Å is the project's **inter-domain PAE >15 Å** screening 
 
 In the 250-design CSV, inter-domain PAE ranges from **10.29 to 27.69 Å**; the median among the 183 passing fusions is **23.16 Å**. These observed values are distinct from the model's output range. PAE output limits depend on the prediction implementation; values near the upper reporting limit should be interpreted as high uncertainty rather than a precise error estimate.
 
+## Understanding pTM for one domain and a two-domain fusion
+
+**pTM (predicted TM-score)** estimates the overall structural similarity expected between a prediction and the true structure. It ranges from **0 to 1**, with higher values indicating greater confidence in the overall fold and arrangement. It is dimensionless, not a distance, and a value of 0.6 does not mean a 60% probability that the structure is correct.
+
+| Structure supplied for prediction | What the reported pTM evaluates |
+|---|---|
+| One isolated binder domain | The overall fold of that domain |
+| A complete two-domain fusion | The whole fusion, including the relative arrangement of its domains |
+
+The Stage 8 CSV's `ptm` column is **whole-fusion pTM**. It does not contain separate pTM scores for the two arms. Per-arm pLDDT is a different confidence measure and must not be called per-arm pTM.
+
+### Thresholds and interpretation
+
+A pTM above approximately **0.5** is commonly used as a rough indication that the overall fold may be correct. This is not a universal acceptance threshold or experimental validation. Scores can be influenced by domain size, uncertain relative domain placement, and poorly predicted regions. A larger, confidently predicted domain can dominate the score even when another part is less reliable. See [EMBL-EBI's AlphaFold confidence-score guidance](https://www.ebi.ac.uk/training/online/courses/alphafold/inputs-and-outputs/evaluating-alphafolds-predicted-structures-using-confidence-scores/confidence-scores-in-alphafold-multimer/).
+
+In a tandem fusion, each arm can have a confident individual fold while their relative orientation remains uncertain. This can reduce whole-fusion pTM; it does not by itself establish that either arm is incorrectly folded. The converse also matters: a high whole-fusion pTM does not prove dual-target binding or successful BBB transport.
+
+For this project's Stage 8 analysis:
+
+- `pass_ptm_soft` records whether **pTM >0.6**. This is an informational flag, not a required gate. The numerical pTM score also acts as a ranking tiebreaker after mean and minimum per-arm pLDDT.
+- `pass_all` requires **both arms' mean pLDDT >80 and inter-domain PAE >15 Å**. It does not require `pass_ptm_soft=True`.
+- The median whole-fusion pTM among the **183 passing designs is 0.53**. Those designs pass the stated Stage 8 gates despite many falling below the soft pTM threshold.
+
+A useful distinction for presenting the slide is: **per-arm confidence asks whether each piece is well formed; whole-fusion pTM also reflects confidence in how the pieces fit together.** Evaluate pTM alongside per-arm pLDDT and the PAE matrix rather than using it alone to judge a tandem fusion.
+
 ## Suggested 45–60 second narration
 
 “My current project aims to combine an amyloid-beta binder with a transferrin receptor 1 binder as a potential brain-delivery strategy for Alzheimer’s disease. I built the computational workflow from target and epitope preparation through de novo design, sequence redesign, structural scoring and developability ranking. The documented campaigns yielded 62 accepted amyloid-beta designs and 380 TfR1 designs. I selected five diverse binders per target and tested five linkers in both domain orders, generating 250 fusion designs. AlphaFold2-based screening identified 183 that passed the predefined domain-folding and inter-domain PAE gates. The plots show each domain’s folding confidence and why whole-chain pTM alone is not an appropriate gate for a flexible tandem construct. These are computational candidates; the next step is to establish expression, dual-target binding, selectivity and BBB transport experimentally.”
@@ -54,3 +79,5 @@ In the 250-design CSV, inter-domain PAE ranges from **10.29 to 27.69 Å**; the m
 Recomputed all Stage 8 gate flags and reconciled split metrics against the merged table. Inspected the rendered slide for legibility and clipping. Checked the PowerPoint ZIP and parsed all XML parts; PNG/PDF exports were generated successfully. PowerPoint/LibreOffice is unavailable on this host, so no application-level PowerPoint rendering was performed.
 
 README clarification, 2026-10-20: added PAE definitions, within-arm versus between-arm interpretation, and a reading guide for the right-hand plot. Checked against the existing Stage 8 script and recorded CSV summaries; no predictions or slide regeneration were performed.
+
+README clarification, 2026-10-20: added single-domain versus whole-fusion pTM, its 0–1 range, general interpretation, and the project-specific >0.6 soft flag and ranking role. Checked against `../scripts/analyze_fusions.py` and the recorded summary; no predictions or slide regeneration were performed.
