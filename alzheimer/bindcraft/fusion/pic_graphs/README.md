@@ -10,6 +10,12 @@ The left plot now uses **TfR1 arm mean pLDDT on the x-axis and Aβ42 arm mean pL
 
 The slide additionally reports **1,342 Aβ42 trajectories and 2,051 TfR1 trajectories before filtering**, as documented in `../../../docs/bindcraft_62design_analysis.md` and repository-root `coordination/DASHBOARD.md`. These are campaign-reported design-exploration counts, not accepted-design counts or counts of all ProteinMPNN sequences. The reported accepted arm library remains 62 + 380 = 442, and the fusion result remains 183/250. Raw trajectory/stat CSVs in Git are partial snapshots; no unrecorded total of evaluated TfR1 sequences is inferred.
 
+## Editable PowerPoint version
+
+`08_05_alzheimer_bispecific_interview_slide_editable.pptx` is the editable version of the revised slide. It contains **35 native text boxes, editable panel shapes, and two native scatter charts**, with two embedded Excel workbooks. It contains no flattened slide image. Select text or shapes to edit them; select a chart and use **Chart Design → Edit Data** to change its data, or **Format Axis** to change axes. Blue/orange point series and dashed threshold series can be formatted independently. The domain mappings and 183/250 pass count are unchanged. Text uses Arial; PowerPoint may substitute a local font if Arial is unavailable.
+
+Rebuild with `python3 alzheimer/bindcraft/fusion/pic_graphs/build_editable_slide.py`. The existing image-based PowerPoint, PDF and PNG are preserved separately. Native chart rendering can differ slightly from the PNG preview. The new file's package, XML, both embedded workbooks, 35 text boxes and two chart references were checked; PowerPoint/LibreOffice is not available on this host, so application-level rendering has not been verified.
+
 ## Deliverables
 
 - `08_03_alzheimer_bispecific_interview_slide.pptx`: one PowerPoint slide containing an embedded high-resolution image; text is not individually editable. The Python source is provided for revision.
@@ -91,3 +97,5 @@ README clarification, 2026-10-20: added PAE definitions, within-arm versus betwe
 README clarification, 2026-10-20: added single-domain versus whole-fusion pTM, its 0–1 range, general interpretation, and the project-specific >0.6 soft flag and ranking role. Checked against `../scripts/analyze_fusions.py` and the recorded summary; no predictions or slide regeneration were performed.
 
 Presentation revision verification, 2026-10-20: regenerated PPTX/PDF/PNG and both plots; verified target-to-arm mappings for all 250 designs against the manifest, all Stage 8 flags and split metrics, and the PPTX ZIP/XML contents. Visually inspected the final slide. No new protein predictions were run.
+
+Editable-slide milestone, 2026-10-20: added native editable PowerPoint and its reproducible builder; retained existing slide exports and scientific results.
