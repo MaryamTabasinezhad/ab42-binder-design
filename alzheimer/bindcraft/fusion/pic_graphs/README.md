@@ -99,3 +99,21 @@ README clarification, 2026-10-20: added single-domain versus whole-fusion pTM, i
 Presentation revision verification, 2026-10-20: regenerated PPTX/PDF/PNG and both plots; verified target-to-arm mappings for all 250 designs against the manifest, all Stage 8 flags and split metrics, and the PPTX ZIP/XML contents. Visually inspected the final slide. No new protein predictions were run.
 
 Editable-slide milestone, 2026-10-20: added native editable PowerPoint and its reproducible builder; retained existing slide exports and scientific results.
+
+## General bispecific binder / antibody workflow
+
+`08_06_general_bispecific_design_workflow.png` is a single 2400 × 2850 PNG adapted from the structure of `Chart1_DeNovo_Binder_Design.png` and `Chart2_Screening_and_Fusion.png`. It generalizes the two charts to two targets or two epitopes, with modality selection for each arm, shared screening, bispecific-format assembly, expression preparation and experimental validation. Both original charts are preserved unchanged.
+
+Two alternative modality routes are distinguished: RFdiffusion + ProteinMPNN (or BindCraft) for miniprotein binders, and RFantibody for framework-based antibody/nanobody design. RFantibody specifically combines antibody-finetuned RFdiffusion, ProteinMPNN and antibody-finetuned RoseTTAFold2. Antibody-format engineering and heavy/light-chain pairing remain separate steps from arm design. Model names are examples of available methods, not claims that every model is installed here or applicable to every target.
+
+The generic figure intentionally carries no disease-specific counts, completed-work claims or universal score cutoffs. It includes experimental validation as a required stage and does not inherit the supplied charts' claims that computational prediction proves independent folds, absence of occlusion or completed counter-screening. High inter-domain PAE is explicitly described as uncertainty, not proof of flexibility. Relevant normal-tissue cross-reactivity and application-specific functional testing must be evaluated in the actual campaign.
+
+Primary model references, checked 2026-10-20:
+
+1. [RFdiffusion](https://github.com/RosettaCommons/RFdiffusion): target-conditioned protein backbone generation.
+2. [ProteinMPNN](https://github.com/dauparas/ProteinMPNN): amino-acid sequence design conditioned on a backbone.
+3. [BindCraft](https://github.com/martinpacesa/BindCraft): AlphaFold2-guided binder design with ProteinMPNN redesign and structural filtering.
+4. [RFantibody](https://github.com/RosettaCommons/RFantibody): antibody-specific backbone generation, sequence design and RoseTTAFold2-based prediction/filtering.
+5. [AlphaFold3](https://github.com/google-deepmind/alphafold3): biomolecular structure and complex prediction.
+
+Regenerate with `python3 alzheimer/bindcraft/fusion/pic_graphs/build_general_workflow.py`. Rendering uses existing Pillow and Liberation Sans; no AI protein design/prediction jobs or software installations were performed. Verified PNG dimensions and visually inspected text, arrows, route merging and scientific wording. Status: complete; this is an explanatory workflow rather than an executed experiment.
