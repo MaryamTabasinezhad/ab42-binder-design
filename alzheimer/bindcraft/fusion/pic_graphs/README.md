@@ -22,6 +22,29 @@ One 16:9 slide for a postdoctoral interview, prepared 2026-10-20 from repository
 
 High inter-domain PAE means uncertain relative domain placement; it is a pipeline heuristic for independent domains, not proof of independence or retained binding. Global pTM is not a hard gate. Fusion ipTM and binder–target interface PAE are not present in Stage 8 monomer scores; inter-domain PAE must not be relabeled as binding-interface PAE. The slide reports computational fold screening, not experimentally validated dual binding, selectivity, production or BBB transport. Earlier computational counter-screens were bypassed after unsuccessful positive controls (see `../../../HANDOFF.md`); their selectivity gates are not part of the Stage 8 pass count.
 
+## Understanding inter-domain and intra-domain PAE
+
+**PAE (Predicted Aligned Error)** is AlphaFold's estimate of positional error for one residue when the predicted and true structures are aligned using another residue's local frame. It is measured in ångströms (Å); 10 Å = 1 nanometre. Low PAE indicates confident relative placement; high PAE indicates uncertain relative placement. PAE is prediction uncertainty, not a measured structural error or the physical distance between residues or domains.
+
+**Inter-domain PAE** summarizes uncertainty between residues belonging to different domains. In these tandem fusions, it describes uncertainty about the position and orientation of one binder arm relative to the other. The Stage 8 script averages the two cross-domain blocks of the PAE matrix, in both directions, excluding the linker. High inter-domain PAE can be compatible with two individually well-folded arms whose relative arrangement is uncertain. It does not establish that the arms are far apart, sufficiently separated, flexible, independently functional, or able to bind both targets simultaneously.
+
+**Intra-domain PAE** describes uncertainty between residues within the same domain. For example, a binder containing three helices should ideally have low PAE between those helices, supporting confidence in their relative packing. Higher PAE within an arm can indicate uncertain packing, a flexible loop or subregion, or an unreliable structural prediction; it does not by itself distinguish those explanations. Inspecting the within-domain PAE pattern is more informative than relying only on a whole-domain average.
+
+| Comparison | Desired or acceptable pattern | Interpretation |
+|---|---|---|
+| Within each binder arm | Low intra-domain PAE | Confident relative placement of parts of that arm |
+| Between the two binder arms | Higher inter-domain PAE can be acceptable for this tandem design | Uncertain relative domain arrangement despite potentially confident individual folds |
+
+The current CSV files report **inter-domain PAE**, not intra-domain PAE. To calculate intra-domain PAE, use each arm's within-domain block of the original PAE matrix with the correct sequence boundaries and linker exclusion. Per-arm pLDDT is a separate local confidence measure and cannot be converted into intra-domain PAE.
+
+### Reading the right-hand plot
+
+Each dot represents one of the 250 fusions. The horizontal axis is whole-chain pTM (higher means more confident overall topology); the vertical axis is mean inter-domain PAE (higher means less certain relative placement of the arms). For example, a point at pTM 0.53 and PAE 23 Å means moderate whole-chain confidence and substantial uncertainty between arms; 23 Å is not their separation distance. A well-predicted fold in each arm can coexist with moderate global pTM if their relative arrangement is uncertain.
+
+The dashed line at 15 Å is the project's **inter-domain PAE >15 Å** screening heuristic. It is not a universal AlphaFold quality threshold, and passing it does not prove domain independence. Teal points pass this threshold and both per-arm pLDDT >80 gates. Gray points fail at least one gate; a gray point above the line therefore fails at least one arm's pLDDT gate. Lower-PAE, higher-pTM gray designs have a more confidently predicted overall arrangement and are not necessarily biologically worse.
+
+In the 250-design CSV, inter-domain PAE ranges from **10.29 to 27.69 Å**; the median among the 183 passing fusions is **23.16 Å**. These observed values are distinct from the model's output range. PAE output limits depend on the prediction implementation; values near the upper reporting limit should be interpreted as high uncertainty rather than a precise error estimate.
+
 ## Suggested 45–60 second narration
 
 “My current project aims to combine an amyloid-beta binder with a transferrin receptor 1 binder as a potential brain-delivery strategy for Alzheimer’s disease. I built the computational workflow from target and epitope preparation through de novo design, sequence redesign, structural scoring and developability ranking. The documented campaigns yielded 62 accepted amyloid-beta designs and 380 TfR1 designs. I selected five diverse binders per target and tested five linkers in both domain orders, generating 250 fusion designs. AlphaFold2-based screening identified 183 that passed the predefined domain-folding and inter-domain PAE gates. The plots show each domain’s folding confidence and why whole-chain pTM alone is not an appropriate gate for a flexible tandem construct. These are computational candidates; the next step is to establish expression, dual-target binding, selectivity and BBB transport experimentally.”
@@ -29,3 +52,5 @@ High inter-domain PAE means uncertain relative domain placement; it is a pipelin
 ## Verification
 
 Recomputed all Stage 8 gate flags and reconciled split metrics against the merged table. Inspected the rendered slide for legibility and clipping. Checked the PowerPoint ZIP and parsed all XML parts; PNG/PDF exports were generated successfully. PowerPoint/LibreOffice is unavailable on this host, so no application-level PowerPoint rendering was performed.
+
+README clarification, 2026-10-20: added PAE definitions, within-arm versus between-arm interpretation, and a reading guide for the right-hand plot. Checked against the existing Stage 8 script and recorded CSV summaries; no predictions or slide regeneration were performed.
