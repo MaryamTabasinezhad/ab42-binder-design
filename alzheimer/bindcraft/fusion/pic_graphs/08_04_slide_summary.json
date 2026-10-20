@@ -1,0 +1,15 @@
+{
+  "predicted_fusions": 250,
+  "pass_all": 183,
+  "accepted_arm_library_reported": {
+    "ab42": 62,
+    "tfr1": 380
+  },
+  "pass_rate_percent": 73.2,
+  "passing_medians": {
+    "arm1_plddt": 89.96,
+    "arm2_plddt": 88.89,
+    "inter_domain_pae": 23.16,
+    "ptm": 0.53
+  }
+}
