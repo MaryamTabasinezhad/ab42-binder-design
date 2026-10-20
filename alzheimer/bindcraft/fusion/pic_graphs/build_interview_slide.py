@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build a single 16:9 slide and plots from committed Stage 8 data; Pillow only."""
-import csv, json, statistics, zipfile
+import csv, json, statistics, zipfile, subprocess
 from pathlib import Path
 from xml.sax.saxutils import escape
 from PIL import Image, ImageDraw, ImageFont
@@ -15,6 +15,17 @@ for r in rows:
     r['pass']=r['arm1_plddt']>80 and r['arm2_plddt']>80 and r['inter_domain_pae']>15
     assert r['pass']==(r['pass_all'].lower()=='true')
 assert sum(r['pass'] for r in rows)==183
+# Arm numbers are sequence positions; map both orientations to target identities.
+manifest={r['id']:r for r in csv.DictReader((BASE/'inputs/fusion_manifest.csv').open())}
+for r in rows:
+    m=manifest[r['id']]
+    assert r['domain_order']==m['domain_order']
+    assert m['domain_order'] in ('ab-tfr1','tfr1-ab')
+    ab_first=m['domain_order']=='ab-tfr1'
+    assert m['arm1_id']==m['ab42_design' if ab_first else 'tfr1_design']
+    assert m['arm2_id']==m['tfr1_design' if ab_first else 'ab42_design']
+    r['ab42_plddt']=r['arm1_plddt' if ab_first else 'arm2_plddt']
+    r['tfr1_plddt']=r['arm2_plddt' if ab_first else 'arm1_plddt']
 # Verify pooled split metrics, preferring populated rows.
 pooled={}
 for split in ['splitA','splitB']:
@@ -23,8 +34,10 @@ for split in ['splitA','splitB']:
 assert len(pooled)==250
 assert all(all(float(pooled[r['id']][k])==r[k] for k in ['arm1_plddt','arm2_plddt','inter_domain_pae','ptm']) for r in rows)
 
-NAVY='#102B46'; TEAL='#007F82'; GRAY='#9BA8B6'; TEXT='#263E53'; MUTED='#546B7E'; BG='#F3F6FA'; WHITE='#FFFFFF'; LINE='#DAE3EC'; GOLD='#F0B44B'
-def font(n,bold=False): return ImageFont.truetype('DejaVuSans-Bold.ttf' if bold else 'DejaVuSans.ttf',n)
+NAVY='#102B46'; TEAL='#0072B2'; GRAY='#D55E00'; TEXT='#263E53'; MUTED='#546B7E'; BG='#F3F6FA'; WHITE='#FFFFFF'; LINE='#DAE3EC'; GOLD='#F0B44B'
+# Liberation Sans is an Arial-compatible conventional presentation font.
+FONT_PATHS={bold:subprocess.check_output(['fc-match','-f','%{file}', 'Liberation Sans:style='+('Bold' if bold else 'Regular')],text=True).strip() for bold in (False,True)}
+def font(n,bold=False): return ImageFont.truetype(FONT_PATHS[bold],n)
 def txt(d,xy,s,n=24,fill=TEXT,bold=False): d.text(xy,s,font=font(n,bold),fill=fill)
 def chart(kind):
     im=Image.new('RGB',(1040,570),WHITE);d=ImageDraw.Draw(im)
@@ -32,7 +45,7 @@ def chart(kind):
     if kind=='arms':
         xmin,xmax,ymin,ymax=30,100,30,100
         title='Per-arm folding confidence across fusion designs'
-        xlabel='N-terminal arm mean pLDDT'; ylabel='C-terminal arm mean pLDDT'
+        xlabel='TfR1 arm mean pLDDT'; ylabel='Aβ42 arm mean pLDDT'
         xticks=yticks=[30,40,50,60,70,80,90,100]
     else:
         xmin,xmax,ymin,ymax=0.4,0.75,0,30
@@ -42,8 +55,8 @@ def chart(kind):
     X=lambda v:x0+(v-xmin)/(xmax-xmin)*(x1-x0)
     Y=lambda v:y1-(v-ymin)/(ymax-ymin)*(y1-y0)
     txt(d,(35,8),title,27,bold=True)
-    if kind=='arms': d.rectangle((X(80),Y(100),X(100),Y(80)),fill='#EAF6F4')
-    else: d.rectangle((x0,Y(30),x1,Y(15)),fill='#EAF6F4')
+    if kind=='arms': d.rectangle((X(80),Y(100),X(100),Y(80)),fill='#EFF6FB')
+    else: d.rectangle((x0,Y(30),x1,Y(15)),fill='#EFF6FB')
     for v in xticks:
         d.line((X(v),y0,X(v),y1),fill=LINE,width=1)
         label=f'{v:g}';txt(d,(X(v)-15,y1+12),label,22,fill=MUTED)
@@ -54,12 +67,12 @@ def chart(kind):
         dist=((xb-xa)**2+(yb-ya)**2)**.5
         for i in range(0,int(dist),16):
             t=i/dist;u=min((i+9)/dist,1)
-            d.line((xa+(xb-xa)*t,ya+(yb-ya)*t,xa+(xb-xa)*u,ya+(yb-ya)*u),fill=TEAL,width=3)
+            d.line((xa+(xb-xa)*t,ya+(yb-ya)*t,xa+(xb-xa)*u,ya+(yb-ya)*u),fill='#607587',width=3)
     if kind=='arms':
         dash(X(80),y0,X(80),y1);dash(x0,Y(80),x1,Y(80))
     else: dash(x0,Y(15),x1,Y(15))
     for r in sorted(rows,key=lambda r:r['pass']):
-        x,y=(r['arm1_plddt'],r['arm2_plddt']) if kind=='arms' else (r['ptm'],r['inter_domain_pae'])
+        x,y=(r['tfr1_plddt'],r['ab42_plddt']) if kind=='arms' else (r['ptm'],r['inter_domain_pae'])
         assert xmin<=x<=xmax and ymin<=y<=ymax,(kind,x,y)
         xx,yy=X(x),Y(y);c=TEAL if r['pass'] else GRAY
         d.ellipse((xx-5,yy-5,xx+5,yy+5),fill=c,outline=WHITE,width=1)
@@ -74,10 +87,12 @@ arms.save(OUT/'08_01_fusion_arm_confidence.png',dpi=(180,180))
 conf.save(OUT/'08_02_fusion_ptm_interdomain_pae.png',dpi=(180,180))
 W,H=2400,1350
 im=Image.new('RGB',(W,H),BG);d=ImageDraw.Draw(im)
-d.rectangle((0,0,W,207),fill=NAVY)
-txt(d,(72,30),'CURRENT RESEARCH  /  COMPUTATIONAL PROTEIN DESIGN',24,fill='#8AD8D2',bold=True)
-txt(d,(72,75),'AI-designed bispecific binders for Alzheimer’s disease',55,fill=WHITE,bold=True)
-txt(d,(74,151),'Aβ42 targeting × transferrin receptor 1 (TfR1)  |  Goal: receptor-mediated delivery across the BBB',29,fill='#D5E5F0')
+d.rectangle((0,0,W,207),fill=WHITE)
+txt(d,(72,30),'CURRENT RESEARCH  /  COMPUTATIONAL PROTEIN DESIGN',24,fill=TEAL,bold=True)
+txt(d,(72,75),'AI-designed bispecific binders for Alzheimer’s disease',58,fill=NAVY,bold=True)
+txt(d,(74,151),'Aβ42 targeting × transferrin receptor 1 (TfR1)  |  Goal: receptor-mediated delivery across the BBB',30,fill=MUTED)
+# Reported exploration counts are trajectories, not accepted sequences.
+txt(d,(74,201),'PRE-FILTER EXPLORATION (reported trajectories):  Aβ42  1,342   |   TfR1 / BBB arm  2,051',25,fill=TEXT,bold=True)
 # End-to-end workstream.
 cards=[('01  TARGET PREPARATION','Structure-guided epitopes','Aβ42: 9CO4  •  TfR1: 6WRV'),('02  DE NOVO DESIGN','BindCraft + ProteinMPNN','Generate, redesign, AF2-score'),('03  FILTER & RANK','Stability + developability','23 Aβ42 / 224 TfR1 retained'),('04  FUSION LIBRARY','5 Aβ42 × 5 TfR1 binders','5 linkers × 2 domain orders'),('05  FOLD & SCREEN','AlphaFold2 / ColabFold','250 fusion predictions scored')]
 for i,(a,b,c) in enumerate(cards):
@@ -87,7 +102,7 @@ for i,(a,b,c) in enumerate(cards):
     txt(d,(x+19,300),b,24,bold=True)
     txt(d,(x+19,345),c,21,fill=MUTED)
 # Three outcome cards.
-for x,num,label,detail in [(72,'442','accepted arm designs','62 Aβ42 + 380 TfR1¹'),(838,'250','fusion designs modeled','25 binder pairs × 10 variants'),(1604,'183 / 250','pass Stage 8 gates','73.2% computational pass rate')]:
+for x,num,label,detail in [(72,'442','accepted arm designs','62 Aβ42 + 380 TfR1 (reported)'),(838,'250','fusion designs modeled','25 binder pairs × 10 variants'),(1604,'183 / 250','pass Stage 8 gates','73.2% computational pass rate')]:
     d.rounded_rectangle((x,420,x+724,575),radius=14,fill=TEAL if x==1604 else WHITE)
     fg=WHITE if x==1604 else NAVY
     txt(d,(x+24,432),num,53,fg,True)
@@ -101,10 +116,8 @@ txt(d,(1608,630),'Dashed lines: required thresholds',22,fill=MUTED)
 im.paste(arms.resize((1100,550)),(62,674));im.paste(conf.resize((1100,550)),(1238,674))
 # crop chart whitespace at bottom leaves footer position deliberately aligned.
 d=ImageDraw.Draw(im)
-d.rectangle((0,1230,W,H),fill=NAVY)
-txt(d,(73,1242),'Gate: both arms pLDDT >80 AND inter-domain PAE >15 Å. High inter-domain PAE reflects uncertain relative orientation.',22,WHITE)
-txt(d,(73,1277),'Computational candidates; binding, selectivity and BBB transport remain unvalidated. Fusion ipTM was not calculated.',22,'#D5E5F0')
-txt(d,(73,1310),'¹ Campaign-reported library total. Separate RFdiffusion → ProteinMPNN route documented; not the source of this fusion cohort.',18,'#AFC5D8')
+d.rectangle((0,1230,W,H),fill='#E7EEF4')
+txt(d,(73,1242),'Gate: both arms pLDDT >80 AND inter-domain PAE >15 Å. High inter-domain PAE reflects uncertain relative orientation.',24,TEXT)
 im.save(OUT/'08_03_alzheimer_bispecific_interview_slide.png',dpi=(180,180))
 im.save(OUT/'08_03_alzheimer_bispecific_interview_slide.pdf','PDF',resolution=180)
 # Standards-based single-slide PPTX, with embedded high-resolution slide image.
@@ -128,8 +141,8 @@ with zipfile.ZipFile(OUT/'08_03_alzheimer_bispecific_interview_slide.pptx','w',z
     for p,v in files.items():z.writestr(p,v)
     z.write(OUT/'08_03_alzheimer_bispecific_interview_slide.png','ppt/media/slide.png')
 with (OUT/'08_04_fusion_plot_data.csv').open('w',newline='') as f:
-    w=csv.DictWriter(f,fieldnames=['id','arm1_plddt','arm2_plddt','inter_domain_pae','ptm','pass_all']);w.writeheader()
+    w=csv.DictWriter(f,fieldnames=['id','domain_order','arm1_plddt','arm2_plddt','tfr1_plddt','ab42_plddt','inter_domain_pae','ptm','pass_all'],lineterminator='\n');w.writeheader()
     for r in rows:w.writerow({k:r[k] for k in w.fieldnames})
-summary={'predicted_fusions':len(rows),'pass_all':sum(r['pass'] for r in rows),'accepted_arm_library_reported':{'ab42':62,'tfr1':380},'pass_rate_percent':73.2,'passing_medians':{k:statistics.median(r[k] for r in rows if r['pass']) for k in ['arm1_plddt','arm2_plddt','inter_domain_pae','ptm']}}
+summary={'predicted_fusions':len(rows),'pass_all':sum(r['pass'] for r in rows),'accepted_arm_library_reported':{'ab42':62,'tfr1':380},'pre_filter_trajectories_reported':{'ab42':1342,'tfr1':2051},'left_plot_axes':{'x':'tfr1_plddt','y':'ab42_plddt'},'pass_rate_percent':73.2,'passing_medians':{k:statistics.median(r[k] for r in rows if r['pass']) for k in ['arm1_plddt','arm2_plddt','inter_domain_pae','ptm']}}
 (OUT/'08_04_slide_summary.json').write_text(json.dumps(summary,indent=2)+'\n')
 print(json.dumps(summary,indent=2))

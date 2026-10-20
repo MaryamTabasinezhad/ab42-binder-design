@@ -2,11 +2,19 @@
 
 One 16:9 slide for a postdoctoral interview, prepared 2026-10-20 from repository data at commit beff539. Status: complete; next scientific step is experimental expression, binding/selectivity and transport evaluation. No new protein predictions were run.
 
+## Presentation revision (2026-10-20)
+
+The revised slide preserves the one-slide structure and uses Liberation Sans (an Arial-compatible presentation font), a white header and light footer instead of the dark blue bands, and a blue/orange scientific plotting palette (#0072B2 / #D55E00). Only the first footer line remains; the validation caveats and separate RFdiffusion-route explanation remain documented here.
+
+The left plot now uses **TfR1 arm mean pLDDT on the x-axis and Aβ42 arm mean pLDDT on the y-axis**. Coordinates are remapped using each fusion's `domain_order`, checked against `../inputs/fusion_manifest.csv`: for `ab-tfr1`, TfR1 is arm 2; for `tfr1-ab`, TfR1 is arm 1. The exported plot-data CSV includes these target-specific scores and domain order. This deliberately changes point placement relative to the original positional-arm plot while preserving each design's scores and pass flag.
+
+The slide additionally reports **1,342 Aβ42 trajectories and 2,051 TfR1 trajectories before filtering**, as documented in `../../../docs/bindcraft_62design_analysis.md` and repository-root `coordination/DASHBOARD.md`. These are campaign-reported design-exploration counts, not accepted-design counts or counts of all ProteinMPNN sequences. The reported accepted arm library remains 62 + 380 = 442, and the fusion result remains 183/250. Raw trajectory/stat CSVs in Git are partial snapshots; no unrecorded total of evaluated TfR1 sequences is inferred.
+
 ## Deliverables
 
 - `08_03_alzheimer_bispecific_interview_slide.pptx`: one PowerPoint slide containing an embedded high-resolution image; text is not individually editable. The Python source is provided for revision.
 - Matching `.pdf` and `.png`: presentation/export versions.
-- `08_01_fusion_arm_confidence.png`: N-terminal versus C-terminal arm mean pLDDT, all 250 fusions.
+- `08_01_fusion_arm_confidence.png`: TfR1 versus Aβ42 arm mean pLDDT, all 250 fusions.
 - `08_02_fusion_ptm_interdomain_pae.png`: fusion pTM versus inter-domain PAE, all 250 fusions.
 - `08_04_fusion_plot_data.csv` and `08_04_slide_summary.json`: plot data and counts.
 - `build_interview_slide.py`: regenerate with `python3 alzheimer/bindcraft/fusion/pic_graphs/build_interview_slide.py` from the repository root. Uses Python standard library and the existing Pillow installation; no software was installed.
@@ -41,7 +49,7 @@ The current CSV files report **inter-domain PAE**, not intra-domain PAE. To calc
 
 Each dot represents one of the 250 fusions. The horizontal axis is whole-chain pTM (higher means more confident overall topology); the vertical axis is mean inter-domain PAE (higher means less certain relative placement of the arms). For example, a point at pTM 0.53 and PAE 23 Å means moderate whole-chain confidence and substantial uncertainty between arms; 23 Å is not their separation distance. A well-predicted fold in each arm can coexist with moderate global pTM if their relative arrangement is uncertain.
 
-The dashed line at 15 Å is the project's **inter-domain PAE >15 Å** screening heuristic. It is not a universal AlphaFold quality threshold, and passing it does not prove domain independence. Teal points pass this threshold and both per-arm pLDDT >80 gates. Gray points fail at least one gate; a gray point above the line therefore fails at least one arm's pLDDT gate. Lower-PAE, higher-pTM gray designs have a more confidently predicted overall arrangement and are not necessarily biologically worse.
+The dashed line at 15 Å is the project's **inter-domain PAE >15 Å** screening heuristic. It is not a universal AlphaFold quality threshold, and passing it does not prove domain independence. Blue points pass this threshold and both per-arm pLDDT >80 gates. Orange points fail at least one gate; an orange point above the line therefore fails at least one arm's pLDDT gate. Lower-PAE, higher-pTM orange designs have a more confidently predicted overall arrangement and are not necessarily biologically worse.
 
 In the 250-design CSV, inter-domain PAE ranges from **10.29 to 27.69 Å**; the median among the 183 passing fusions is **23.16 Å**. These observed values are distinct from the model's output range. PAE output limits depend on the prediction implementation; values near the upper reporting limit should be interpreted as high uncertainty rather than a precise error estimate.
 
@@ -81,3 +89,5 @@ Recomputed all Stage 8 gate flags and reconciled split metrics against the merge
 README clarification, 2026-10-20: added PAE definitions, within-arm versus between-arm interpretation, and a reading guide for the right-hand plot. Checked against the existing Stage 8 script and recorded CSV summaries; no predictions or slide regeneration were performed.
 
 README clarification, 2026-10-20: added single-domain versus whole-fusion pTM, its 0–1 range, general interpretation, and the project-specific >0.6 soft flag and ranking role. Checked against `../scripts/analyze_fusions.py` and the recorded summary; no predictions or slide regeneration were performed.
+
+Presentation revision verification, 2026-10-20: regenerated PPTX/PDF/PNG and both plots; verified target-to-arm mappings for all 250 designs against the manifest, all Stage 8 flags and split metrics, and the PPTX ZIP/XML contents. Visually inspected the final slide. No new protein predictions were run.

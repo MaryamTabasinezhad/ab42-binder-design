@@ -5,6 +5,14 @@
     "ab42": 62,
     "tfr1": 380
   },
+  "pre_filter_trajectories_reported": {
+    "ab42": 1342,
+    "tfr1": 2051
+  },
+  "left_plot_axes": {
+    "x": "tfr1_plddt",
+    "y": "ab42_plddt"
+  },
   "pass_rate_percent": 73.2,
   "passing_medians": {
     "arm1_plddt": 89.96,
