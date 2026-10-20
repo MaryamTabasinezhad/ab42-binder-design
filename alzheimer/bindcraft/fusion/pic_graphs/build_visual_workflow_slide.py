@@ -50,69 +50,69 @@ def antibody(cx,cy,scale=1):
  path([(cx,cy+65*scale),(cx,cy),(cx-60*scale,cy-60*scale)],BLUE,int(16*scale))
  path([(cx,cy),(cx+60*scale,cy-60*scale)],TEAL,int(16*scale))
  for dx,c in [(-60,BLUE),(60,TEAL)]:shape(cx+dx*scale-11*scale,cy-70*scale,22*scale,22*scale,c,'ellipse')
-shape(0,0,W,H,BG,'rect');shape(0,0,W,210,WHITE,'rect')
-text(72,35,'FROM TARGETS TO A BISPECIFIC',26,BLUE,1)
-text(72,80,'AI-designed binders & antibodies',68,NAVY,1)
-text(74,163,'Design each arm  •  Choose a format  •  Test dual binding',32,MUTED)
-xs=[65+380*i for i in range(6)];titles=['Targets','Design','Screen','Assemble','Predict','Validate']
-for i,(x,title) in enumerate(zip(xs,titles)):
- text(x,267,f'0{i+1}',30,BLUE,1)
- text(x,310,title,44,NAVY,1)
- shape(x,385,345,690,WHITE,stroke=LIGHT)
- if i<5:arrow(x+351,730,x+374,730)
-# Targets.
-x=xs[0];blob(x+97,540,BLUE);blob(x+246,658,TEAL)
-text(x+35,630,'A',32,BLUE,1);text(x+260,741,'B',32,TEAL,1)
-text(x+24,830,'Structures + epitopes',30,NAVY,1,w=300,align='center')
-text(x+24,890,'Target A / Target B',28,MUTED,w=300,align='center')
-# Design alternatives.
-x=xs[1]
-shape(x+18,410,309,285,'EFF6FC')
-ribbon(x+168,460,BLUE,.7)
-text(x+28,534,'MINIPROTEIN',24,BLUE,1,w=289,align='center')
-text(x+28,575,'RFdiffusion / BindCraft',28,NAVY,1,w=289,align='center')
-text(x+28,620,'ProteinMPNN',29,MUTED,w=289,align='center')
-text(x+28,711,'OR',23,MUTED,w=289,align='center')
-shape(x+18,756,309,295,'EEF8F5')
-antibody(x+170,834,.52)
-text(x+28,889,'ANTIBODY / VHH',24,TEAL,1,w=289,align='center')
-text(x+28,930,'RFantibody',33,NAVY,1,w=289,align='center')
-text(x+28,982,'RFdiffusion-Ab · MPNN · RF2',23,MUTED,w=289,align='center')
-# Screening funnel: progressively fewer candidate dots.
-x=xs[2]
-for row,count in enumerate([6,4,2]):
- for j in range(count):shape(x+172-(count-1)*19+j*38-10,475+row*65,20,20,BLUE if row<2 else TEAL,'ellipse')
-for y,s in [(735,'Fold'),(815,'Interface'),(895,'Developability')]:
- path([(x+35,y+14),(x+46,y+25),(x+66,y)],TEAL,5);text(x+88,y-3,s,29,NAVY,1)
-# Assembly: tandem and antibody formats.
-x=xs[3]
-ribbon(x+99,510,BLUE,.65);ribbon(x+250,510,TEAL,.65)
-path([(x+145,524),(x+157,535),(x+169,523),(x+181,535),(x+193,524)],MUTED,4)
-text(x+18,609,'Tandem fusion',30,NAVY,1,w=309,align='center')
-antibody(x+174,791,.85)
-text(x+18,915,'IgG-like / scFv-Fc',29,NAVY,1,w=309,align='center')
-# Prediction: a small PAE-style matrix, editable cells.
-x=xs[4]
-for a in range(8):
- for b in range(8):
-  same=(a<4)==(b<4);col=('1B7593' if abs(a-b)<2 else '64A5B9') if same else 'E4EEF2'
-  shape(x+65+a*27,455+b*27,25,25,col,'rect')
-text(x+15,738,'AlphaFold2 / 3',32,NAVY,1,w=315,align='center')
-text(x+15,803,'Folds + complexes',28,MUTED,w=315,align='center')
-text(x+15,857,'pLDDT · PAE · ipTM*',26,MUTED,w=315,align='center')
-# Experimental validation: response curve and two target badges.
-x=xs[5]
-path([(x+55,472),(x+55,650),(x+295,650)],MUTED,4)
-path([(x+57,635),(x+85,628),(x+110,580),(x+135,533),(x+168,520),(x+252,520),(x+285,560)],TEAL,7)
-for y,s in [(747,'Expression'),(827,'Dual binding'),(907,'Function')]:
- shape(x+31,y+5,13,13,TEAL,'ellipse');text(x+66,y,s,30,NAVY,1)
-# Iteration below cards.
-path([(xs[5]+173,1100),(xs[5]+173,1160),(xs[1]+173,1160)],TEAL,4)
-arrow(xs[1]+173,1160,xs[1]+173,1100,TEAL,4)
-shape(936,1130,570,57,BG,'rect');text(948,1135,'Experiment-guided redesign',30,TEAL,1)
-text(76,1260,'*Interface scores where available. Set target- and format-specific criteria.',25,MUTED)
-text(1740,1260,'Two arms → one construct',29,NAVY,1,w=590,align='center')
-out=P/'08_06_general_bispecific_design_workflow.png';im.save(out,dpi=(180,180))
+# Publication-style diagram: native vector boxes and connectors; no illustrative data.
+# Scientific text is intentionally short; implementation notes remain in README.
+shape(0,0,W,H,WHITE,'rect')
+text(70,53,'Structure-guided design of bispecific proteins',62,NAVY,1)
+text(73,135,'Target-specific arm discovery, format engineering and experimental validation',32,MUTED)
+path([(70,207),(2330,207)],LIGHT,2)
+text(70,242,'A   TARGET-SPECIFIC ARM DISCOVERY',29,BLUE,1)
+text(1350,244,'Repeat independently for arm A and arm B',28,MUTED)
+xs=[70,645,1220,1795];cw=535
+# Flat, consistently sized scientific process nodes.
+def node(x,y,title,lines,h=330,color=BLUE):
+ shape(x,y,cw,h,WHITE,'rect',stroke='B4C1CD')
+ shape(x,y,cw,6,color,'rect')
+ text(x+26,y+26,title,35,NAVY,1,w=cw-50)
+ for yy,s,n,c,bold in lines:
+  text(x+26,y+yy,s,n,c,bold,w=cw-50)
+node(xs[0],320,'1  Target definition',[
+ (125,'Structure + epitope',34,NAVY,0),
+ (183,'Accessibility · native context',29,MUTED,0),
+ (237,'Counter-target panel',30,MUTED,0)])
+node(xs[1],320,'2  Arm generation',[
+ (91,'MINIPROTEIN',23,BLUE,1),
+ (127,'RFdiffusion → ProteinMPNN',30,NAVY,0),
+ (168,'or BindCraft',29,MUTED,0),
+ (227,'ANTIBODY / VHH',23,BLUE,1),
+ (265,'RFantibody¹',32,NAVY,0)])
+path([(xs[1]+25,532),(xs[1]+cw-25,532)],LIGHT,2)
+node(xs[2],320,'3  Complex prediction',[
+ (104,'AlphaFold2-Multimer / AlphaFold3',29,NAVY,0),
+ (158,'Antibody-tuned RF2',30,NAVY,0),
+ (234,'Fold · interface · epitope recovery',28,MUTED,0)])
+node(xs[3],320,'4  Arm selection',[
+ (108,'Confidence + developability',31,NAVY,0),
+ (170,'Selectivity controls',30,MUTED,0),
+ (232,'Sequence + scaffold diversity',29,MUTED,0)])
+for x in xs[:-1]:arrow(x+cw+8,485,x+cw+33,485,BLUE,4)
+# A single row-to-row connector carries selected arms into construct engineering.
+path([(2062,650),(2062,755),(560,755)],BLUE,4)
+arrow(560,755,560,883,BLUE,4)
+shape(710,723,990,63,WHITE,'rect')
+text(735,729,'Selected arm A + arm B',33,BLUE,1,w=940,align='center')
+text(70,831,'B   BISPECIFIC ENGINEERING',29,BLUE,1)
+text(1220,831,'C   EXPERIMENTAL VALIDATION',29,TEAL,1)
+node(xs[0],890,'5  Bispecific assembly',[
+ (93,'Arm pairs · linkers · domain order',28,NAVY,0),
+ (150,'Valency · Fc / chain pairing',29,MUTED,0)],h=240)
+node(xs[1],890,'6  Construct evaluation',[
+ (93,'AlphaFold2 / AlphaFold3',31,NAVY,0),
+ (150,'Folds · accessibility · steric clashes',27,MUTED,0)],h=240)
+node(xs[2],890,'7  Expression & QC',[
+ (93,'Gene synthesis · production',30,NAVY,0),
+ (150,'SEC–MALS · DSF',31,MUTED,0)],h=240,color=TEAL)
+node(xs[3],890,'8  Functional validation',[
+ (93,'SPR / BLI · simultaneous binding',28,NAVY,0),
+ (150,'Specificity · application assays',29,MUTED,0)],h=240,color=TEAL)
+for i,x in enumerate(xs[:-1]):arrow(x+cw+8,1010,x+cw+33,1010,BLUE if i==0 else TEAL,4)
+# Iteration is an experimental feedback path, not a claim of completed validation.
+path([(2062,1130),(2062,1190),(337,1190)],TEAL,3)
+arrow(337,1190,337,1138,TEAL,3)
+shape(865,1164,690,56,WHITE,'rect')
+text(884,1168,'Assay-guided redesign',29,TEAL,1,w=650,align='center')
+text(70,1264,'¹ RFantibody: antibody-tuned RFdiffusion → ProteinMPNN → antibody-tuned RoseTTAFold2.',26,MUTED)
+out=P/'08_06_general_bispecific_design_workflow.png';im.save(out,dpi=(300,300))
 # Use existing clean master/layout package; all visible elements above are native shapes.
 with zipfile.ZipFile(P/'08_03_alzheimer_bispecific_interview_slide.pptx') as z:
  files={n:z.read(n) for n in z.namelist() if not n.startswith('ppt/media/')}
