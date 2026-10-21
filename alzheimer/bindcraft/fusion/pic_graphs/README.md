@@ -114,3 +114,51 @@ Panel A covers target-specific discovery for each arm: target definition, modali
 Rebuild all three exports with `python3 alzheimer/bindcraft/fusion/pic_graphs/build_visual_workflow_slide.py`; `build_general_workflow.py` forwards to the same builder. Uses existing Pillow, pycairo and Liberation Sans. Text uses Arial in PowerPoint and its compatible Liberation Sans equivalent in PNG/PDF.
 
 Publication-preparation milestone, 2026-10-20: revised scientific gates and layout; added a proposed-workflow designation, full legend and references, 180-mm vector PDF and explicit export specifications. Verified 45 native text labels and 82 native shapes in the PPTX; inspected PNG and rendered PDF; checked PDF dimensions, embedded fonts and absence of raster images. Journal-specific adaptation and manuscript review remain necessary before submission. Native PowerPoint rendering is unavailable on this host. Temporary inspection paths and commands are recorded in the legend; durable artifacts and builder are present here. No software installation or protein inference was performed.
+
+## 08_07 — Visual Alzheimer project overview
+
+New presentation version of `08_03_alzheimer_bispecific_interview_slide.png`,
+prepared 2026-10-21. The request linked the directory rather than one image;
+08_03 was selected as the project-overview source after presenting the available
+choices. Original images and data remain unchanged.
+
+- `08_07_alzheimer_visual_overview.png`: 2400 × 1350, 16:9, antialiased vector-scene render; 180 mm print width / approximately 339 dpi.
+- `08_07_alzheimer_visual_overview.pdf`: vector export, 180 × 101.25 mm, embedded fonts and no raster objects; minimum label size 7.02 pt at this width.
+- `08_07_alzheimer_visual_overview_editable.pptx`: one slide with editable text, molecular schematics, points and axes as native shapes; not native chart workbooks.
+- `08_07_build_visual_overview.py`: reproducible builder, reusing the existing renderer and OOXML helpers from `build_visual_workflow_slide.py`.
+
+The redesign replaces five prose-heavy cards and repeated numerical panels
+with four visual stages: target schematics, accepted arm libraries, a linked
+miniprotein fusion and a pass-fraction ring. Purple represents Aβ42 and blue
+TfR1 in the molecular schematics. In both plots, blue means Stage 8 pass and
+gray means fail; the plot legend explicitly switches to screening status.
+Molecular glyphs show concepts, not atomic structures or validated binding poses.
+
+All quantitative sources and qualifications listed above for 08_03 apply:
+62 accepted Aβ42 and 380 accepted TfR1 arms are campaign-reported counts;
+1,342 and 2,051 are the corresponding reported trajectories. Five selected
+arms per target, five linkers and both orders produce 250 fusion designs.
+Both plots use all 250 rows of `08_04_fusion_plot_data.csv`. The builder
+recomputes the defined gate for each row and checks 183 passes (73.2%): both
+arm mean pLDDTs >80 and inter-domain PAE >15 Å. These are the project's
+computational fold-screening gates, not general binding or developability
+criteria. The high-PAE heuristic denotes uncertain relative placement, not
+proven separation, flexibility, independence or dual binding. Whole-fusion
+pTM is informational. BBB transport and simultaneous target binding remain
+experimental questions; the intended brain-delivery goal is labeled as a goal.
+
+Rebuild from the repository root:
+
+```bash
+python3 alzheimer/bindcraft/fusion/pic_graphs/08_07_build_visual_overview.py
+```
+
+Used existing Pillow, pycairo, Poppler and Liberation Sans; no installations
+or protein inference. PowerPoint uses Arial. PNG is rendered from the vector
+PDF with Poppler for antialiased molecular lines and charts. Verified gate
+counts, plot bounds, PNG decoding, vector PDF dimensions/font embedding,
+PPTX XML and native editable objects; visually reviewed the complete PNG.
+Native PowerPoint application rendering is unavailable. The figure is prepared
+for a full-width scientific presentation/manuscript; journal-specific sizing,
+caption and submission requirements still apply. Detailed PAE interpretation
+and source caveats remain in this README rather than filling the slide.
