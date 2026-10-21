@@ -162,3 +162,25 @@ Native PowerPoint application rendering is unavailable. The figure is prepared
 for a full-width scientific presentation/manuscript; journal-specific sizing,
 caption and submission requirements still apply. Detailed PAE interpretation
 and source caveats remain in this README rather than filling the slide.
+
+## 08_08 — Visual general bispecific workflow
+
+Created 2026-10-21 at the user's request to redesign **08_06**, preserving the
+original. Text-heavy boxes are replaced with target/epitope surfaces, helix
+and Fab/VHH glyphs, interface/confidence motifs, a selection funnel, tandem
+and IgG-like formats, and production/assay schematics. Two short lines per
+stage retain methods and essential scientific checkpoints. The figure is a
+proposed general workflow, not a record of completed experimental stages.
+
+- [New PNG](08_08_visual_bispecific_workflow.png)
+- [Vector PDF](08_08_visual_bispecific_workflow.pdf)
+- [Editable PowerPoint](08_08_visual_bispecific_workflow_editable.pptx)
+- [Figure legend, scientific interpretation and verification](08_08_visual_bispecific_workflow_legend.md)
+
+Rebuild with `python3 alzheimer/bindcraft/fusion/pic_graphs/08_08_build_visual_bispecific_workflow.py`.
+The 2400 × 1350 PNG is rendered from the antialiased vector PDF; labels are
+at least 7.02 pt at 180 mm print width. Existing primary references and
+scientific qualifications are retained through the 08_06 legend. No new
+protein inference or experimental results are introduced. Status: visual
+presentation artifact complete; publication-specific adaptation remains a
+manuscript/submission step.
